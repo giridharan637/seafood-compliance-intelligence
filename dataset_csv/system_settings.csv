@@ -1,0 +1,7 @@
+key,value
+temp_warning_threshold,2.5
+temp_critical_threshold,5.5
+max_allowed_delay_mins,45
+alert_sensitivity,HIGH
+store_forward_sync_interval,15
+auto_impute_missing,True

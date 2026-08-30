@@ -1,0 +1,9 @@
+worker_id,driver_id,driver_name,working_hours,rest_hours,active_assignments,workload_score,safety_status
+WRK-DRV-101,DRV-101,John Miller,6.5,12.0,1,0.66,SAFE
+WRK-DRV-102,DRV-102,Robert Chen,7.0,11.5,1,0.69,SAFE
+WRK-DRV-103,DRV-103,Maria Garcia,10.5,5.5,3,1.0,UNSAFE
+WRK-DRV-104,DRV-104,James Wilson,5.5,14.0,1,0.59,SAFE
+WRK-DRV-105,DRV-105,David Kim,9.5,7.0,2,1.0,UNSAFE
+WRK-DRV-106,DRV-106,Anna Kowalski,4.0,16.0,1,0.5,SAFE
+WRK-DRV-107,DRV-107,Carlos Rodriguez,11.0,4.5,3,1.0,UNSAFE
+WRK-DRV-108,DRV-108,Samantha Lee,6.0,13.0,1,0.62,SAFE

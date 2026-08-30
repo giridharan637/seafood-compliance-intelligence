@@ -1,0 +1,6 @@
+prediction_id,batch_id,anomaly_type,severity,confidence,timestamp,sensor_id,recommended_action,risk_level,contributing_factors
+PRED-002-01,BTC-SEA-5002,Thermal Excursion Anomaly,CRITICAL,0.94,2026-08-22 16:33 UTC,SNS-1002,Quarantine batch for organoleptic evaluation,HIGH,Spike duration > 45 mins; Max temp +7.2°C; Fresh seafood spoilage risk high
+PRED-014-01,BTC-SEA-5014,Thermal Excursion Anomaly,CRITICAL,0.94,2026-08-23 16:33 UTC,SNS-1014,Quarantine batch for organoleptic evaluation,HIGH,Spike duration > 45 mins; Max temp +7.2°C; Fresh seafood spoilage risk high
+PRED-018-01,BTC-SEA-5018,Thermal Excursion Anomaly,CRITICAL,0.94,2026-08-24 00:33 UTC,SNS-1018,Quarantine batch for organoleptic evaluation,HIGH,Spike duration > 45 mins; Max temp +7.2°C; Fresh seafood spoilage risk high
+PRED-024-01,BTC-SEA-5024,Thermal Excursion Anomaly,CRITICAL,0.94,2026-08-24 12:33 UTC,SNS-1024,Quarantine batch for organoleptic evaluation,HIGH,Spike duration > 45 mins; Max temp +7.2°C; Fresh seafood spoilage risk high
+PRED-033-01,BTC-SEA-5033,Thermal Excursion Anomaly,CRITICAL,0.94,2026-08-25 06:33 UTC,SNS-1033,Quarantine batch for organoleptic evaluation,HIGH,Spike duration > 45 mins; Max temp +7.2°C; Fresh seafood spoilage risk high

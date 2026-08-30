@@ -1,0 +1,35 @@
+batch_id,product_type,quantity_kg,processing_date,origin,destination,required_temp_min,required_temp_max,export_date,shipment_id,compliance_status
+BTC-SEA-5001,Pacific Cod (Frozen Fillets),3223.0,2026-08-22,Portland Marine Terminal (OR),Frankfurt Airport Cold Logistics (FRA - Germany),-22.0,-18.0,2026-08-23,SHP-2026-101,WARNING
+BTC-SEA-5002,Atlantic Salmon (Fresh),2062.8,2026-08-22,Anchorage Cold Storage Facility (AK),Singapore Changi Freight Hub (SIN - Singapore),0.0,3.5,2026-08-23,SHP-2026-102,CRITICAL
+BTC-SEA-5003,Atlantic Salmon (Fresh),1087.1,2026-08-22,Boston Harbor Freight Terminal (MA),Singapore Changi Freight Hub (SIN - Singapore),0.0,3.5,2026-08-23,SHP-2026-103,WARNING
+BTC-SEA-5004,King Crab Legs (Cooked/Frozen),4267.4,2026-08-22,Seattle Pier 91 Logistics Center (WA),Seoul Incheon Cargo Terminal (ICN - South Korea),-24.0,-18.0,2026-08-23,SHP-2026-104,CRITICAL
+BTC-SEA-5005,Pacific Cod (Frozen Fillets),1991.4,2026-08-22,Seattle Pier 91 Logistics Center (WA),Los Angeles Int'l Cargo Center (LAX - USA),-22.0,-18.0,2026-08-23,SHP-2026-105,NORMAL
+BTC-SEA-5006,Pacific Oysters (Live Shellstock),1566.2,2026-08-23,Portland Marine Terminal (OR),Frankfurt Airport Cold Logistics (FRA - Germany),1.0,5.0,2026-08-24,SHP-2026-106,NORMAL
+BTC-SEA-5007,King Crab Legs (Cooked/Frozen),1631.9,2026-08-23,Kodiak Island Seafood Dock (AK),Tokyo Haneda Cargo Center (HND - Japan),-24.0,-18.0,2026-08-24,SHP-2026-107,WARNING
+BTC-SEA-5008,Pacific Cod (Frozen Fillets),2275.8,2026-08-23,Portland Marine Terminal (OR),Shanghai Pudong Int'l Freight Hub (PVG - China),-22.0,-18.0,2026-08-24,SHP-2026-108,WARNING
+BTC-SEA-5009,King Crab Legs (Cooked/Frozen),1139.5,2026-08-23,Kodiak Island Seafood Dock (AK),Seoul Incheon Cargo Terminal (ICN - South Korea),-24.0,-18.0,2026-08-24,SHP-2026-109,NORMAL
+BTC-SEA-5010,Pacific Oysters (Live Shellstock),3678.9,2026-08-23,Seattle Pier 91 Logistics Center (WA),Los Angeles Int'l Cargo Center (LAX - USA),1.0,5.0,2026-08-24,SHP-2026-110,NORMAL
+BTC-SEA-5011,King Crab Legs (Cooked/Frozen),2019.8,2026-08-23,Portland Marine Terminal (OR),Frankfurt Airport Cold Logistics (FRA - Germany),-24.0,-18.0,2026-08-24,SHP-2026-111,NORMAL
+BTC-SEA-5012,Pacific Oysters (Live Shellstock),2945.1,2026-08-23,Boston Harbor Freight Terminal (MA),Tokyo Haneda Cargo Center (HND - Japan),1.0,5.0,2026-08-24,SHP-2026-112,NORMAL
+BTC-SEA-5013,Black Tiger Shrimp (Chilled),2034.7,2026-08-23,Anchorage Cold Storage Facility (AK),Tokyo Haneda Cargo Center (HND - Japan),0.5,4.0,2026-08-24,SHP-2026-113,NORMAL
+BTC-SEA-5014,Black Tiger Shrimp (Chilled),3938.7,2026-08-23,Anchorage Cold Storage Facility (AK),Shanghai Pudong Int'l Freight Hub (PVG - China),0.5,4.0,2026-08-24,SHP-2026-114,CRITICAL
+BTC-SEA-5015,Maine Lobster (Live),2581.9,2026-08-23,Boston Harbor Freight Terminal (MA),Frankfurt Airport Cold Logistics (FRA - Germany),2.0,6.0,2026-08-24,SHP-2026-115,NORMAL
+BTC-SEA-5016,King Crab Legs (Cooked/Frozen),1971.1,2026-08-23,Seattle Pier 91 Logistics Center (WA),Tokyo Haneda Cargo Center (HND - Japan),-24.0,-18.0,2026-08-24,SHP-2026-116,WARNING
+BTC-SEA-5017,Atlantic Salmon (Fresh),1584.9,2026-08-23,Kodiak Island Seafood Dock (AK),Singapore Changi Freight Hub (SIN - Singapore),0.0,3.5,2026-08-24,SHP-2026-117,NORMAL
+BTC-SEA-5018,Yellowfin Tuna (Super-Frozen),1665.5,2026-08-24,Seattle Pier 91 Logistics Center (WA),Los Angeles Int'l Cargo Center (LAX - USA),-55.0,-50.0,2026-08-25,SHP-2026-118,CRITICAL
+BTC-SEA-5019,Black Tiger Shrimp (Chilled),1978.3,2026-08-24,Vancouver Pacific Processing Hub (BC),Seoul Incheon Cargo Terminal (ICN - South Korea),0.5,4.0,2026-08-25,SHP-2026-119,WARNING
+BTC-SEA-5020,Maine Lobster (Live),624.1,2026-08-24,Anchorage Cold Storage Facility (AK),Tokyo Haneda Cargo Center (HND - Japan),2.0,6.0,2026-08-25,SHP-2026-120,NORMAL
+BTC-SEA-5021,Pacific Oysters (Live Shellstock),1993.2,2026-08-24,Anchorage Cold Storage Facility (AK),Shanghai Pudong Int'l Freight Hub (PVG - China),1.0,5.0,2026-08-25,SHP-2026-121,NORMAL
+BTC-SEA-5022,King Crab Legs (Cooked/Frozen),4306.0,2026-08-24,Seattle Pier 91 Logistics Center (WA),Singapore Changi Freight Hub (SIN - Singapore),-24.0,-18.0,2026-08-25,SHP-2026-122,NORMAL
+BTC-SEA-5023,Pacific Oysters (Live Shellstock),3014.0,2026-08-24,Seattle Pier 91 Logistics Center (WA),Shanghai Pudong Int'l Freight Hub (PVG - China),1.0,5.0,2026-08-25,SHP-2026-123,NORMAL
+BTC-SEA-5024,Pacific Cod (Frozen Fillets),2988.7,2026-08-24,Portland Marine Terminal (OR),Los Angeles Int'l Cargo Center (LAX - USA),-22.0,-18.0,2026-08-25,SHP-2026-124,CRITICAL
+BTC-SEA-5025,Black Tiger Shrimp (Chilled),2829.6,2026-08-24,Kodiak Island Seafood Dock (AK),Tokyo Haneda Cargo Center (HND - Japan),0.5,4.0,2026-08-25,SHP-2026-125,WARNING
+BTC-SEA-5026,Pacific Cod (Frozen Fillets),2426.8,2026-08-24,Seattle Pier 91 Logistics Center (WA),Tokyo Haneda Cargo Center (HND - Japan),-22.0,-18.0,2026-08-25,SHP-2026-126,WARNING
+BTC-SEA-5027,Black Tiger Shrimp (Chilled),2715.3,2026-08-24,Kodiak Island Seafood Dock (AK),Frankfurt Airport Cold Logistics (FRA - Germany),0.5,4.0,2026-08-25,SHP-2026-127,WARNING
+BTC-SEA-5028,Pacific Cod (Frozen Fillets),3570.6,2026-08-24,Vancouver Pacific Processing Hub (BC),Frankfurt Airport Cold Logistics (FRA - Germany),-22.0,-18.0,2026-08-25,SHP-2026-128,CRITICAL
+BTC-SEA-5029,Yellowfin Tuna (Super-Frozen),2165.1,2026-08-24,Vancouver Pacific Processing Hub (BC),Seoul Incheon Cargo Terminal (ICN - South Korea),-55.0,-50.0,2026-08-25,SHP-2026-129,NORMAL
+BTC-SEA-5030,King Crab Legs (Cooked/Frozen),4447.4,2026-08-25,Boston Harbor Freight Terminal (MA),Frankfurt Airport Cold Logistics (FRA - Germany),-24.0,-18.0,2026-08-26,SHP-2026-130,NORMAL
+BTC-SEA-5031,Black Tiger Shrimp (Chilled),2405.4,2026-08-25,Portland Marine Terminal (OR),Frankfurt Airport Cold Logistics (FRA - Germany),0.5,4.0,2026-08-26,SHP-2026-131,WARNING
+BTC-SEA-5032,Black Tiger Shrimp (Chilled),3215.1,2026-08-25,Boston Harbor Freight Terminal (MA),Seoul Incheon Cargo Terminal (ICN - South Korea),0.5,4.0,2026-08-26,SHP-2026-132,NORMAL
+BTC-SEA-5033,Maine Lobster (Live),2248.9,2026-08-25,Vancouver Pacific Processing Hub (BC),Frankfurt Airport Cold Logistics (FRA - Germany),2.0,6.0,2026-08-26,SHP-2026-133,CRITICAL
+BTC-DEMO-999,Black Tiger Shrimp (Chilled),2500.0,2026-08-30,Portland Marine Cold Terminal,Los Angeles Cold Logistics Center,0.0,4.0,2026-09-05,SHP-DEMO-2026-999,NORMAL
