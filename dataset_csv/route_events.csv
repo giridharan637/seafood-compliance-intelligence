@@ -1,199 +1,397 @@
 route_id,shipment_id,event_type,timestamp,location,delay_minutes,route_status,notes
-RTE-001-1,SHP-2026-101,Batch Creation,2026-08-22 14:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-001-2,SHP-2026-101,Cold Storage Exit & Loading,2026-08-22 15:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-001-3,SHP-2026-101,Transit Checkpoint Alpha,2026-08-22 19:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-001-4,SHP-2026-101,Port / Airport Logistics Ramp,2026-08-23 02:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-001-5,SHP-2026-101,Export Inspection Dock,2026-08-23 08:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-001-6,SHP-2026-101,Final Aircraft / Vessel Loading,2026-08-23 12:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-002-1,SHP-2026-102,Batch Creation,2026-08-22 16:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-002-2,SHP-2026-102,Cold Storage Exit & Loading,2026-08-22 17:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-002-3,SHP-2026-102,Transit Checkpoint Alpha,2026-08-22 21:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-002-4,SHP-2026-102,Port / Airport Logistics Ramp,2026-08-23 04:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-002-5,SHP-2026-102,Export Inspection Dock,2026-08-23 10:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-002-6,SHP-2026-102,Final Aircraft / Vessel Loading,2026-08-23 14:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-003-1,SHP-2026-103,Batch Creation,2026-08-22 18:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-003-2,SHP-2026-103,Cold Storage Exit & Loading,2026-08-22 19:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-003-3,SHP-2026-103,Transit Checkpoint Alpha,2026-08-22 23:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-003-4,SHP-2026-103,Port / Airport Logistics Ramp,2026-08-23 06:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-003-5,SHP-2026-103,Export Inspection Dock,2026-08-23 12:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-003-6,SHP-2026-103,Final Aircraft / Vessel Loading,2026-08-23 16:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-004-1,SHP-2026-104,Batch Creation,2026-08-22 20:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-004-2,SHP-2026-104,Cold Storage Exit & Loading,2026-08-22 21:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-004-3,SHP-2026-104,Transit Checkpoint Alpha,2026-08-23 01:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-004-4,SHP-2026-104,Port / Airport Logistics Ramp,2026-08-23 08:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-004-5,SHP-2026-104,Export Inspection Dock,2026-08-23 14:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-004-6,SHP-2026-104,Final Aircraft / Vessel Loading,2026-08-23 18:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-005-1,SHP-2026-105,Batch Creation,2026-08-22 22:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-005-2,SHP-2026-105,Cold Storage Exit & Loading,2026-08-22 23:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-005-3,SHP-2026-105,Transit Checkpoint Alpha,2026-08-23 03:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-005-4,SHP-2026-105,Port / Airport Logistics Ramp,2026-08-23 10:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-005-5,SHP-2026-105,Export Inspection Dock,2026-08-23 16:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-005-6,SHP-2026-105,Final Aircraft / Vessel Loading,2026-08-23 20:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-006-1,SHP-2026-106,Batch Creation,2026-08-23 00:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-006-2,SHP-2026-106,Cold Storage Exit & Loading,2026-08-23 01:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-006-3,SHP-2026-106,Transit Checkpoint Alpha,2026-08-23 05:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-006-4,SHP-2026-106,Port / Airport Logistics Ramp,2026-08-23 12:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-006-5,SHP-2026-106,Export Inspection Dock,2026-08-23 18:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-006-6,SHP-2026-106,Final Aircraft / Vessel Loading,2026-08-23 22:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-007-1,SHP-2026-107,Batch Creation,2026-08-23 02:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-007-2,SHP-2026-107,Cold Storage Exit & Loading,2026-08-23 03:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-007-3,SHP-2026-107,Transit Checkpoint Alpha,2026-08-23 07:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-007-4,SHP-2026-107,Port / Airport Logistics Ramp,2026-08-23 14:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-007-5,SHP-2026-107,Export Inspection Dock,2026-08-23 20:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-007-6,SHP-2026-107,Final Aircraft / Vessel Loading,2026-08-24 00:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-008-1,SHP-2026-108,Batch Creation,2026-08-23 04:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-008-2,SHP-2026-108,Cold Storage Exit & Loading,2026-08-23 05:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-008-3,SHP-2026-108,Transit Checkpoint Alpha,2026-08-23 09:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-008-4,SHP-2026-108,Port / Airport Logistics Ramp,2026-08-23 16:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-008-5,SHP-2026-108,Export Inspection Dock,2026-08-23 22:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-008-6,SHP-2026-108,Final Aircraft / Vessel Loading,2026-08-24 02:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-009-1,SHP-2026-109,Batch Creation,2026-08-23 06:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-009-2,SHP-2026-109,Cold Storage Exit & Loading,2026-08-23 07:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-009-3,SHP-2026-109,Transit Checkpoint Alpha,2026-08-23 11:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-009-4,SHP-2026-109,Port / Airport Logistics Ramp,2026-08-23 18:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-009-5,SHP-2026-109,Export Inspection Dock,2026-08-24 00:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-009-6,SHP-2026-109,Final Aircraft / Vessel Loading,2026-08-24 04:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-010-1,SHP-2026-110,Batch Creation,2026-08-23 08:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-010-2,SHP-2026-110,Cold Storage Exit & Loading,2026-08-23 09:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-010-3,SHP-2026-110,Transit Checkpoint Alpha,2026-08-23 13:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-010-4,SHP-2026-110,Port / Airport Logistics Ramp,2026-08-23 20:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-010-5,SHP-2026-110,Export Inspection Dock,2026-08-24 02:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-010-6,SHP-2026-110,Final Aircraft / Vessel Loading,2026-08-24 06:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-011-1,SHP-2026-111,Batch Creation,2026-08-23 10:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-011-2,SHP-2026-111,Cold Storage Exit & Loading,2026-08-23 11:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-011-3,SHP-2026-111,Transit Checkpoint Alpha,2026-08-23 15:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-011-4,SHP-2026-111,Port / Airport Logistics Ramp,2026-08-23 22:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-011-5,SHP-2026-111,Export Inspection Dock,2026-08-24 04:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-011-6,SHP-2026-111,Final Aircraft / Vessel Loading,2026-08-24 08:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-012-1,SHP-2026-112,Batch Creation,2026-08-23 12:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-012-2,SHP-2026-112,Cold Storage Exit & Loading,2026-08-23 13:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-012-3,SHP-2026-112,Transit Checkpoint Alpha,2026-08-23 17:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-012-4,SHP-2026-112,Port / Airport Logistics Ramp,2026-08-24 00:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-012-5,SHP-2026-112,Export Inspection Dock,2026-08-24 06:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-012-6,SHP-2026-112,Final Aircraft / Vessel Loading,2026-08-24 10:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-013-1,SHP-2026-113,Batch Creation,2026-08-23 14:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-013-2,SHP-2026-113,Cold Storage Exit & Loading,2026-08-23 15:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-013-3,SHP-2026-113,Transit Checkpoint Alpha,2026-08-23 19:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-013-4,SHP-2026-113,Port / Airport Logistics Ramp,2026-08-24 02:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-013-5,SHP-2026-113,Export Inspection Dock,2026-08-24 08:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-013-6,SHP-2026-113,Final Aircraft / Vessel Loading,2026-08-24 12:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-014-1,SHP-2026-114,Batch Creation,2026-08-23 16:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-014-2,SHP-2026-114,Cold Storage Exit & Loading,2026-08-23 17:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-014-3,SHP-2026-114,Transit Checkpoint Alpha,2026-08-23 21:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-014-4,SHP-2026-114,Port / Airport Logistics Ramp,2026-08-24 04:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-014-5,SHP-2026-114,Export Inspection Dock,2026-08-24 10:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-014-6,SHP-2026-114,Final Aircraft / Vessel Loading,2026-08-24 14:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-015-1,SHP-2026-115,Batch Creation,2026-08-23 18:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-015-2,SHP-2026-115,Cold Storage Exit & Loading,2026-08-23 19:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-015-3,SHP-2026-115,Transit Checkpoint Alpha,2026-08-23 23:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-015-4,SHP-2026-115,Port / Airport Logistics Ramp,2026-08-24 06:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-015-5,SHP-2026-115,Export Inspection Dock,2026-08-24 12:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-015-6,SHP-2026-115,Final Aircraft / Vessel Loading,2026-08-24 16:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-016-1,SHP-2026-116,Batch Creation,2026-08-23 20:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-016-2,SHP-2026-116,Cold Storage Exit & Loading,2026-08-23 21:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-016-3,SHP-2026-116,Transit Checkpoint Alpha,2026-08-24 01:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-016-4,SHP-2026-116,Port / Airport Logistics Ramp,2026-08-24 08:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-016-5,SHP-2026-116,Export Inspection Dock,2026-08-24 14:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-016-6,SHP-2026-116,Final Aircraft / Vessel Loading,2026-08-24 18:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-017-1,SHP-2026-117,Batch Creation,2026-08-23 22:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-017-2,SHP-2026-117,Cold Storage Exit & Loading,2026-08-23 23:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-017-3,SHP-2026-117,Transit Checkpoint Alpha,2026-08-24 03:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-017-4,SHP-2026-117,Port / Airport Logistics Ramp,2026-08-24 10:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-017-5,SHP-2026-117,Export Inspection Dock,2026-08-24 16:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-017-6,SHP-2026-117,Final Aircraft / Vessel Loading,2026-08-24 20:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-018-1,SHP-2026-118,Batch Creation,2026-08-24 00:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-018-2,SHP-2026-118,Cold Storage Exit & Loading,2026-08-24 01:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-018-3,SHP-2026-118,Transit Checkpoint Alpha,2026-08-24 05:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-018-4,SHP-2026-118,Port / Airport Logistics Ramp,2026-08-24 12:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-018-5,SHP-2026-118,Export Inspection Dock,2026-08-24 18:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-018-6,SHP-2026-118,Final Aircraft / Vessel Loading,2026-08-24 22:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-019-1,SHP-2026-119,Batch Creation,2026-08-24 02:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-019-2,SHP-2026-119,Cold Storage Exit & Loading,2026-08-24 03:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-019-3,SHP-2026-119,Transit Checkpoint Alpha,2026-08-24 07:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-019-4,SHP-2026-119,Port / Airport Logistics Ramp,2026-08-24 14:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-019-5,SHP-2026-119,Export Inspection Dock,2026-08-24 20:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-019-6,SHP-2026-119,Final Aircraft / Vessel Loading,2026-08-25 00:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-020-1,SHP-2026-120,Batch Creation,2026-08-24 04:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-020-2,SHP-2026-120,Cold Storage Exit & Loading,2026-08-24 05:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-020-3,SHP-2026-120,Transit Checkpoint Alpha,2026-08-24 09:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-020-4,SHP-2026-120,Port / Airport Logistics Ramp,2026-08-24 16:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-020-5,SHP-2026-120,Export Inspection Dock,2026-08-24 22:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-020-6,SHP-2026-120,Final Aircraft / Vessel Loading,2026-08-25 02:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-021-1,SHP-2026-121,Batch Creation,2026-08-24 06:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-021-2,SHP-2026-121,Cold Storage Exit & Loading,2026-08-24 07:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-021-3,SHP-2026-121,Transit Checkpoint Alpha,2026-08-24 11:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-021-4,SHP-2026-121,Port / Airport Logistics Ramp,2026-08-24 18:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-021-5,SHP-2026-121,Export Inspection Dock,2026-08-25 00:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-021-6,SHP-2026-121,Final Aircraft / Vessel Loading,2026-08-25 04:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-022-1,SHP-2026-122,Batch Creation,2026-08-24 08:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-022-2,SHP-2026-122,Cold Storage Exit & Loading,2026-08-24 09:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-022-3,SHP-2026-122,Transit Checkpoint Alpha,2026-08-24 13:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-022-4,SHP-2026-122,Port / Airport Logistics Ramp,2026-08-24 20:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-022-5,SHP-2026-122,Export Inspection Dock,2026-08-25 02:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-022-6,SHP-2026-122,Final Aircraft / Vessel Loading,2026-08-25 06:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-023-1,SHP-2026-123,Batch Creation,2026-08-24 10:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-023-2,SHP-2026-123,Cold Storage Exit & Loading,2026-08-24 11:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-023-3,SHP-2026-123,Transit Checkpoint Alpha,2026-08-24 15:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-023-4,SHP-2026-123,Port / Airport Logistics Ramp,2026-08-24 22:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-023-5,SHP-2026-123,Export Inspection Dock,2026-08-25 04:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-023-6,SHP-2026-123,Final Aircraft / Vessel Loading,2026-08-25 08:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-024-1,SHP-2026-124,Batch Creation,2026-08-24 12:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-024-2,SHP-2026-124,Cold Storage Exit & Loading,2026-08-24 13:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-024-3,SHP-2026-124,Transit Checkpoint Alpha,2026-08-24 17:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-024-4,SHP-2026-124,Port / Airport Logistics Ramp,2026-08-25 00:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-024-5,SHP-2026-124,Export Inspection Dock,2026-08-25 06:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-024-6,SHP-2026-124,Final Aircraft / Vessel Loading,2026-08-25 10:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-025-1,SHP-2026-125,Batch Creation,2026-08-24 14:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-025-2,SHP-2026-125,Cold Storage Exit & Loading,2026-08-24 15:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-025-3,SHP-2026-125,Transit Checkpoint Alpha,2026-08-24 19:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-025-4,SHP-2026-125,Port / Airport Logistics Ramp,2026-08-25 02:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-025-5,SHP-2026-125,Export Inspection Dock,2026-08-25 08:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-025-6,SHP-2026-125,Final Aircraft / Vessel Loading,2026-08-25 12:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-026-1,SHP-2026-126,Batch Creation,2026-08-24 16:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-026-2,SHP-2026-126,Cold Storage Exit & Loading,2026-08-24 17:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-026-3,SHP-2026-126,Transit Checkpoint Alpha,2026-08-24 21:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-026-4,SHP-2026-126,Port / Airport Logistics Ramp,2026-08-25 04:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-026-5,SHP-2026-126,Export Inspection Dock,2026-08-25 10:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-026-6,SHP-2026-126,Final Aircraft / Vessel Loading,2026-08-25 14:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-027-1,SHP-2026-127,Batch Creation,2026-08-24 18:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-027-2,SHP-2026-127,Cold Storage Exit & Loading,2026-08-24 19:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-027-3,SHP-2026-127,Transit Checkpoint Alpha,2026-08-24 23:33 UTC,Stage 3 Location,97,DELAYED,Traffic congestion causing 97 min delay
-RTE-027-4,SHP-2026-127,Port / Airport Logistics Ramp,2026-08-25 06:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-027-5,SHP-2026-127,Export Inspection Dock,2026-08-25 12:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-027-6,SHP-2026-127,Final Aircraft / Vessel Loading,2026-08-25 16:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-028-1,SHP-2026-128,Batch Creation,2026-08-24 20:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-028-2,SHP-2026-128,Cold Storage Exit & Loading,2026-08-24 21:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-028-3,SHP-2026-128,Transit Checkpoint Alpha,2026-08-25 01:33 UTC,Stage 3 Location,52,DELAYED,Traffic congestion causing 52 min delay
-RTE-028-4,SHP-2026-128,Port / Airport Logistics Ramp,2026-08-25 08:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-028-5,SHP-2026-128,Export Inspection Dock,2026-08-25 14:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-028-6,SHP-2026-128,Final Aircraft / Vessel Loading,2026-08-25 18:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-029-1,SHP-2026-129,Batch Creation,2026-08-24 22:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-029-2,SHP-2026-129,Cold Storage Exit & Loading,2026-08-24 23:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-029-3,SHP-2026-129,Transit Checkpoint Alpha,2026-08-25 03:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-029-4,SHP-2026-129,Port / Airport Logistics Ramp,2026-08-25 10:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-029-5,SHP-2026-129,Export Inspection Dock,2026-08-25 16:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-029-6,SHP-2026-129,Final Aircraft / Vessel Loading,2026-08-25 20:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-030-1,SHP-2026-130,Batch Creation,2026-08-25 00:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-030-2,SHP-2026-130,Cold Storage Exit & Loading,2026-08-25 01:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-030-3,SHP-2026-130,Transit Checkpoint Alpha,2026-08-25 05:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-030-4,SHP-2026-130,Port / Airport Logistics Ramp,2026-08-25 12:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-030-5,SHP-2026-130,Export Inspection Dock,2026-08-25 18:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-030-6,SHP-2026-130,Final Aircraft / Vessel Loading,2026-08-25 22:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-031-1,SHP-2026-131,Batch Creation,2026-08-25 02:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-031-2,SHP-2026-131,Cold Storage Exit & Loading,2026-08-25 03:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-031-3,SHP-2026-131,Transit Checkpoint Alpha,2026-08-25 07:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-031-4,SHP-2026-131,Port / Airport Logistics Ramp,2026-08-25 14:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-031-5,SHP-2026-131,Export Inspection Dock,2026-08-25 20:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-031-6,SHP-2026-131,Final Aircraft / Vessel Loading,2026-08-26 00:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-032-1,SHP-2026-132,Batch Creation,2026-08-25 04:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-032-2,SHP-2026-132,Cold Storage Exit & Loading,2026-08-25 05:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-032-3,SHP-2026-132,Transit Checkpoint Alpha,2026-08-25 09:33 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
-RTE-032-4,SHP-2026-132,Port / Airport Logistics Ramp,2026-08-25 16:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-032-5,SHP-2026-132,Export Inspection Dock,2026-08-25 22:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-032-6,SHP-2026-132,Final Aircraft / Vessel Loading,2026-08-26 02:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
-RTE-033-1,SHP-2026-133,Batch Creation,2026-08-25 06:33 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
-RTE-033-2,SHP-2026-133,Cold Storage Exit & Loading,2026-08-25 07:33 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
-RTE-033-3,SHP-2026-133,Transit Checkpoint Alpha,2026-08-25 11:33 UTC,Stage 3 Location,50,DELAYED,Traffic congestion causing 50 min delay
-RTE-033-4,SHP-2026-133,Port / Airport Logistics Ramp,2026-08-25 18:33 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
-RTE-033-5,SHP-2026-133,Export Inspection Dock,2026-08-26 00:33 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
-RTE-033-6,SHP-2026-133,Final Aircraft / Vessel Loading,2026-08-26 04:33 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-001-1,SHP-2026-101,Batch Creation,2026-08-28 09:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-001-2,SHP-2026-101,Cold Storage Exit & Loading,2026-08-28 10:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-001-3,SHP-2026-101,Transit Checkpoint Alpha,2026-08-28 14:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-001-4,SHP-2026-101,Port / Airport Logistics Ramp,2026-08-28 21:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-001-5,SHP-2026-101,Export Inspection Dock,2026-08-29 03:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-001-6,SHP-2026-101,Final Aircraft / Vessel Loading,2026-08-29 07:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-002-1,SHP-2026-102,Batch Creation,2026-08-28 11:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-002-2,SHP-2026-102,Cold Storage Exit & Loading,2026-08-28 12:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-002-3,SHP-2026-102,Transit Checkpoint Alpha,2026-08-28 16:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-002-4,SHP-2026-102,Port / Airport Logistics Ramp,2026-08-28 23:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-002-5,SHP-2026-102,Export Inspection Dock,2026-08-29 05:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-002-6,SHP-2026-102,Final Aircraft / Vessel Loading,2026-08-29 09:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-003-1,SHP-2026-103,Batch Creation,2026-08-28 13:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-003-2,SHP-2026-103,Cold Storage Exit & Loading,2026-08-28 14:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-003-3,SHP-2026-103,Transit Checkpoint Alpha,2026-08-28 18:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-003-4,SHP-2026-103,Port / Airport Logistics Ramp,2026-08-29 01:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-003-5,SHP-2026-103,Export Inspection Dock,2026-08-29 07:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-003-6,SHP-2026-103,Final Aircraft / Vessel Loading,2026-08-29 11:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-004-1,SHP-2026-104,Batch Creation,2026-08-28 15:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-004-2,SHP-2026-104,Cold Storage Exit & Loading,2026-08-28 16:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-004-3,SHP-2026-104,Transit Checkpoint Alpha,2026-08-28 20:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-004-4,SHP-2026-104,Port / Airport Logistics Ramp,2026-08-29 03:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-004-5,SHP-2026-104,Export Inspection Dock,2026-08-29 09:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-004-6,SHP-2026-104,Final Aircraft / Vessel Loading,2026-08-29 13:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-005-1,SHP-2026-105,Batch Creation,2026-08-28 17:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-005-2,SHP-2026-105,Cold Storage Exit & Loading,2026-08-28 18:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-005-3,SHP-2026-105,Transit Checkpoint Alpha,2026-08-28 22:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-005-4,SHP-2026-105,Port / Airport Logistics Ramp,2026-08-29 05:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-005-5,SHP-2026-105,Export Inspection Dock,2026-08-29 11:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-005-6,SHP-2026-105,Final Aircraft / Vessel Loading,2026-08-29 15:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-006-1,SHP-2026-106,Batch Creation,2026-08-28 19:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-006-2,SHP-2026-106,Cold Storage Exit & Loading,2026-08-28 20:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-006-3,SHP-2026-106,Transit Checkpoint Alpha,2026-08-29 00:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-006-4,SHP-2026-106,Port / Airport Logistics Ramp,2026-08-29 07:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-006-5,SHP-2026-106,Export Inspection Dock,2026-08-29 13:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-006-6,SHP-2026-106,Final Aircraft / Vessel Loading,2026-08-29 17:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-007-1,SHP-2026-107,Batch Creation,2026-08-28 21:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-007-2,SHP-2026-107,Cold Storage Exit & Loading,2026-08-28 22:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-007-3,SHP-2026-107,Transit Checkpoint Alpha,2026-08-29 02:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-007-4,SHP-2026-107,Port / Airport Logistics Ramp,2026-08-29 09:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-007-5,SHP-2026-107,Export Inspection Dock,2026-08-29 15:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-007-6,SHP-2026-107,Final Aircraft / Vessel Loading,2026-08-29 19:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-008-1,SHP-2026-108,Batch Creation,2026-08-28 23:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-008-2,SHP-2026-108,Cold Storage Exit & Loading,2026-08-29 00:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-008-3,SHP-2026-108,Transit Checkpoint Alpha,2026-08-29 04:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-008-4,SHP-2026-108,Port / Airport Logistics Ramp,2026-08-29 11:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-008-5,SHP-2026-108,Export Inspection Dock,2026-08-29 17:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-008-6,SHP-2026-108,Final Aircraft / Vessel Loading,2026-08-29 21:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-009-1,SHP-2026-109,Batch Creation,2026-08-29 01:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-009-2,SHP-2026-109,Cold Storage Exit & Loading,2026-08-29 02:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-009-3,SHP-2026-109,Transit Checkpoint Alpha,2026-08-29 06:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-009-4,SHP-2026-109,Port / Airport Logistics Ramp,2026-08-29 13:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-009-5,SHP-2026-109,Export Inspection Dock,2026-08-29 19:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-009-6,SHP-2026-109,Final Aircraft / Vessel Loading,2026-08-29 23:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-010-1,SHP-2026-110,Batch Creation,2026-08-29 03:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-010-2,SHP-2026-110,Cold Storage Exit & Loading,2026-08-29 04:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-010-3,SHP-2026-110,Transit Checkpoint Alpha,2026-08-29 08:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-010-4,SHP-2026-110,Port / Airport Logistics Ramp,2026-08-29 15:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-010-5,SHP-2026-110,Export Inspection Dock,2026-08-29 21:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-010-6,SHP-2026-110,Final Aircraft / Vessel Loading,2026-08-30 01:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-011-1,SHP-2026-111,Batch Creation,2026-08-29 05:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-011-2,SHP-2026-111,Cold Storage Exit & Loading,2026-08-29 06:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-011-3,SHP-2026-111,Transit Checkpoint Alpha,2026-08-29 10:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-011-4,SHP-2026-111,Port / Airport Logistics Ramp,2026-08-29 17:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-011-5,SHP-2026-111,Export Inspection Dock,2026-08-29 23:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-011-6,SHP-2026-111,Final Aircraft / Vessel Loading,2026-08-30 03:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-012-1,SHP-2026-112,Batch Creation,2026-08-29 07:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-012-2,SHP-2026-112,Cold Storage Exit & Loading,2026-08-29 08:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-012-3,SHP-2026-112,Transit Checkpoint Alpha,2026-08-29 12:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-012-4,SHP-2026-112,Port / Airport Logistics Ramp,2026-08-29 19:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-012-5,SHP-2026-112,Export Inspection Dock,2026-08-30 01:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-012-6,SHP-2026-112,Final Aircraft / Vessel Loading,2026-08-30 05:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-013-1,SHP-2026-113,Batch Creation,2026-08-29 09:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-013-2,SHP-2026-113,Cold Storage Exit & Loading,2026-08-29 10:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-013-3,SHP-2026-113,Transit Checkpoint Alpha,2026-08-29 14:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-013-4,SHP-2026-113,Port / Airport Logistics Ramp,2026-08-29 21:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-013-5,SHP-2026-113,Export Inspection Dock,2026-08-30 03:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-013-6,SHP-2026-113,Final Aircraft / Vessel Loading,2026-08-30 07:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-014-1,SHP-2026-114,Batch Creation,2026-08-29 11:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-014-2,SHP-2026-114,Cold Storage Exit & Loading,2026-08-29 12:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-014-3,SHP-2026-114,Transit Checkpoint Alpha,2026-08-29 16:09 UTC,Stage 3 Location,92,DELAYED,Traffic congestion causing 92 min delay
+RTE-014-4,SHP-2026-114,Port / Airport Logistics Ramp,2026-08-29 23:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-014-5,SHP-2026-114,Export Inspection Dock,2026-08-30 05:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-014-6,SHP-2026-114,Final Aircraft / Vessel Loading,2026-08-30 09:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-015-1,SHP-2026-115,Batch Creation,2026-08-29 13:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-015-2,SHP-2026-115,Cold Storage Exit & Loading,2026-08-29 14:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-015-3,SHP-2026-115,Transit Checkpoint Alpha,2026-08-29 18:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-015-4,SHP-2026-115,Port / Airport Logistics Ramp,2026-08-30 01:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-015-5,SHP-2026-115,Export Inspection Dock,2026-08-30 07:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-015-6,SHP-2026-115,Final Aircraft / Vessel Loading,2026-08-30 11:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-016-1,SHP-2026-116,Batch Creation,2026-08-29 15:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-016-2,SHP-2026-116,Cold Storage Exit & Loading,2026-08-29 16:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-016-3,SHP-2026-116,Transit Checkpoint Alpha,2026-08-29 20:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-016-4,SHP-2026-116,Port / Airport Logistics Ramp,2026-08-30 03:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-016-5,SHP-2026-116,Export Inspection Dock,2026-08-30 09:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-016-6,SHP-2026-116,Final Aircraft / Vessel Loading,2026-08-30 13:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-017-1,SHP-2026-117,Batch Creation,2026-08-29 17:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-017-2,SHP-2026-117,Cold Storage Exit & Loading,2026-08-29 18:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-017-3,SHP-2026-117,Transit Checkpoint Alpha,2026-08-29 22:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-017-4,SHP-2026-117,Port / Airport Logistics Ramp,2026-08-30 05:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-017-5,SHP-2026-117,Export Inspection Dock,2026-08-30 11:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-017-6,SHP-2026-117,Final Aircraft / Vessel Loading,2026-08-30 15:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-018-1,SHP-2026-118,Batch Creation,2026-08-29 19:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-018-2,SHP-2026-118,Cold Storage Exit & Loading,2026-08-29 20:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-018-3,SHP-2026-118,Transit Checkpoint Alpha,2026-08-30 00:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-018-4,SHP-2026-118,Port / Airport Logistics Ramp,2026-08-30 07:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-018-5,SHP-2026-118,Export Inspection Dock,2026-08-30 13:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-018-6,SHP-2026-118,Final Aircraft / Vessel Loading,2026-08-30 17:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-019-1,SHP-2026-119,Batch Creation,2026-08-29 21:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-019-2,SHP-2026-119,Cold Storage Exit & Loading,2026-08-29 22:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-019-3,SHP-2026-119,Transit Checkpoint Alpha,2026-08-30 02:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-019-4,SHP-2026-119,Port / Airport Logistics Ramp,2026-08-30 09:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-019-5,SHP-2026-119,Export Inspection Dock,2026-08-30 15:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-019-6,SHP-2026-119,Final Aircraft / Vessel Loading,2026-08-30 19:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-020-1,SHP-2026-120,Batch Creation,2026-08-29 23:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-020-2,SHP-2026-120,Cold Storage Exit & Loading,2026-08-30 00:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-020-3,SHP-2026-120,Transit Checkpoint Alpha,2026-08-30 04:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-020-4,SHP-2026-120,Port / Airport Logistics Ramp,2026-08-30 11:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-020-5,SHP-2026-120,Export Inspection Dock,2026-08-30 17:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-020-6,SHP-2026-120,Final Aircraft / Vessel Loading,2026-08-30 21:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-021-1,SHP-2026-121,Batch Creation,2026-08-30 01:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-021-2,SHP-2026-121,Cold Storage Exit & Loading,2026-08-30 02:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-021-3,SHP-2026-121,Transit Checkpoint Alpha,2026-08-30 06:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-021-4,SHP-2026-121,Port / Airport Logistics Ramp,2026-08-30 13:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-021-5,SHP-2026-121,Export Inspection Dock,2026-08-30 19:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-021-6,SHP-2026-121,Final Aircraft / Vessel Loading,2026-08-30 23:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-022-1,SHP-2026-122,Batch Creation,2026-08-30 03:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-022-2,SHP-2026-122,Cold Storage Exit & Loading,2026-08-30 04:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-022-3,SHP-2026-122,Transit Checkpoint Alpha,2026-08-30 08:09 UTC,Stage 3 Location,50,DELAYED,Traffic congestion causing 50 min delay
+RTE-022-4,SHP-2026-122,Port / Airport Logistics Ramp,2026-08-30 15:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-022-5,SHP-2026-122,Export Inspection Dock,2026-08-30 21:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-022-6,SHP-2026-122,Final Aircraft / Vessel Loading,2026-08-31 01:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-023-1,SHP-2026-123,Batch Creation,2026-08-30 05:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-023-2,SHP-2026-123,Cold Storage Exit & Loading,2026-08-30 06:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-023-3,SHP-2026-123,Transit Checkpoint Alpha,2026-08-30 10:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-023-4,SHP-2026-123,Port / Airport Logistics Ramp,2026-08-30 17:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-023-5,SHP-2026-123,Export Inspection Dock,2026-08-30 23:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-023-6,SHP-2026-123,Final Aircraft / Vessel Loading,2026-08-31 03:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-024-1,SHP-2026-124,Batch Creation,2026-08-30 07:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-024-2,SHP-2026-124,Cold Storage Exit & Loading,2026-08-30 08:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-024-3,SHP-2026-124,Transit Checkpoint Alpha,2026-08-30 12:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-024-4,SHP-2026-124,Port / Airport Logistics Ramp,2026-08-30 19:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-024-5,SHP-2026-124,Export Inspection Dock,2026-08-31 01:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-024-6,SHP-2026-124,Final Aircraft / Vessel Loading,2026-08-31 05:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-025-1,SHP-2026-125,Batch Creation,2026-08-30 09:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-025-2,SHP-2026-125,Cold Storage Exit & Loading,2026-08-30 10:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-025-3,SHP-2026-125,Transit Checkpoint Alpha,2026-08-30 14:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-025-4,SHP-2026-125,Port / Airport Logistics Ramp,2026-08-30 21:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-025-5,SHP-2026-125,Export Inspection Dock,2026-08-31 03:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-025-6,SHP-2026-125,Final Aircraft / Vessel Loading,2026-08-31 07:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-026-1,SHP-2026-126,Batch Creation,2026-08-30 11:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-026-2,SHP-2026-126,Cold Storage Exit & Loading,2026-08-30 12:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-026-3,SHP-2026-126,Transit Checkpoint Alpha,2026-08-30 16:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-026-4,SHP-2026-126,Port / Airport Logistics Ramp,2026-08-30 23:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-026-5,SHP-2026-126,Export Inspection Dock,2026-08-31 05:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-026-6,SHP-2026-126,Final Aircraft / Vessel Loading,2026-08-31 09:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-027-1,SHP-2026-127,Batch Creation,2026-08-30 13:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-027-2,SHP-2026-127,Cold Storage Exit & Loading,2026-08-30 14:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-027-3,SHP-2026-127,Transit Checkpoint Alpha,2026-08-30 18:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-027-4,SHP-2026-127,Port / Airport Logistics Ramp,2026-08-31 01:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-027-5,SHP-2026-127,Export Inspection Dock,2026-08-31 07:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-027-6,SHP-2026-127,Final Aircraft / Vessel Loading,2026-08-31 11:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-028-1,SHP-2026-128,Batch Creation,2026-08-30 15:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-028-2,SHP-2026-128,Cold Storage Exit & Loading,2026-08-30 16:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-028-3,SHP-2026-128,Transit Checkpoint Alpha,2026-08-30 20:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-028-4,SHP-2026-128,Port / Airport Logistics Ramp,2026-08-31 03:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-028-5,SHP-2026-128,Export Inspection Dock,2026-08-31 09:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-028-6,SHP-2026-128,Final Aircraft / Vessel Loading,2026-08-31 13:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-029-1,SHP-2026-129,Batch Creation,2026-08-30 17:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-029-2,SHP-2026-129,Cold Storage Exit & Loading,2026-08-30 18:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-029-3,SHP-2026-129,Transit Checkpoint Alpha,2026-08-30 22:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-029-4,SHP-2026-129,Port / Airport Logistics Ramp,2026-08-31 05:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-029-5,SHP-2026-129,Export Inspection Dock,2026-08-31 11:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-029-6,SHP-2026-129,Final Aircraft / Vessel Loading,2026-08-31 15:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-030-1,SHP-2026-130,Batch Creation,2026-08-30 19:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-030-2,SHP-2026-130,Cold Storage Exit & Loading,2026-08-30 20:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-030-3,SHP-2026-130,Transit Checkpoint Alpha,2026-08-31 00:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-030-4,SHP-2026-130,Port / Airport Logistics Ramp,2026-08-31 07:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-030-5,SHP-2026-130,Export Inspection Dock,2026-08-31 13:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-030-6,SHP-2026-130,Final Aircraft / Vessel Loading,2026-08-31 17:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-031-1,SHP-2026-131,Batch Creation,2026-08-30 21:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-031-2,SHP-2026-131,Cold Storage Exit & Loading,2026-08-30 22:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-031-3,SHP-2026-131,Transit Checkpoint Alpha,2026-08-31 02:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-031-4,SHP-2026-131,Port / Airport Logistics Ramp,2026-08-31 09:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-031-5,SHP-2026-131,Export Inspection Dock,2026-08-31 15:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-031-6,SHP-2026-131,Final Aircraft / Vessel Loading,2026-08-31 19:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-032-1,SHP-2026-132,Batch Creation,2026-08-30 23:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-032-2,SHP-2026-132,Cold Storage Exit & Loading,2026-08-31 00:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-032-3,SHP-2026-132,Transit Checkpoint Alpha,2026-08-31 04:09 UTC,Stage 3 Location,83,DELAYED,Traffic congestion causing 83 min delay
+RTE-032-4,SHP-2026-132,Port / Airport Logistics Ramp,2026-08-31 11:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-032-5,SHP-2026-132,Export Inspection Dock,2026-08-31 17:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-032-6,SHP-2026-132,Final Aircraft / Vessel Loading,2026-08-31 21:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-033-1,SHP-2026-133,Batch Creation,2026-08-31 01:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-033-2,SHP-2026-133,Cold Storage Exit & Loading,2026-08-31 02:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-033-3,SHP-2026-133,Transit Checkpoint Alpha,2026-08-31 06:09 UTC,Stage 3 Location,77,DELAYED,Traffic congestion causing 77 min delay
+RTE-033-4,SHP-2026-133,Port / Airport Logistics Ramp,2026-08-31 13:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-033-5,SHP-2026-133,Export Inspection Dock,2026-08-31 19:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-033-6,SHP-2026-133,Final Aircraft / Vessel Loading,2026-08-31 23:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-034-1,SHP-2026-134,Batch Creation,2026-08-31 03:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-034-2,SHP-2026-134,Cold Storage Exit & Loading,2026-08-31 04:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-034-3,SHP-2026-134,Transit Checkpoint Alpha,2026-08-31 08:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-034-4,SHP-2026-134,Port / Airport Logistics Ramp,2026-08-31 15:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-034-5,SHP-2026-134,Export Inspection Dock,2026-08-31 21:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-034-6,SHP-2026-134,Final Aircraft / Vessel Loading,2026-09-01 01:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-035-1,SHP-2026-135,Batch Creation,2026-08-31 05:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-035-2,SHP-2026-135,Cold Storage Exit & Loading,2026-08-31 06:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-035-3,SHP-2026-135,Transit Checkpoint Alpha,2026-08-31 10:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-035-4,SHP-2026-135,Port / Airport Logistics Ramp,2026-08-31 17:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-035-5,SHP-2026-135,Export Inspection Dock,2026-08-31 23:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-035-6,SHP-2026-135,Final Aircraft / Vessel Loading,2026-09-01 03:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-036-1,SHP-2026-136,Batch Creation,2026-08-31 07:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-036-2,SHP-2026-136,Cold Storage Exit & Loading,2026-08-31 08:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-036-3,SHP-2026-136,Transit Checkpoint Alpha,2026-08-31 12:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-036-4,SHP-2026-136,Port / Airport Logistics Ramp,2026-08-31 19:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-036-5,SHP-2026-136,Export Inspection Dock,2026-09-01 01:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-036-6,SHP-2026-136,Final Aircraft / Vessel Loading,2026-09-01 05:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-037-1,SHP-2026-137,Batch Creation,2026-08-31 09:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-037-2,SHP-2026-137,Cold Storage Exit & Loading,2026-08-31 10:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-037-3,SHP-2026-137,Transit Checkpoint Alpha,2026-08-31 14:09 UTC,Stage 3 Location,111,DELAYED,Traffic congestion causing 111 min delay
+RTE-037-4,SHP-2026-137,Port / Airport Logistics Ramp,2026-08-31 21:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-037-5,SHP-2026-137,Export Inspection Dock,2026-09-01 03:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-037-6,SHP-2026-137,Final Aircraft / Vessel Loading,2026-09-01 07:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-038-1,SHP-2026-138,Batch Creation,2026-08-31 11:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-038-2,SHP-2026-138,Cold Storage Exit & Loading,2026-08-31 12:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-038-3,SHP-2026-138,Transit Checkpoint Alpha,2026-08-31 16:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-038-4,SHP-2026-138,Port / Airport Logistics Ramp,2026-08-31 23:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-038-5,SHP-2026-138,Export Inspection Dock,2026-09-01 05:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-038-6,SHP-2026-138,Final Aircraft / Vessel Loading,2026-09-01 09:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-039-1,SHP-2026-139,Batch Creation,2026-08-31 13:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-039-2,SHP-2026-139,Cold Storage Exit & Loading,2026-08-31 14:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-039-3,SHP-2026-139,Transit Checkpoint Alpha,2026-08-31 18:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-039-4,SHP-2026-139,Port / Airport Logistics Ramp,2026-09-01 01:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-039-5,SHP-2026-139,Export Inspection Dock,2026-09-01 07:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-039-6,SHP-2026-139,Final Aircraft / Vessel Loading,2026-09-01 11:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-040-1,SHP-2026-140,Batch Creation,2026-08-31 15:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-040-2,SHP-2026-140,Cold Storage Exit & Loading,2026-08-31 16:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-040-3,SHP-2026-140,Transit Checkpoint Alpha,2026-08-31 20:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-040-4,SHP-2026-140,Port / Airport Logistics Ramp,2026-09-01 03:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-040-5,SHP-2026-140,Export Inspection Dock,2026-09-01 09:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-040-6,SHP-2026-140,Final Aircraft / Vessel Loading,2026-09-01 13:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-041-1,SHP-2026-141,Batch Creation,2026-08-31 17:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-041-2,SHP-2026-141,Cold Storage Exit & Loading,2026-08-31 18:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-041-3,SHP-2026-141,Transit Checkpoint Alpha,2026-08-31 22:09 UTC,Stage 3 Location,117,DELAYED,Traffic congestion causing 117 min delay
+RTE-041-4,SHP-2026-141,Port / Airport Logistics Ramp,2026-09-01 05:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-041-5,SHP-2026-141,Export Inspection Dock,2026-09-01 11:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-041-6,SHP-2026-141,Final Aircraft / Vessel Loading,2026-09-01 15:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-042-1,SHP-2026-142,Batch Creation,2026-08-31 19:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-042-2,SHP-2026-142,Cold Storage Exit & Loading,2026-08-31 20:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-042-3,SHP-2026-142,Transit Checkpoint Alpha,2026-09-01 00:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-042-4,SHP-2026-142,Port / Airport Logistics Ramp,2026-09-01 07:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-042-5,SHP-2026-142,Export Inspection Dock,2026-09-01 13:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-042-6,SHP-2026-142,Final Aircraft / Vessel Loading,2026-09-01 17:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-043-1,SHP-2026-143,Batch Creation,2026-08-31 21:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-043-2,SHP-2026-143,Cold Storage Exit & Loading,2026-08-31 22:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-043-3,SHP-2026-143,Transit Checkpoint Alpha,2026-09-01 02:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-043-4,SHP-2026-143,Port / Airport Logistics Ramp,2026-09-01 09:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-043-5,SHP-2026-143,Export Inspection Dock,2026-09-01 15:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-043-6,SHP-2026-143,Final Aircraft / Vessel Loading,2026-09-01 19:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-044-1,SHP-2026-144,Batch Creation,2026-08-31 23:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-044-2,SHP-2026-144,Cold Storage Exit & Loading,2026-09-01 00:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-044-3,SHP-2026-144,Transit Checkpoint Alpha,2026-09-01 04:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-044-4,SHP-2026-144,Port / Airport Logistics Ramp,2026-09-01 11:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-044-5,SHP-2026-144,Export Inspection Dock,2026-09-01 17:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-044-6,SHP-2026-144,Final Aircraft / Vessel Loading,2026-09-01 21:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-045-1,SHP-2026-145,Batch Creation,2026-09-01 01:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-045-2,SHP-2026-145,Cold Storage Exit & Loading,2026-09-01 02:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-045-3,SHP-2026-145,Transit Checkpoint Alpha,2026-09-01 06:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-045-4,SHP-2026-145,Port / Airport Logistics Ramp,2026-09-01 13:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-045-5,SHP-2026-145,Export Inspection Dock,2026-09-01 19:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-045-6,SHP-2026-145,Final Aircraft / Vessel Loading,2026-09-01 23:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-046-1,SHP-2026-146,Batch Creation,2026-09-01 03:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-046-2,SHP-2026-146,Cold Storage Exit & Loading,2026-09-01 04:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-046-3,SHP-2026-146,Transit Checkpoint Alpha,2026-09-01 08:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-046-4,SHP-2026-146,Port / Airport Logistics Ramp,2026-09-01 15:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-046-5,SHP-2026-146,Export Inspection Dock,2026-09-01 21:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-046-6,SHP-2026-146,Final Aircraft / Vessel Loading,2026-09-02 01:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-047-1,SHP-2026-147,Batch Creation,2026-09-01 05:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-047-2,SHP-2026-147,Cold Storage Exit & Loading,2026-09-01 06:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-047-3,SHP-2026-147,Transit Checkpoint Alpha,2026-09-01 10:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-047-4,SHP-2026-147,Port / Airport Logistics Ramp,2026-09-01 17:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-047-5,SHP-2026-147,Export Inspection Dock,2026-09-01 23:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-047-6,SHP-2026-147,Final Aircraft / Vessel Loading,2026-09-02 03:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-048-1,SHP-2026-148,Batch Creation,2026-09-01 07:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-048-2,SHP-2026-148,Cold Storage Exit & Loading,2026-09-01 08:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-048-3,SHP-2026-148,Transit Checkpoint Alpha,2026-09-01 12:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-048-4,SHP-2026-148,Port / Airport Logistics Ramp,2026-09-01 19:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-048-5,SHP-2026-148,Export Inspection Dock,2026-09-02 01:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-048-6,SHP-2026-148,Final Aircraft / Vessel Loading,2026-09-02 05:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-049-1,SHP-2026-149,Batch Creation,2026-09-01 09:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-049-2,SHP-2026-149,Cold Storage Exit & Loading,2026-09-01 10:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-049-3,SHP-2026-149,Transit Checkpoint Alpha,2026-09-01 14:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-049-4,SHP-2026-149,Port / Airport Logistics Ramp,2026-09-01 21:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-049-5,SHP-2026-149,Export Inspection Dock,2026-09-02 03:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-049-6,SHP-2026-149,Final Aircraft / Vessel Loading,2026-09-02 07:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-050-1,SHP-2026-150,Batch Creation,2026-09-01 11:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-050-2,SHP-2026-150,Cold Storage Exit & Loading,2026-09-01 12:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-050-3,SHP-2026-150,Transit Checkpoint Alpha,2026-09-01 16:09 UTC,Stage 3 Location,101,DELAYED,Traffic congestion causing 101 min delay
+RTE-050-4,SHP-2026-150,Port / Airport Logistics Ramp,2026-09-01 23:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-050-5,SHP-2026-150,Export Inspection Dock,2026-09-02 05:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-050-6,SHP-2026-150,Final Aircraft / Vessel Loading,2026-09-02 09:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-051-1,SHP-2026-151,Batch Creation,2026-09-01 13:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-051-2,SHP-2026-151,Cold Storage Exit & Loading,2026-09-01 14:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-051-3,SHP-2026-151,Transit Checkpoint Alpha,2026-09-01 18:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-051-4,SHP-2026-151,Port / Airport Logistics Ramp,2026-09-02 01:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-051-5,SHP-2026-151,Export Inspection Dock,2026-09-02 07:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-051-6,SHP-2026-151,Final Aircraft / Vessel Loading,2026-09-02 11:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-052-1,SHP-2026-152,Batch Creation,2026-09-01 15:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-052-2,SHP-2026-152,Cold Storage Exit & Loading,2026-09-01 16:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-052-3,SHP-2026-152,Transit Checkpoint Alpha,2026-09-01 20:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-052-4,SHP-2026-152,Port / Airport Logistics Ramp,2026-09-02 03:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-052-5,SHP-2026-152,Export Inspection Dock,2026-09-02 09:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-052-6,SHP-2026-152,Final Aircraft / Vessel Loading,2026-09-02 13:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-053-1,SHP-2026-153,Batch Creation,2026-09-01 17:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-053-2,SHP-2026-153,Cold Storage Exit & Loading,2026-09-01 18:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-053-3,SHP-2026-153,Transit Checkpoint Alpha,2026-09-01 22:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-053-4,SHP-2026-153,Port / Airport Logistics Ramp,2026-09-02 05:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-053-5,SHP-2026-153,Export Inspection Dock,2026-09-02 11:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-053-6,SHP-2026-153,Final Aircraft / Vessel Loading,2026-09-02 15:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-054-1,SHP-2026-154,Batch Creation,2026-09-01 19:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-054-2,SHP-2026-154,Cold Storage Exit & Loading,2026-09-01 20:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-054-3,SHP-2026-154,Transit Checkpoint Alpha,2026-09-02 00:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-054-4,SHP-2026-154,Port / Airport Logistics Ramp,2026-09-02 07:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-054-5,SHP-2026-154,Export Inspection Dock,2026-09-02 13:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-054-6,SHP-2026-154,Final Aircraft / Vessel Loading,2026-09-02 17:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-055-1,SHP-2026-155,Batch Creation,2026-09-01 21:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-055-2,SHP-2026-155,Cold Storage Exit & Loading,2026-09-01 22:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-055-3,SHP-2026-155,Transit Checkpoint Alpha,2026-09-02 02:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-055-4,SHP-2026-155,Port / Airport Logistics Ramp,2026-09-02 09:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-055-5,SHP-2026-155,Export Inspection Dock,2026-09-02 15:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-055-6,SHP-2026-155,Final Aircraft / Vessel Loading,2026-09-02 19:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-056-1,SHP-2026-156,Batch Creation,2026-09-01 23:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-056-2,SHP-2026-156,Cold Storage Exit & Loading,2026-09-02 00:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-056-3,SHP-2026-156,Transit Checkpoint Alpha,2026-09-02 04:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-056-4,SHP-2026-156,Port / Airport Logistics Ramp,2026-09-02 11:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-056-5,SHP-2026-156,Export Inspection Dock,2026-09-02 17:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-056-6,SHP-2026-156,Final Aircraft / Vessel Loading,2026-09-02 21:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-057-1,SHP-2026-157,Batch Creation,2026-09-02 01:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-057-2,SHP-2026-157,Cold Storage Exit & Loading,2026-09-02 02:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-057-3,SHP-2026-157,Transit Checkpoint Alpha,2026-09-02 06:09 UTC,Stage 3 Location,117,DELAYED,Traffic congestion causing 117 min delay
+RTE-057-4,SHP-2026-157,Port / Airport Logistics Ramp,2026-09-02 13:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-057-5,SHP-2026-157,Export Inspection Dock,2026-09-02 19:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-057-6,SHP-2026-157,Final Aircraft / Vessel Loading,2026-09-02 23:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-058-1,SHP-2026-158,Batch Creation,2026-09-02 03:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-058-2,SHP-2026-158,Cold Storage Exit & Loading,2026-09-02 04:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-058-3,SHP-2026-158,Transit Checkpoint Alpha,2026-09-02 08:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-058-4,SHP-2026-158,Port / Airport Logistics Ramp,2026-09-02 15:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-058-5,SHP-2026-158,Export Inspection Dock,2026-09-02 21:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-058-6,SHP-2026-158,Final Aircraft / Vessel Loading,2026-09-03 01:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-059-1,SHP-2026-159,Batch Creation,2026-09-02 05:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-059-2,SHP-2026-159,Cold Storage Exit & Loading,2026-09-02 06:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-059-3,SHP-2026-159,Transit Checkpoint Alpha,2026-09-02 10:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-059-4,SHP-2026-159,Port / Airport Logistics Ramp,2026-09-02 17:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-059-5,SHP-2026-159,Export Inspection Dock,2026-09-02 23:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-059-6,SHP-2026-159,Final Aircraft / Vessel Loading,2026-09-03 03:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-060-1,SHP-2026-160,Batch Creation,2026-09-02 07:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-060-2,SHP-2026-160,Cold Storage Exit & Loading,2026-09-02 08:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-060-3,SHP-2026-160,Transit Checkpoint Alpha,2026-09-02 12:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-060-4,SHP-2026-160,Port / Airport Logistics Ramp,2026-09-02 19:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-060-5,SHP-2026-160,Export Inspection Dock,2026-09-03 01:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-060-6,SHP-2026-160,Final Aircraft / Vessel Loading,2026-09-03 05:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-061-1,SHP-2026-161,Batch Creation,2026-09-02 09:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-061-2,SHP-2026-161,Cold Storage Exit & Loading,2026-09-02 10:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-061-3,SHP-2026-161,Transit Checkpoint Alpha,2026-09-02 14:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-061-4,SHP-2026-161,Port / Airport Logistics Ramp,2026-09-02 21:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-061-5,SHP-2026-161,Export Inspection Dock,2026-09-03 03:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-061-6,SHP-2026-161,Final Aircraft / Vessel Loading,2026-09-03 07:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-062-1,SHP-2026-162,Batch Creation,2026-09-02 11:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-062-2,SHP-2026-162,Cold Storage Exit & Loading,2026-09-02 12:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-062-3,SHP-2026-162,Transit Checkpoint Alpha,2026-09-02 16:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-062-4,SHP-2026-162,Port / Airport Logistics Ramp,2026-09-02 23:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-062-5,SHP-2026-162,Export Inspection Dock,2026-09-03 05:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-062-6,SHP-2026-162,Final Aircraft / Vessel Loading,2026-09-03 09:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-063-1,SHP-2026-163,Batch Creation,2026-09-02 13:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-063-2,SHP-2026-163,Cold Storage Exit & Loading,2026-09-02 14:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-063-3,SHP-2026-163,Transit Checkpoint Alpha,2026-09-02 18:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-063-4,SHP-2026-163,Port / Airport Logistics Ramp,2026-09-03 01:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-063-5,SHP-2026-163,Export Inspection Dock,2026-09-03 07:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-063-6,SHP-2026-163,Final Aircraft / Vessel Loading,2026-09-03 11:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-064-1,SHP-2026-164,Batch Creation,2026-09-02 15:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-064-2,SHP-2026-164,Cold Storage Exit & Loading,2026-09-02 16:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-064-3,SHP-2026-164,Transit Checkpoint Alpha,2026-09-02 20:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-064-4,SHP-2026-164,Port / Airport Logistics Ramp,2026-09-03 03:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-064-5,SHP-2026-164,Export Inspection Dock,2026-09-03 09:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-064-6,SHP-2026-164,Final Aircraft / Vessel Loading,2026-09-03 13:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-065-1,SHP-2026-165,Batch Creation,2026-09-02 17:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-065-2,SHP-2026-165,Cold Storage Exit & Loading,2026-09-02 18:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-065-3,SHP-2026-165,Transit Checkpoint Alpha,2026-09-02 22:09 UTC,Stage 3 Location,108,DELAYED,Traffic congestion causing 108 min delay
+RTE-065-4,SHP-2026-165,Port / Airport Logistics Ramp,2026-09-03 05:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-065-5,SHP-2026-165,Export Inspection Dock,2026-09-03 11:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-065-6,SHP-2026-165,Final Aircraft / Vessel Loading,2026-09-03 15:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression
+RTE-066-1,SHP-2026-166,Batch Creation,2026-09-02 19:09 UTC,Stage 1 Location,0,COMPLETED,Normal transit progression
+RTE-066-2,SHP-2026-166,Cold Storage Exit & Loading,2026-09-02 20:09 UTC,Stage 2 Location,0,COMPLETED,Normal transit progression
+RTE-066-3,SHP-2026-166,Transit Checkpoint Alpha,2026-09-03 00:09 UTC,Stage 3 Location,0,ON_TIME,Normal transit progression
+RTE-066-4,SHP-2026-166,Port / Airport Logistics Ramp,2026-09-03 07:09 UTC,Stage 4 Location,0,ON_TIME,Normal transit progression
+RTE-066-5,SHP-2026-166,Export Inspection Dock,2026-09-03 13:09 UTC,Stage 5 Location,0,ON_TIME,Normal transit progression
+RTE-066-6,SHP-2026-166,Final Aircraft / Vessel Loading,2026-09-03 17:09 UTC,Stage 6 Location,0,SCHEDULED,Normal transit progression

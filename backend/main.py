@@ -4,7 +4,7 @@ import csv
 import io
 import sqlite3
 from contextlib import asynccontextmanager
-from typing import Optional, Any
+from typing import Optional, Any, Dict
 
 # Ensure backend directory is in sys.path
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -955,7 +955,10 @@ def export_dataset_excel():
 
     # Sheet 1: Shipments
     ws1 = wb.active
-    ws1.title = "Shipments"
+    if ws1 is None:
+        ws1 = wb.create_sheet("Shipments")
+    else:
+        ws1.title = "Shipments"
     write_sheet(ws1, """
         SELECT s.*, w.driver_name, w.safety_status
         FROM shipments s

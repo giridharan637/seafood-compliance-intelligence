@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# seafood-compliance-intelligence
-=======
 # Seafood Compliance Intelligence
 ## Automated Seafood Export Compliance & Evidence System
 
@@ -40,58 +37,74 @@
 
 ---
 
-### 1. Backend Setup
+### 1. Unified Single-Command Run (Recommended)
+
+From the project root directory:
+
+```bash
+# Run with virtual environment Python
+.\venv\Scripts\python.exe run.py
+
+# Or on macOS/Linux:
+# ./venv/bin/python run.py
+```
+
+This starts the unified FastAPI server on port `8001` serving:
+- **Web Application & UI**: `http://localhost:8001/`
+- **Interactive API Documentation (Swagger)**: `http://localhost:8001/docs`
+- **API Health Check**: `http://localhost:8001/api/health`
+
+---
+
+### 2. Manual Backend Setup
 
 ```bash
 # Navigate to backend directory
 cd backend
 
-# Activate virtual environment (Windows PowerShell)
-..\venv\Scripts\Activate.ps1
-
-# Or create virtual environment if starting from scratch:
-# python -m venv ..\venv
-# ..\venv\Scripts\pip install fastapi uvicorn pandas numpy scikit-learn openpyxl httpx
-
 # Start the FastAPI server (Port 8001)
-uvicorn main:app --host 127.0.0.1 --port 8001 --reload
+..\venv\Scripts\uvicorn.exe main:app --host 127.0.0.1 --port 8001 --reload
 ```
-
-The backend API will start at: `http://127.0.0.1:8001`  
-API Documentation (Swagger UI): `http://127.0.0.1:8001/docs`
 
 ---
 
-### 2. Frontend Setup
+### 3. Manual Frontend Development Setup
 
 ```bash
 # Navigate to frontend directory
 cd frontend
 
-# Install dependencies
+# Install dependencies (if not installed)
 npm install
 
 # Start development server
 npm run dev
 ```
 
-Open the application at: `http://localhost:5173`
+Open the development application at: `http://localhost:5173`
 
 ---
 
-### 3. Production Build & Unified Server
+### 4. Production Frontend Build
 
 ```bash
-# Build production bundle
 cd frontend
 npm run build
-
-# The built frontend in frontend/dist is automatically served by FastAPI on port 8001:
-cd ../backend
-uvicorn main:app --host 0.0.0.0 --port 8001
 ```
 
-Now visiting `http://localhost:8001/` will serve the full production web application with all SPA fallback routes (`/transport`, `/compliance`, `/admin/dashboard`, `/manual-entry`, `/workflow-map`, etc.) working seamlessly on direct URL navigation and browser refresh.
+This compiles TypeScript and builds optimized static assets to `frontend/dist`. When running `python run.py` or FastAPI on port 8001, the built frontend is automatically served with client-side SPA fallback routes (`/compliance`, `/transport`, `/admin/dashboard`, `/manual-entry`, `/workflow-map`, `/failure-modes`, `/dataset-explorer`, etc.).
+
+---
+
+### 5. Running Automated Tests & Experiments
+
+```bash
+# Run full automated test and endpoint audit suite
+.\venv\Scripts\python.exe backend\test_audit.py
+
+# Run standalone experiments suite
+.\venv\Scripts\python.exe backend\test_experiments.py
+```
 
 ---
 
@@ -99,32 +112,34 @@ Now visiting `http://localhost:8001/` will serve the full production web applica
 
 ```
 seafood-compliance-system/
+├── run.py                    # Root single-command application launcher
 ├── backend/
-│   ├── main.py                   # FastAPI REST API & SPA static file router
-│   ├── database.py               # SQLite3 schema definition & connection factory
-│   ├── data_generator.py         # Relational dataset generator (10,000+ records)
-│   ├── ml_engine.py              # Isolation Forest & Random Forest models
-│   ├── workload_engine.py        # Driver duty hour & rest safety constraint engine
-│   ├── experiments_engine.py     # Baseline, missing data, noise & threshold tuning
-│   ├── evidence_pack.py          # Unified multi-table Evidence Pack & Audit generator
-│   ├── store_forward.py          # Offline buffering & network sync engine
-│   ├── manual_entry.py           # Manual compliance entry validation & save pipeline
-│   ├── export_csv.py             # CSV export utility
-│   ├── test_audit.py             # Full automated backend test & audit suite
-│   └── seafood_compliance.db     # SQLite relational database
+│   ├── main.py               # FastAPI REST API & SPA static file router
+│   ├── database.py           # SQLite3 schema definition & connection factory
+│   ├── data_generator.py     # Relational dataset generator (10,000+ records)
+│   ├── ml_engine.py          # Isolation Forest & Random Forest models
+│   ├── workload_engine.py    # Driver duty hour & rest safety constraint engine
+│   ├── experiments_engine.py # Baseline, missing data, noise & threshold tuning
+│   ├── evidence_pack.py      # Unified multi-table Evidence Pack & Audit generator
+│   ├── store_forward.py      # Offline buffering & network sync engine
+│   ├── manual_entry.py       # Manual compliance entry validation & save pipeline
+│   ├── export_csv.py         # CSV export utility
+│   ├── test_audit.py         # Full automated backend test & audit suite
+│   ├── test_experiments.py   # Full standalone experiments test suite
+│   └── seafood_compliance.db # SQLite relational database
 ├── frontend/
 │   ├── src/
-│   │   ├── components/           # React views, dashboards, modals, and charts
-│   │   ├── config/api.ts         # Centralized API client with environment fallback
-│   │   ├── context/              # ToastContext & ThemeContext
-│   │   ├── types/index.ts        # TypeScript schemas and data interfaces
-│   │   ├── App.tsx               # Main SPA router & navigation state
-│   │   └── index.css             # Liquid glass styling, theme tokens & design system
+│   │   ├── components/       # React views, dashboards, modals, and charts
+│   │   ├── config/api.ts     # Centralized API client with environment fallback
+│   │   ├── context/          # ToastContext & ThemeContext
+│   │   ├── types/index.ts    # TypeScript schemas and data interfaces
+│   │   ├── App.tsx           # Main SPA router & navigation state
+│   │   └── index.css         # Liquid glass styling, theme tokens & design system
 │   ├── package.json
 │   └── vite.config.ts
-├── dataset_csv/                  # Exported relational CSV datasets
-├── experiments/                  # Jupyter notebook with experimental figures
-├── TECHNICAL_DOCUMENTATION.md    # Comprehensive technical reference
+├── dataset_csv/              # Exported relational CSV datasets
+├── experiments/              # Jupyter notebook with experimental figures
+├── TECHNICAL_DOCUMENTATION.md # Comprehensive technical reference
 └── README.md
 ```
 
@@ -160,4 +175,3 @@ Follow this sequence for live presentations:
 
 ## 🛡️ License & Academic Integrity
 Developed as a capstone project for Seafood Cold-Chain Compliance Automation. All relational records and experimental data are generated with consistent relational schemas and validated against ISO 17025 cold-chain standards.
->>>>>>> b75b389 (Initial commit - Seafood Compliance Intelligence System)

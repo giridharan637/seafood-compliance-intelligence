@@ -123,7 +123,10 @@ def export_all_to_csv(output_dir="dataset_csv"):
 
         # Sheet 1: Master Combined (active)
         ws_master = wb.active
-        ws_master.title = "Master Compliance Dataset"
+        if ws_master is None:
+            ws_master = wb.create_sheet("Master Compliance Dataset")
+        else:
+            ws_master.title = "Master Compliance Dataset"
         cursor.execute(master_query + " LIMIT 5000")
         m_rows = cursor.fetchall()
         if m_rows:

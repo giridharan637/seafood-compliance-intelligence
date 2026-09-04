@@ -3,3 +3,8 @@ buffer_id,payload_type,payload_data,created_at,synced
 2,OFFLINE_SENSOR_TELEMETRY,"{""sensor_id"": ""SNS-101"", ""temp"": -19.2, ""status"": ""BUFFERED""}",2026-08-30 06:46:26 UTC,1
 3,OFFLINE_SENSOR_TELEMETRY,"{""sensor_id"": ""SNS-101"", ""temp"": -19.2, ""status"": ""BUFFERED""}",2026-08-30 06:50:40 UTC,1
 4,OFFLINE_SENSOR_TELEMETRY,"{""sensor_id"": ""SNS-101"", ""temp"": -19.2, ""status"": ""BUFFERED""}",2026-08-30 06:58:33 UTC,1
+5,OFFLINE_SENSOR_TELEMETRY,"{""sensor_id"": ""SNS-101"", ""temp"": -19.2, ""status"": ""BUFFERED""}",2026-09-04 07:11:27 UTC,1
+6,OFFLINE_SENSOR_TELEMETRY,"{""sensor_id"": ""SNS-101"", ""temp"": -19.2, ""status"": ""BUFFERED""}",2026-09-04 07:14:25 UTC,1
+7,TEST_LOG,"{""sensor"": ""S1"", ""temp"": 2.1}",2026-09-04 07:29:07 UTC,1
+8,OFFLINE_SENSOR_TELEMETRY,"{""sensor_id"": ""SNS-101"", ""temp"": -19.2, ""status"": ""BUFFERED""}",2026-09-04 07:29:18 UTC,1
+9,OFFLINE_SENSOR_TELEMETRY,"{""sensor_id"": ""SNS-101"", ""temp"": -19.2, ""status"": ""BUFFERED""}",2026-09-04 07:36:39 UTC,1
