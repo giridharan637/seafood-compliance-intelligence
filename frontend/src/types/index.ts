@@ -157,6 +157,12 @@ export interface EvidencePack {
   shipment_details: Shipment;
   sensor_details: Sensor;
   calibration_evidence: any[];
+  integrity_metadata?: {
+    hash_algorithm: string;
+    integrity_hash: string;
+    hash_timestamp: string;
+    verification_note: string;
+  };
   custody_handovers: Handover[];
   route_events: RouteEvent[];
   worker_safety_check: {

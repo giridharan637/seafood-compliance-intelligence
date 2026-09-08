@@ -1,6 +1,9 @@
 """
 Standalone test for all experiments_engine functions.
 Run with: ../venv/Scripts/python test_experiments.py
+
+IMPORTANT: This test will FAIL (non-zero exit code) if any experiment
+returns an {"error": ...} key or raises an unhandled exception.
 """
 import os
 import sys
@@ -42,7 +45,9 @@ for name, fn in tests:
     try:
         result = fn()
         if isinstance(result, dict) and "error" in result:
-            print(f"{WARN} {name} -> returned error key: {result['error']}")
+            # ERROR key present → this is a genuine failure, not a warning
+            print(f"{FAIL} {name} -> returned error key: {result['error']}")
+            all_passed = False
         else:
             top_keys = list(result.keys())[:5]
             print(f"{PASS} {name} -> OK | top keys: {top_keys}")

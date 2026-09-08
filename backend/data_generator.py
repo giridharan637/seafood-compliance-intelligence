@@ -78,12 +78,28 @@ def generate_dataset(target_total_records: int = 10000) -> None:
     conn = get_db_connection()
     cursor = conn.cursor()
 
-    # Clear existing data
-    tables = ["product_batches", "shipments", "sensors", "sensor_logs", 
-              "sensor_calibrations", "handover_records", "route_events", 
-              "worker_logs", "compliance_events", "ml_predictions"]
+    # Clear existing data safely by disabling foreign keys during truncation
+    cursor.execute("PRAGMA foreign_keys = OFF")
+    tables = [
+        "ml_predictions",
+        "compliance_events",
+        "route_events",
+        "handover_records",
+        "sensor_calibrations",
+        "sensor_logs",
+        "product_batches",
+        "shipments",
+        "sensors",
+        "worker_logs",
+        "user_feedback",
+        "offline_buffer",
+    ]
     for t in tables:
-        cursor.execute(f"DELETE FROM {t}")
+        try:
+            cursor.execute(f"DELETE FROM {t}")
+        except Exception:
+            pass
+    cursor.execute("PRAGMA foreign_keys = ON")
     conn.commit()
 
     # Scale number of shipments and log density based on target total records

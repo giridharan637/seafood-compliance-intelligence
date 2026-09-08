@@ -23,7 +23,7 @@ export const TechnicalDocsPage: React.FC<Props> = ({ onNavigate }) => {
     { title: "12. Worker Safety Constraints", content: "Enforces max 8.0 driving hrs/day, min 10.0 hrs rest, and max 2 active assignments. Blocks unsafe driver assignments with banner 'UNSAFE ASSIGNMENT – REASSIGN REQUIRED'." },
     { title: "13. Failure Mode Analysis", content: "5 dedicated interactive test cases: Missing Sensor Telemetry, Sensor Noise / Spike, Network Failure & Store-and-Forward, Expired ISO Calibration, Unsafe Driver Assignment." },
     { title: "14. Experiment Methodology", content: "Baseline (Manual) vs Proposed System empirical study comparing report preparation time, manual steps, error rates, and completeness on active dataset." },
-    { title: "15. Evaluation Metrics", content: "Time reduction percentage (+99.4%), Report Completeness (99.8%), ML F1 Score (0.973), Precision (0.962), Recall (0.985)." },
+    { title: "15. Evaluation Metrics", content: "Empirically measured via /api/experiments endpoints: preparation time reduction vs manual baseline, dynamic evidence completeness score, dynamic confusion matrix (Precision, Recall, F1 score), and SHA-256 evidence integrity validation." },
     { title: "16. Limitations", content: "Current implementation uses SQLite; production scale out targets PostgreSQL with Kafka telemetry streaming." },
     { title: "17. Future Enhancements", content: "Integration with blockchain smart contracts for immutable customs evidence verification and satellite IoT mesh connectivity." },
     { title: "18. Project Evaluation Requirements", content: "Fully functional COE capstone project meeting all 20 evaluation criteria including 10,000+ generated records, ML pipeline, and audit report exporter." },

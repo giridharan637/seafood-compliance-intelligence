@@ -194,7 +194,7 @@ export const UserFeedbackPage: React.FC<Props> = ({ onNavigate }) => {
 
               <div className="flex flex-wrap items-center gap-2">
                 <span className="px-3.5 py-1.5 rounded-full bg-purple-50 dark:bg-slate-900 border border-purple-300 dark:border-purple-500/30 text-xs font-bold text-purple-800 dark:text-purple-300 shadow-xs">
-                  ✅ Key Finding: 99.4% Audit Preparation Time Saved
+                  ✅ Key Finding: Automated Evidence Pack vs Manual Baseline Time Saved
                 </span>
                 <span className="px-3.5 py-1.5 rounded-full bg-emerald-50 dark:bg-slate-900 border border-emerald-300 dark:border-emerald-500/30 text-xs font-bold text-emerald-800 dark:text-emerald-300 shadow-xs">
                   ✅ Target ≥60% Time Reduction: ACHIEVED

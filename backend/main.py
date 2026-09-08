@@ -29,8 +29,8 @@ from experiments_engine import (
     run_missing_data_experiment,
     run_noise_experiment
 )
-from evidence_pack import generate_evidence_pack_and_report
-from store_forward import get_network_status, toggle_network_status, sync_offline_records, buffer_offline_log
+from evidence_pack import generate_evidence_pack_and_report, verify_evidence_pack_integrity
+from store_forward import get_network_status, toggle_network_status, sync_offline_records, buffer_offline_log, simulate_multi_sensor_outage
 from manual_entry import (
     ManualComplianceEntryPayload,
     get_search_options,
@@ -69,11 +69,14 @@ app = FastAPI(
 )
 
 # CORS middleware
+# CORS configuration:
+# allow_credentials=True with allow_origins=["*"] is a security misconfiguration (rejected by browsers).
+# Use allow_credentials=False for open wildcard origins (safe for API-only public endpoints).
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
@@ -142,8 +145,20 @@ def get_kpis():
     total_sensors = cursor.fetchone()[0]
     sensor_health = round((valid_sensors / total_sensors * 100.0), 1) if total_sensors > 0 else 100.0
 
-    cursor.execute("SELECT COUNT(*) FROM user_feedback")
     reports_generated = total_shipments  # every active shipment has ready evidence pack
+
+    # Dynamic evidence completeness: based on batches with sensor logs + calibration coverage
+    cursor.execute("""
+        SELECT COUNT(DISTINCT b.batch_id)
+        FROM product_batches b
+        JOIN sensor_logs sl ON b.batch_id = sl.batch_id
+        JOIN sensors s ON sl.sensor_id = s.sensor_id
+        WHERE s.calibration_status = 'VALID'
+    """)
+    batches_with_full_evidence = cursor.fetchone()[0]
+    evidence_completeness = round(
+        (batches_with_full_evidence / max(1, total_batches)) * 100.0, 1
+    )
 
     conn.close()
 
@@ -155,7 +170,7 @@ def get_kpis():
         "open_alerts": open_alerts,
         "sensor_health": sensor_health,
         "reports_generated": reports_generated,
-        "evidence_completeness": 99.4
+        "evidence_completeness": evidence_completeness
     }
 
 @app.get("/api/shipments")
@@ -360,12 +375,12 @@ def get_system_health():
             "status": "ONLINE",
             "port": 8001,
             "version": "1.0.0",
-            "framework": "FastAPI (Python 3.12)",
-            "uptime": "99.98%"
+            "framework": "FastAPI (Python)",
+            "note": "Runtime uptime tracking not implemented in prototype; server up since last restart."
         },
         "database": {
             "status": "ONLINE",
-            "type": "SQLite 3 (WAL mode)",
+            "type": "SQLite 3",
             "shipments_count": ship_count,
             "batches_count": batches_count,
             "sensors_count": sensors_count,
@@ -374,19 +389,18 @@ def get_system_health():
         },
         "ml_engine": {
             "status": "OPERATIONAL",
-            "models": ["Isolation Forest (Anomaly Detection)", "Random Forest (Risk Classifier)"],
-            "accuracy": "98.7%",
-            "f1_score": 0.942
+            "models": ["IsolationForest (Anomaly Detection)", "RandomForestClassifier (Risk Classification)"],
+            "note": "Accuracy metrics are calculated per experiment run on the simulated dataset — see /api/error-analysis."
         },
         "sensor_stream": {
             "status": "ACTIVE",
-            "frequency": "Real-time Telemetry (10s intervals)",
-            "quality_checks": ["ISO 17025 Calibration Check", "Kalman Imputation", "Outlier Filter"]
+            "frequency": "Simulated 15-minute sensor telemetry intervals",
+            "quality_checks": ["ISO 17025-related calibration check", "Forward-fill temporal imputation", "Rolling Z-score outlier filter"]
         },
         "evidence_pack": {
             "status": "READY",
-            "completeness_score": 99.4,
-            "digital_signature": "SHA-256 HMAC Verified"
+            "integrity_protection": "SHA-256 Evidence Integrity Hash (per-pack)",
+            "note": "Completeness score calculated dynamically per batch — see /api/evidence-pack/{batch_id}."
         },
         "store_forward": {
             "network_status": net_status.get("status", "ONLINE"),
@@ -460,6 +474,35 @@ def generate_evidence_pack_api(batch_id: str):
     if "error" in pack:
         raise HTTPException(status_code=404, detail=pack["error"])
     return pack
+
+
+@app.post("/api/evidence-pack/{batch_id}/verify")
+def verify_evidence_pack_api(batch_id: str):
+    """Generates an evidence pack and immediately verifies its SHA-256 integrity hash."""
+    pack = generate_evidence_pack_and_report(batch_id)
+    if "error" in pack:
+        raise HTTPException(status_code=404, detail=pack["error"])
+    verification = verify_evidence_pack_integrity(pack)
+    return {"evidence_pack": pack, "integrity_verification": verification}
+
+
+class StressTestRequest(BaseModel):
+    num_sensors: int = 100
+    records_per_sensor: int = 10
+    simulate_corrupt: bool = False
+
+
+@app.post("/api/store-forward/stress-test")
+def post_store_forward_stress_test(req: StressTestRequest):
+    """Stress-tests the store-and-forward engine with multi-sensor offline buffering and sync."""
+    num_sensors = max(1, min(1000, req.num_sensors))
+    records_per_sensor = max(1, min(50, req.records_per_sensor))
+    result = simulate_multi_sensor_outage(
+        num_sensors=num_sensors,
+        records_per_sensor=records_per_sensor,
+        simulate_corrupt=req.simulate_corrupt
+    )
+    return result
 
 @app.post("/api/workload-check")
 def check_workload_api(req: WorkloadCheckRequest):

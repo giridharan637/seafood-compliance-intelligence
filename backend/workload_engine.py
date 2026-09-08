@@ -13,11 +13,14 @@ MAX_DRIVING_HOURS = 8.0
 MIN_REST_HOURS = 10.0
 MAX_ACTIVE_ASSIGNMENTS = 2
 
-def check_worker_workload_safety(driver_id: str, new_additional_hours: float = 0.0) -> Dict[str, Any]:
+def check_worker_workload_safety(driver_id: str, new_additional_hours: float = 0.0, **kwargs) -> Dict[str, Any]:
     """
     Evaluates driver workload safety against strict regulatory limits.
     Blocks assignment if limits are exceeded.
+    Supports either new_additional_hours or additional_hours.
     """
+    additional_hours = kwargs.get("additional_hours", new_additional_hours)
+
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -36,12 +39,14 @@ def check_worker_workload_safety(driver_id: str, new_additional_hours: float = 0
             "is_safe": True,
             "safety_status": "SAFE",
             "message": "New driver profile - within safety limits.",
+            "violations": [],
+            "safety_violations": [],
             "workload_score": 0.2
         }
 
-    curr_hours = worker['working_hours'] + new_additional_hours
+    curr_hours = worker['working_hours'] + additional_hours
     curr_rest = worker['rest_hours']
-    curr_assignments = worker['active_assignments'] + (1 if new_additional_hours > 0 else 0)
+    curr_assignments = worker['active_assignments'] + (1 if additional_hours > 0 else 0)
 
     violations = []
     if curr_hours > MAX_DRIVING_HOURS:
@@ -63,6 +68,7 @@ def check_worker_workload_safety(driver_id: str, new_additional_hours: float = 0
             "alert_banner": "UNSAFE ASSIGNMENT – REASSIGN REQUIRED",
             "message": "Assignment blocked! The selected driver violates mandated workload safety constraints.",
             "violations": violations,
+            "safety_violations": violations,
             "working_hours": curr_hours,
             "rest_hours": curr_rest,
             "active_assignments": curr_assignments,
@@ -76,6 +82,7 @@ def check_worker_workload_safety(driver_id: str, new_additional_hours: float = 0
         "safety_status": "SAFE",
         "message": "Driver workload is within safe regulatory parameters.",
         "violations": [],
+        "safety_violations": [],
         "working_hours": curr_hours,
         "rest_hours": curr_rest,
         "active_assignments": curr_assignments,

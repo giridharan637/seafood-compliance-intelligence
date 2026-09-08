@@ -316,6 +316,9 @@ export const ComplianceOfficerDashboard: React.FC<Props> = ({ onNavigate }) => {
   const complianceRate = batches.length > 0
     ? Math.round((batches.filter(b => b.compliance_status === 'NORMAL').length / batches.length) * 1000) / 10
     : 0;
+  const evidenceScore = batches.length > 0
+    ? Math.max(0, Math.round(((batches.length - calibrationCount) / batches.length) * 1000) / 10)
+    : 100;
 
   // Chart data
   const alertDistData = [
@@ -358,7 +361,7 @@ export const ComplianceOfficerDashboard: React.FC<Props> = ({ onNavigate }) => {
           { label: 'Missing Data', value: missingDataCount, sub: 'Auto-Imputed', color: 'cyan' },
           { label: 'Calibration Issues', value: calibrationCount, sub: 'ISO 17025 Check', color: 'purple' },
           { label: 'Route Exceptions', value: routes.filter(r => r.delay_minutes > 30).length || 4, sub: 'Delays Flagged', color: 'blue' },
-          { label: 'Evidence Score', value: '99.4%', sub: 'Automated Joined', color: 'teal' },
+          { label: 'Evidence Score', value: `${evidenceScore}%`, sub: 'Automated Joined', color: 'teal' },
           { label: 'Reports Ready', value: batches.length, sub: 'Instant Export', color: 'sky' },
         ].map((k, i) => (
           <div key={i} className={`glass-panel p-3.5 rounded-xl border-l-4 border-${k.color}-400`}>

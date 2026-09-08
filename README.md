@@ -16,15 +16,17 @@
    - **Field Workflow Map**: Complete interactive lifecycle stage visualization linking physical checkpoints to database records.
 
 2. **Scientific Experiment & Benchmark Engine**:
-   - **Baseline vs Proposed Benchmark**: Measures manual workflow (4.2 hrs/shipment) vs automated system (<2 sec/shipment), achieving **99.4% preparation time reduction**.
-   - **Missing Data Experiment**: Tests temporal gap imputation at controlled loss rates (1%–50%) maintaining 99%+ evidence completeness.
+   - **Baseline vs Proposed Benchmark**: Measures manual workflow (~4.2 hrs/shipment across disconnected systems) vs automated system (<2 sec/shipment), demonstrating dramatic audit preparation time reduction.
+   - **Missing Data Experiment**: Tests temporal gap imputation at controlled loss rates (1%–50%) maintaining high evidence completeness.
    - **Noise Filtering Experiment**: Evaluates rolling Z-score and adaptive median suppression under injected sensor electrical noise.
-   - **Threshold Sensitivity Tuning**: Dynamic trade-off analysis between False Positives (FP) and True Anomaly Recall.
+   - **Threshold Sensitivity Tuning**: Dynamic trade-off analysis between False Positives (FP) and True Anomaly Recall with dynamic confusion matrix calculations.
    - **User Feedback & Usability Scoring**: Interactive survey module and live empirical rating breakdown.
 
-3. **Production-Grade Resilience**:
-   - **Store & Forward Engine**: Handles network outages via local buffering and automated restoration sync with zero data loss.
+3. **Production-Grade Resilience & Cryptographic Integrity**:
+   - **SHA-256 Evidence Integrity Engine**: Deterministic canonical JSON serialization and 64-character SHA-256 digest calculation for tamper-evident compliance audit packages (`/api/evidence-pack/{batch_id}/verify`).
+   - **Store & Forward Resilience**: Handles network outages via local buffering with SHA-256 deduplication and automated restoration sync with item-level error isolation (`/api/store-forward/stress-test`).
    - **Worker Safety Engine**: Hard-blocks unsafe driver duty assignments violating legal hours and minimum rest periods.
+   - **Sensor Calibration Verification**: Automated validation of sensor calibration records against ISO 17025-related cold-chain calibration standards.
    - **Liquid Glass & Dual Theme UI**: Complete Dark / Light theme support with accessible contrast and responsive layouts.
 
 ---
@@ -96,10 +98,13 @@ This compiles TypeScript and builds optimized static assets to `frontend/dist`. 
 
 ---
 
-### 5. Running Automated Tests & Experiments
+### 5. Running Automated Tests & Verification
 
 ```bash
-# Run full automated test and endpoint audit suite
+# Run complete Pytest test suite (119 unit & integration tests)
+.\venv\Scripts\pytest backend\tests\ -v --tb=short
+
+# Run full automated endpoint audit script
 .\venv\Scripts\python.exe backend\test_audit.py
 
 # Run standalone experiments suite

@@ -11,8 +11,10 @@ if CURRENT_DIR not in sys.path:
 DB_PATH = os.path.join(CURRENT_DIR, "seafood_compliance.db")
 
 def get_db_connection():
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, timeout=30.0)
     conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA journal_mode = WAL")
+    conn.execute("PRAGMA foreign_keys = ON")
     return conn
 
 def init_db():
@@ -94,6 +96,14 @@ def init_db():
         FOREIGN KEY (shipment_id) REFERENCES shipments (shipment_id),
         FOREIGN KEY (sensor_id) REFERENCES sensors (sensor_id)
     )
+    """)
+
+    # Index for frequently queried columns in sensor_logs
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_sensor_logs_batch_id ON sensor_logs(batch_id)
+    """)
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_sensor_logs_shipment_id ON sensor_logs(shipment_id)
     """)
 
     # Sensor Calibrations
@@ -211,15 +221,39 @@ def init_db():
     )
     """)
 
-    # Offline Store & Forward Buffer
+    # Offline Store & Forward Buffer — enhanced schema with deduplication support
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS offline_buffer (
         buffer_id INTEGER PRIMARY KEY AUTOINCREMENT,
         payload_type TEXT NOT NULL,
         payload_data TEXT NOT NULL,
+        payload_hash TEXT,
         created_at TEXT NOT NULL,
-        synced INTEGER DEFAULT 0
+        synced INTEGER DEFAULT 0,
+        sync_status TEXT DEFAULT 'PENDING',
+        retry_count INTEGER DEFAULT 0,
+        error_message TEXT
     )
+    """)
+
+    # Attempt to add new columns to offline_buffer if they don't exist yet (schema migration)
+    for col_def in [
+        ("payload_hash", "TEXT"),
+        ("sync_status", "TEXT DEFAULT 'PENDING'"),
+        ("retry_count", "INTEGER DEFAULT 0"),
+        ("error_message", "TEXT"),
+    ]:
+        try:
+            cursor.execute(f"ALTER TABLE offline_buffer ADD COLUMN {col_def[0]} {col_def[1]}")
+        except Exception:
+            pass  # Column already exists — idempotent
+
+    # Index for deduplication
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_offline_buffer_hash ON offline_buffer(payload_hash)
+    """)
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_offline_buffer_synced ON offline_buffer(synced)
     """)
 
     conn.commit()

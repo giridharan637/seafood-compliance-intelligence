@@ -54,7 +54,7 @@ export const AdminDashboard: React.FC<Props> = ({ onNavigate, initialTab = 'Dash
     open_alerts: 8,
     sensor_health: 95.2,
     reports_generated: 66,
-    evidence_completeness: 99.4
+    evidence_completeness: 100.0
   });
 
   const [shipments, setShipments] = useState<Shipment[]>([]);
@@ -1535,12 +1535,12 @@ export const AdminDashboard: React.FC<Props> = ({ onNavigate, initialTab = 'Dash
                     <FileCheck2 className="w-4 h-4" /> Evidence Pack Aggregator
                   </h3>
                   <span className="px-2 py-0.5 rounded bg-teal-950 text-teal-300 border border-teal-500/30 text-[10px] font-bold">
-                    READY (99.4%)
+                    READY ({kpis.evidence_completeness ? `${kpis.evidence_completeness.toFixed(1)}%` : 'Active'})
                   </span>
                 </div>
                 <div className="text-xs space-y-1.5 text-slate-300">
-                  <div className="flex justify-between"><span className="text-slate-500">Completeness:</span> <span className="font-mono text-teal-300 font-bold">99.4%</span></div>
-                  <div className="flex justify-between"><span className="text-slate-500">Signature:</span> <span>SHA-256 HMAC</span></div>
+                  <div className="flex justify-between"><span className="text-slate-500">Completeness:</span> <span className="font-mono text-teal-300 font-bold">{kpis.evidence_completeness ? `${kpis.evidence_completeness.toFixed(1)}%` : 'Dynamic'}</span></div>
+                  <div className="flex justify-between"><span className="text-slate-500">Integrity:</span> <span>SHA-256 Digest</span></div>
                 </div>
               </div>
 

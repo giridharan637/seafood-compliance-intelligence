@@ -477,6 +477,51 @@ def get_error_analysis_data() -> dict[str, Any]:
 
     conn.close()
 
+    # Dynamically compute ML confusion matrix from actual database records
+    # Ground truth: sensor_logs with anomaly_score > 0.5 are treated as detected anomalies
+    # True condition: shipment has CRITICAL compliance status
+    try:
+        conn2 = get_db_connection()
+        cm_df = pd.read_sql_query("""
+            SELECT l.anomaly_score, b.compliance_status AS ground_truth
+            FROM sensor_logs l
+            JOIN product_batches b ON l.batch_id = b.batch_id
+        """, conn2)
+        conn2.close()
+
+        if not cm_df.empty:
+            y_true = (cm_df['ground_truth'] == 'CRITICAL').astype(int)
+            y_pred = (cm_df['anomaly_score'] > 0.5).astype(int)
+
+            tp = int(np.sum((y_true == 1) & (y_pred == 1)))
+            fp = int(np.sum((y_true == 0) & (y_pred == 1)))
+            fn = int(np.sum((y_true == 1) & (y_pred == 0)))
+            tn = int(np.sum((y_true == 0) & (y_pred == 0)))
+
+            precision = round(tp / max(1, tp + fp), 4)
+            recall = round(tp / max(1, tp + fn), 4)
+            f1 = round(2 * (precision * recall) / max(1e-5, precision + recall), 4)
+
+            cm_result = {
+                "true_positives": tp,
+                "false_positives": fp,
+                "false_negatives": fn,
+                "true_negatives": tn,
+                "precision": precision,
+                "recall": recall,
+                "f1_score": f1,
+                "total_evaluated": len(cm_df),
+                "note": "Dynamically calculated from simulated dataset using anomaly_score > 0.5 as detection threshold vs CRITICAL compliance ground truth."
+            }
+        else:
+            cm_result = {
+                "note": "No sensor log data available for confusion matrix calculation."
+            }
+    except Exception as e:
+        cm_result = {
+            "note": f"Confusion matrix calculation error: {str(e)}"
+        }
+
     return {
         "data_quality_issues": {
             "missing_sensor_records": missing_count,
@@ -488,11 +533,5 @@ def get_error_analysis_data() -> dict[str, Any]:
             "route_delays": delayed_route_count,
             "unsafe_worker_workloads": unsafe_worker_count
         },
-        "ml_confusion_matrix": {
-            "false_positives": 14,
-            "false_negatives": 3,
-            "precision": 0.962,
-            "recall": 0.985,
-            "f1_score": 0.973
-        }
+        "ml_confusion_matrix": cm_result
     }
