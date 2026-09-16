@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { AlertTriangle, ShieldAlert, Cpu, Activity, BarChart3, CheckCircle2, Home } from 'lucide-react';
+import { BarChart3, Home } from 'lucide-react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { NavigationRole } from '../types';
 import { ThemeToggle } from './ThemeToggle';

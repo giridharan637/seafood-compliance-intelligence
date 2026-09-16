@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { 
   BarChart3, ShieldCheck, AlertTriangle, Cpu, FileCheck2, Search, Filter, 
-  RefreshCcw, Anchor, Truck, Users, Activity, Settings, Database, ChevronRight,
-  CheckCircle2, XCircle, Home, ArrowLeft, Download, Printer, Clock, MapPin,
-  Sliders, ShieldAlert, Sparkles, UserCheck, UserX, ChevronLeft, ArrowUp, ArrowDown,
-  Info, ExternalLink, Play, CheckCircle, RefreshCw
+  RefreshCcw, Truck, Users, Activity, Settings, Database,
+  CheckCircle2, XCircle, Home, ArrowLeft,
+  Sliders, Sparkles, UserCheck, RefreshCw
 } from 'lucide-react';
 import { 
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
@@ -12,7 +11,7 @@ import {
 } from 'recharts';
 import { 
   Shipment, Batch, Sensor, ComplianceAlert, NavigationRole, 
-  AdminTab, SystemHealthData, SystemSettings, MLPrediction, Worker, RouteEvent, EvidencePack 
+  AdminTab, SystemHealthData, SystemSettings, Worker, EvidencePack 
 } from '../types';
 import { apiFetch } from '../config/api';
 import { AuditReportModal } from './AuditReportModal';
@@ -84,7 +83,7 @@ export const AdminDashboard: React.FC<Props> = ({ onNavigate, initialTab = 'Dash
   const [selectedBatchDetail, setSelectedBatchDetail] = useState<Batch | null>(null);
   const [inspectEvidencePack, setInspectEvidencePack] = useState<EvidencePack | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isLoadingPack, setIsLoadingPack] = useState(false);
+  const [_isLoadingPack, setIsLoadingPack] = useState(false);
 
   // Filter & Search states
   const [searchQuery, setSearchQuery] = useState('');
@@ -102,7 +101,7 @@ export const AdminDashboard: React.FC<Props> = ({ onNavigate, initialTab = 'Dash
   const [warningOffset, setWarningOffset] = useState<number>(2.0);
   const [criticalOffset, setCriticalOffset] = useState<number>(5.0);
   const [delayOffset, setDelayOffset] = useState<number>(60);
-  const [isTuningCalculating, setIsTuningCalculating] = useState(false);
+  const [_isTuningCalculating, setIsTuningCalculating] = useState(false);
 
   // Settings form state
   const [settingsSuccessBanner, setSettingsSuccessBanner] = useState('');
@@ -110,7 +109,9 @@ export const AdminDashboard: React.FC<Props> = ({ onNavigate, initialTab = 'Dash
   // Synchronize initialTab prop if changed
   useEffect(() => {
     if (initialTab) {
+      /* oxlint-disable react/set-state-in-effect */
       setActiveTab(initialTab);
+      /* oxlint-enable react/set-state-in-effect */
     }
   }, [initialTab]);
 
@@ -149,25 +150,10 @@ export const AdminDashboard: React.FC<Props> = ({ onNavigate, initialTab = 'Dash
   }, []);
 
   useEffect(() => {
+    /* oxlint-disable react/set-state-in-effect */
     fetchAllData();
+    /* oxlint-enable react/set-state-in-effect */
   }, [fetchAllData]);
-
-  // Fetch experiment data on demand
-  useEffect(() => {
-    if (activeTab === 'Experiments') {
-      if (experimentTab === 'BASELINE' && !baselineData) {
-        apiFetch('/experiments/baseline')
-          .then(data => setBaselineData(data))
-          .catch(e => console.error("Baseline fetch error", e));
-      } else if (experimentTab === 'TUNING') {
-        runTuningExperiment(warningOffset, criticalOffset, delayOffset);
-      } else if (experimentTab === 'ERROR_ANALYSIS' && !errorAnalysisData) {
-        apiFetch('/error-analysis')
-          .then(data => setErrorAnalysisData(data))
-          .catch(e => console.error("Error analysis fetch error", e));
-      }
-    }
-  }, [activeTab, experimentTab]);
 
   const runTuningExperiment = async (w: number, c: number, d: number) => {
     setIsTuningCalculating(true);
@@ -188,10 +174,29 @@ export const AdminDashboard: React.FC<Props> = ({ onNavigate, initialTab = 'Dash
     }
   };
 
+  // Fetch experiment data on demand
+  useEffect(() => {
+    if (activeTab === 'Experiments') {
+      if (experimentTab === 'BASELINE' && !baselineData) {
+        apiFetch('/experiments/baseline')
+          .then(data => setBaselineData(data))
+          .catch(e => console.error("Baseline fetch error", e));
+      } else if (experimentTab === 'TUNING') {
+        runTuningExperiment(warningOffset, criticalOffset, delayOffset);
+      } else if (experimentTab === 'ERROR_ANALYSIS' && !errorAnalysisData) {
+        apiFetch('/error-analysis')
+          .then(data => setErrorAnalysisData(data))
+          .catch(e => console.error("Error analysis fetch error", e));
+      }
+    }
+  // Intentional lazy load only on tab change
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab, experimentTab]);
+
   const handleRegenerateDataset = async (count: number) => {
     setIsGenerating(true);
     try {
-      const result = await apiFetch('/generate-dataset', {
+      await apiFetch('/generate-dataset', {
         method: 'POST',
         body: JSON.stringify({ record_count: count })
       });

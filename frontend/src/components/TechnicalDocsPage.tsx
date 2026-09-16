@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileText, ShieldCheck, Cpu, Database, GitMerge, Activity, Server, Layers, Home, CheckCircle2 } from 'lucide-react';
+import { Home, CheckCircle2 } from 'lucide-react';
 import { NavigationRole } from '../types';
 import { ThemeToggle } from './ThemeToggle';
 

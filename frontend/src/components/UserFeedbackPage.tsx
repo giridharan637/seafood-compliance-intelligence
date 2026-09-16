@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Sparkles, Star, Send, MessageSquare, CheckCircle2, Home, BarChart2, Users, Clock, Target } from 'lucide-react';
 import { NavigationRole } from '../types';
 import { ThemeToggle } from './ThemeToggle';
@@ -54,18 +54,20 @@ export const UserFeedbackPage: React.FC<Props> = ({ onNavigate }) => {
     };
   };
 
-  useEffect(() => {
-    fetchFeedback();
-  }, []);
-
-  const fetchFeedback = async () => {
+  const fetchFeedback = useCallback(async () => {
     try {
-      const res = await apiFetch('/feedback');
+      const res = await apiFetch<FeedbackSummary>('/feedback');
       setFeedbackSummary(res);
     } catch (err) {
       console.error("Feedback fetch error", err);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    /* oxlint-disable react/set-state-in-effect */
+    fetchFeedback();
+    /* oxlint-enable react/set-state-in-effect */
+  }, [fetchFeedback]);
 
   const { showToast } = useToast();
 

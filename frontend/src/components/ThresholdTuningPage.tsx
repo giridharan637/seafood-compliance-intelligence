@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Sliders, RefreshCw, CheckCircle2, AlertTriangle, ShieldCheck, Activity, Home } from 'lucide-react';
+import { Sliders, RefreshCw, Home } from 'lucide-react';
 import { NavigationRole } from '../types';
 import { ThemeToggle } from './ThemeToggle';
 import { apiFetch } from '../config/api';
@@ -15,10 +15,6 @@ export const ThresholdTuningPage: React.FC<Props> = ({ onNavigate }) => {
   
   const [tuningResults, setTuningResults] = useState<any>(null);
   const [isCalculating, setIsCalculating] = useState(false);
-
-  useEffect(() => {
-    runTuningExperiment(2.0, 5.0, 60);
-  }, []);
 
   const runTuningExperiment = async (w: number, c: number, d: number) => {
     setIsCalculating(true);
@@ -38,6 +34,11 @@ export const ThresholdTuningPage: React.FC<Props> = ({ onNavigate }) => {
       setIsCalculating(false);
     }
   };
+
+  useEffect(() => {
+    runTuningExperiment(2.0, 5.0, 60);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col transition-colors duration-300 relative overflow-hidden select-none">

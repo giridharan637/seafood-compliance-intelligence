@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
-  TestTube2, ShieldCheck, CheckCircle2, TrendingDown, ArrowRight, Clock,
-  FileCheck2, AlertTriangle, Home, RefreshCw, BarChart2, Layers, Cpu,
-  Database, Activity, Filter, Zap, Table
+  CheckCircle2, AlertTriangle, Home, RefreshCw,
+  Database, Activity, Table
 } from 'lucide-react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { NavigationRole } from '../types';
@@ -34,7 +33,7 @@ export const BaselineExperimentPage: React.FC<Props> = ({ onNavigate }) => {
   
   // Baseline Data
   const [baselineData, setBaselineData] = useState<any>(null);
-  const [baselineLoading, setBaselineLoading] = useState(true);
+  const [_baselineLoading, setBaselineLoading] = useState(true);
 
   // Missing Data Experiment
   const [missingRate, setMissingRate] = useState<number>(0.05);
@@ -48,14 +47,7 @@ export const BaselineExperimentPage: React.FC<Props> = ({ onNavigate }) => {
 
   // Dataset Sample Stats
   const [datasetStats, setDatasetStats] = useState<any>(null);
-  const [statsLoading, setStatsLoading] = useState(false);
-
-  useEffect(() => {
-    fetchBaseline();
-    fetchMissingData(0.05);
-    fetchNoiseData(0.08);
-    fetchDatasetStats();
-  }, []);
+  const [_statsLoading, setStatsLoading] = useState(false);
 
   const fetchBaseline = () => {
     setBaselineLoading(true);
@@ -114,6 +106,17 @@ export const BaselineExperimentPage: React.FC<Props> = ({ onNavigate }) => {
         setStatsLoading(false);
       });
   };
+
+  useEffect(() => {
+    /* oxlint-disable react/set-state-in-effect */
+    fetchBaseline();
+    fetchMissingData(0.05);
+    fetchNoiseData(0.08);
+    fetchDatasetStats();
+    /* oxlint-enable react/set-state-in-effect */
+  // Initial mount experiment data loading
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 flex flex-col transition-colors duration-300 relative overflow-hidden select-none">

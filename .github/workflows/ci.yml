@@ -24,11 +24,20 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r backend/requirements.txt
-          pip install pytest
+          pip install pytest matplotlib seaborn
 
       - name: Run Pytest Test Suite
+        env:
+          PYTHONPATH: .
         run: |
-          pytest backend/tests/ -v --tb=short
+          python -m pytest backend/tests/ -v --tb=short
+
+      - name: Verify Experiment Notebook Reproducibility
+        env:
+          PYTHONPATH: .
+          MPLBACKEND: Agg
+        run: |
+          python -c "import json, os; nb = json.load(open('experiments/seafood_compliance_experiments.ipynb', encoding='utf-8')); ns = {'__name__': '__main__', '__file__': os.path.abspath('experiments/seafood_compliance_experiments.ipynb')}; [exec(''.join(c['source']), ns) for c in nb['cells'] if c['cell_type'] == 'code']; print('Experiment Notebook Clean Run Verified!')"
 
   frontend-build:
     name: Frontend Build & Typecheck

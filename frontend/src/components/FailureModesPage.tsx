@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { 
   ShieldAlert, WifiOff, Cpu, UserX, AlertTriangle, ArrowRight, 
-  CheckCircle2, RefreshCw, Activity, Layers, Anchor, Home, Play,
-  Database, FileCheck2, Clock, TrendingDown
+  CheckCircle2, RefreshCw, Activity, Layers, Home, Play,
+  Database, FileCheck2
 } from 'lucide-react';
 import { NavigationRole } from '../types';
 import { ThemeToggle } from './ThemeToggle';

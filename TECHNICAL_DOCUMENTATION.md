@@ -411,7 +411,17 @@ Manual compliance process was measured across 6 domains per shipment:
 | `master_dataset.xlsx` | `/master_dataset.xlsx` | Multi-sheet Excel workbook (8 sheets) |
 | `seafood_compliance.db` | `/backend/seafood_compliance.db` | SQLite relational database |
 | `seafood_compliance_experiments.ipynb` | `/experiments/` | Reproducible Jupyter experiment notebook |
-| `/dataset_csv/*.csv` | `/dataset_csv/` | Individual table CSV exports |
+## 18.1 Stakeholder Validation & Usability Evaluation Status
+
+The system incorporates a fully operational stakeholder feedback collection and rating framework:
+- **API Endpoint**: `GET /api/feedback` and `POST /api/feedback` for real-time rating submissions and statistical aggregations.
+- **Data Persistence**: Relational SQLite table `user_feedback` capturing role, usability rating, audit preparation satisfaction, and verbatim qualitative recommendations.
+- **Frontend Dashboard**: Dedicated User Feedback view (`/feedback`) with dynamic rating averages and live feedback feed.
+
+> [!IMPORTANT]
+> **Academic & Regulatory Integrity Disclosure**:
+> The feedback entries currently stored in the development database represent structured demonstration evaluation profiles and functional test entries created to validate UI aggregation calculations and submission workflows.
+> **No formal field trials with live commercial seafood exporters, maritime shipping lines, customs inspectors, or government agencies (e.g., FDA, EFSA) have been conducted.** All stakeholder ratings presented in the demo interface reflect testing profiles. Formal field pilot validation with commercial seafood cold-chain operators remains an active post-capstone objective.
 
 ---
 

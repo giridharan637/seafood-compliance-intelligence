@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Home, Menu, X, Anchor, Circle, ChevronLeft, ChevronRight, ShieldCheck, Truck, Shield } from 'lucide-react';
+import { Home, Menu, X, Circle, ShieldCheck, Truck, Shield } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 
 export interface RoleSidebarItem {
@@ -24,7 +24,7 @@ interface RoleSidebarProps {
 export const RoleSidebar: React.FC<RoleSidebarProps> = ({
   role,
   roleTitle,
-  roleSubtitle = 'Automated Compliance & Evidence System',
+  roleSubtitle: _roleSubtitle = 'Automated Compliance & Evidence System',
   items,
   activeItem,
   onSelectItem,

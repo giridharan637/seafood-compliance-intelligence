@@ -54,6 +54,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   );
 };
 
+// Standard React context pattern: exporting provider and hook together in the context module
+// eslint-disable-next-line react-refresh/only-export-components, react/only-export-components
 export const useTheme = (): ThemeContextType => {
   const context = useContext(ThemeContext);
   if (!context) {

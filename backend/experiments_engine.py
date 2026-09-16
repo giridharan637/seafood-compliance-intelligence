@@ -190,6 +190,7 @@ def run_missing_data_experiment(missing_rate: float = 0.05) -> dict[str, Any]:
     Simulates missing sensor observations on the active dataset at controlled rates (e.g. 1%, 5%, 10%, 20%).
     Evaluates records affected, recovery rate via forward-fill imputation, compliance decisions,
     false alerts, and evidence completeness.
+    Guarantees 0% <= recovery_rate_pct <= 100%.
     """
     conn = get_db_connection()
     logs_df = pd.read_sql_query("""
@@ -204,7 +205,7 @@ def run_missing_data_experiment(missing_rate: float = 0.05) -> dict[str, Any]:
         return {"error": "No sensor logs in database"}
 
     total_records = len(logs_df)
-    
+
     # Deterministic simulation seed based on rate for reproducibility
     np.random.seed(int(missing_rate * 1000) + 42)
     mask_missing = np.random.rand(total_records) < missing_rate
@@ -214,12 +215,26 @@ def run_missing_data_experiment(missing_rate: float = 0.05) -> dict[str, Any]:
     simulated_temp = logs_df['temperature'].copy()
     simulated_temp[mask_missing] = np.nan
 
-    # Actual Handling Logic: Forward-fill + Backward-fill Linear Imputation
+    # Actual Handling Logic: Forward-fill + Backward-fill Linear Imputation per shipment
     recovered_temp = simulated_temp.groupby(logs_df['shipment_id']).transform(lambda s: s.ffill().bfill()).fillna(0.0)
-    recovered_count = int(np.sum(~recovered_temp.isna()))
+
+    # Correct Metric: Records recovered is the subset of AFFECTED missing records successfully imputed
+    recovered_affected_mask = mask_missing & (~recovered_temp.isna())
+    recovered_count = int(np.sum(recovered_affected_mask))
+    unrecovered_count = affected_count - recovered_count
+
+    # Recovery rate is defined as recovered affected records / total affected records * 100%
+    if affected_count > 0:
+        recovery_rate_pct = round((recovered_count / affected_count) * 100.0, 2)
+    else:
+        recovery_rate_pct = 100.0
+    assert 0.0 <= recovery_rate_pct <= 100.0, f"recovery_rate_pct {recovery_rate_pct} out of bounds [0, 100]"
+
+    # Overall dataset coverage after imputation
+    total_valid_after_imputation = int(np.sum(~recovered_temp.isna()))
+    coverage_pct = round((total_valid_after_imputation / max(1, total_records)) * 100.0, 2)
 
     # Calculate compliance decisions on raw (incomplete) vs recovered (imputed)
-    # Ground truth breach: actual temperature exceeded required max
     ground_truth_breach = (logs_df['imputed_temp'] > logs_df['required_temp_max'])
 
     # Raw incomplete data: cannot evaluate when NaN -> causes missed breaches (false negatives)
@@ -232,15 +247,17 @@ def run_missing_data_experiment(missing_rate: float = 0.05) -> dict[str, Any]:
     false_alerts_raw = int(np.sum((~ground_truth_breach) & raw_decision_breach))
     false_alerts_recovered = int(np.sum((~ground_truth_breach) & recovered_decision_breach))
 
-    evidence_completeness_raw = round(((total_records - affected_count) / total_records) * 100.0, 2)
-    evidence_completeness_recovered = round(100.0 * (recovered_count / total_records), 2)
+    evidence_completeness_raw = round(((total_records - affected_count) / max(1, total_records)) * 100.0, 2)
+    evidence_completeness_recovered = round(((total_records - unrecovered_count) / max(1, total_records)) * 100.0, 2)
 
     return {
         "simulated_missing_rate_pct": round(missing_rate * 100.0, 1),
         "total_sensor_records": total_records,
         "records_affected": affected_count,
         "records_recovered": recovered_count,
-        "recovery_rate_pct": round((recovered_count / max(1, affected_count)) * 100.0, 1) if affected_count > 0 else 100.0,
+        "records_unrecovered": unrecovered_count,
+        "recovery_rate_pct": recovery_rate_pct,
+        "coverage_pct": coverage_pct,
         "handling_algorithm": "Forward-Fill Temporal Imputation with ISO Metadata Tagging (is_imputed=1)",
         "raw_incomplete_data": {
             "evidence_completeness_pct": evidence_completeness_raw,
@@ -254,14 +271,33 @@ def run_missing_data_experiment(missing_rate: float = 0.05) -> dict[str, Any]:
             "false_alerts": false_alerts_recovered,
             "decision_accuracy_pct": round(((total_records - missed_critical_events_recovered - false_alerts_recovered) / total_records) * 100.0, 2)
         },
-        "conclusion": f"At {missing_rate*100:.1f}% telemetry loss, raw evaluation misses {missed_critical_events_raw} critical events. The system's temporal imputation restores completeness to {evidence_completeness_recovered}% and reduces missed events to {missed_critical_events_recovered}."
+        "conclusion": f"At {missing_rate*100:.1f}% telemetry loss ({affected_count} records affected), raw evaluation misses {missed_critical_events_raw} critical events. The system's temporal imputation recovers {recovered_count}/{affected_count} records ({recovery_rate_pct}% recovery rate, {coverage_pct}% overall coverage), restoring completeness to {evidence_completeness_recovered}% and reducing missed events to {missed_critical_events_recovered}."
     }
 
 
 def run_noise_experiment(noise_level: float = 0.08) -> dict[str, Any]:
     """
     Injects controlled realistic sensor noise into temperature logs and compares
-    RAW SENSOR DATA vs PROCESSED/FILTERED DATA (Rolling Z-Score + Outlier Suppression).
+    RAW SENSOR DATA vs PROCESSED/FILTERED DATA.
+
+    Detection Algorithm: Two-Pass Iterative Hampel Filter with Global-MAD Pre-screening.
+
+    At high noise densities (>=20%), adjacent spikes corrupt the rolling median window
+    in a single-pass Hampel filter, causing recall to drop below 50%.
+
+    Pass 1 -- Global MAD Pre-screen (per shipment):
+      Compute the global median and MAD of the entire shipment series.
+      The median has a 50% breakdown point, so it is robust even at 25% noise.
+      Flag observations where |x - median| / (1.4826 * MAD) > 4.0 sigma.
+      Replace flagged positions with the series median (pre-cleaned series).
+
+    Pass 2 -- Centered Rolling Hampel on the pre-cleaned series:
+      Re-run the classical Hampel filter (window=7, threshold=3.0) on the
+      pre-cleaned series. Adjacent spikes no longer corrupt the rolling window.
+
+    Final detection mask = Pass-1 UNION Pass-2.
+
+    Reference: Pearson, R.K. et al. (2016). Generalized Hampel Identifiers.
     """
     conn = get_db_connection()
     logs_df = pd.read_sql_query("""
@@ -269,6 +305,7 @@ def run_noise_experiment(noise_level: float = 0.08) -> dict[str, Any]:
                b.required_temp_min, b.required_temp_max, b.compliance_status AS ground_truth
         FROM sensor_logs l
         JOIN product_batches b ON l.batch_id = b.batch_id
+        ORDER BY l.shipment_id, l.log_id
     """, conn)
     conn.close()
 
@@ -278,89 +315,157 @@ def run_noise_experiment(noise_level: float = 0.08) -> dict[str, Any]:
     total_records = len(logs_df)
     np.random.seed(int(noise_level * 1000) + 123)
 
-    # 1. Inject Noise (random gaussian deviation + occasional sensor electrical spikes)
+    # 1. Inject Known Synthetic Spikes (Ground Truth)
     noise_mask = np.random.rand(total_records) < noise_level
     noisy_temp = logs_df['clean_temp'].copy()
     spike_noise = np.random.uniform(4.0, 12.0, total_records) * np.random.choice([-1, 1], total_records)
     noisy_temp[noise_mask] = noisy_temp[noise_mask] + spike_noise[noise_mask]
-
-    # 2. Process & Filter Data: Rolling window mean and 3.0-sigma outlier suppression
     logs_df['noisy_temp'] = noisy_temp
-    rolling_mean = logs_df.groupby('shipment_id')['noisy_temp'].transform(lambda s: s.rolling(window=5, min_periods=1).mean())
-    rolling_std = logs_df.groupby('shipment_id')['noisy_temp'].transform(lambda s: s.rolling(window=5, min_periods=1).std()).fillna(0.2)
-    
-    z_scores = np.abs((noisy_temp - rolling_mean) / (rolling_std + 1e-5))
-    is_detected_outlier = z_scores > 2.8
 
-    # Filtered signal: replace detected noise outliers with local rolling median
-    rolling_median = logs_df.groupby('shipment_id')['noisy_temp'].transform(lambda s: s.rolling(window=5, min_periods=1).median())
+    # 2. Two-Pass Iterative Hampel Outlier Detection per shipment
+
+    def _global_mad_prescreen(series: pd.Series, threshold: float = 4.0):
+        """Pass 1: Global MAD pre-screen. Robust to <=49% contamination."""
+        med = series.median()
+        mad = (series - med).abs().median()
+        scale = max(1.4826 * mad, 0.5)  # floor prevents near-zero division
+        z = (series - med).abs() / scale
+        is_out = z > threshold
+        cleaned = series.copy()
+        if is_out.any():
+            cleaned[is_out] = med
+        return is_out, cleaned
+
+    def _rolling_hampel(series: pd.Series, window: int = 7, threshold: float = 3.0):
+        """Pass 2: Centered rolling Hampel filter on pre-cleaned series."""
+        rolling_med = series.rolling(window=window, min_periods=3, center=True).median().bfill().ffill()
+        abs_diff = (series - rolling_med).abs()
+        rolling_mad = abs_diff.rolling(window=window, min_periods=3, center=True).median().bfill().ffill()
+        scale = (1.4826 * rolling_mad).clip(lower=0.5)
+        score = abs_diff / scale
+        is_out = score > threshold
+        return is_out, rolling_med
+
+    is_detected_outlier = pd.Series(False, index=logs_df.index)
     filtered_temp = noisy_temp.copy()
-    filtered_temp[is_detected_outlier] = rolling_median[is_detected_outlier]
 
-    # 3. Ground Truth: True thermal breach vs Noise
+    for _, group in logs_df.groupby('shipment_id'):
+        idx = group.index
+        series = group['noisy_temp']
+
+        # Pass 1: global MAD pre-screen
+        pass1_mask, cleaned_series = _global_mad_prescreen(series, threshold=4.0)
+
+        # Pass 2: rolling Hampel on pre-cleaned data
+        pass2_mask, rolling_med = _rolling_hampel(cleaned_series, window=7, threshold=3.0)
+
+        # Union: either pass detects the spike
+        combined_mask = pass1_mask | pass2_mask
+        is_detected_outlier.loc[idx] = combined_mask.values
+
+        # Replacement strategy: use rolling median (Pass-2) when available
+        global_med = series.median()
+        replacement = filtered_temp.loc[idx].copy()
+        # Default replacement: global median (handles Pass-1-only detections)
+        replacement[combined_mask.values] = global_med
+        # Refine: for Pass-2 detections use the local rolling median
+        pass2_arr = pass2_mask.values
+        if pass2_arr.any():
+            replacement.iloc[pass2_arr] = rolling_med.values[pass2_arr]
+        filtered_temp.loc[idx] = replacement
+
+    # 3. Spike Detection Metrics (Ground Truth vs Detected)
+    injected_spikes_count  = int(np.sum(noise_mask))
+    detected_outliers_count = int(np.sum(is_detected_outlier))
+
+    spike_tp = int(np.sum(noise_mask & is_detected_outlier))
+    spike_fp = int(np.sum((~noise_mask) & is_detected_outlier))
+    spike_fn = int(np.sum(noise_mask & (~is_detected_outlier)))
+    spike_tn = int(np.sum((~noise_mask) & (~is_detected_outlier)))
+
+    spike_precision = round(spike_tp / max(1, spike_tp + spike_fp), 4)
+    spike_recall    = round(spike_tp / max(1, spike_tp + spike_fn), 4)
+    spike_f1        = round(2 * (spike_precision * spike_recall) / max(1e-5, spike_precision + spike_recall), 4)
+
+    # 4. Downstream Compliance Decision Evaluation
     true_breach = (logs_df['clean_temp'] > logs_df['required_temp_max'])
 
-    # Raw Noisy decisions (triggers massive false positives due to sensor noise spikes)
-    raw_breach_pred = (noisy_temp > logs_df['required_temp_max'])
-    raw_fp = int(np.sum((~true_breach) & raw_breach_pred))
-    raw_fn = int(np.sum(true_breach & (~raw_breach_pred)))
-    raw_tp = int(np.sum(true_breach & raw_breach_pred))
-    raw_tn = int(np.sum((~true_breach) & (~raw_breach_pred)))
+    raw_breach_pred  = (noisy_temp    > logs_df['required_temp_max'])
+    raw_fp  = int(np.sum((~true_breach) & raw_breach_pred))
+    raw_fn  = int(np.sum(true_breach  & (~raw_breach_pred)))
+    raw_tp  = int(np.sum(true_breach  & raw_breach_pred))
+    raw_tn  = int(np.sum((~true_breach) & (~raw_breach_pred)))
 
-    # Filtered Data decisions
     filt_breach_pred = (filtered_temp > logs_df['required_temp_max'])
     filt_fp = int(np.sum((~true_breach) & filt_breach_pred))
-    filt_fn = int(np.sum(true_breach & (~filt_breach_pred)))
-    filt_tp = int(np.sum(true_breach & filt_breach_pred))
+    filt_fn = int(np.sum(true_breach  & (~filt_breach_pred)))
+    filt_tp = int(np.sum(true_breach  & filt_breach_pred))
     filt_tn = int(np.sum((~true_breach) & (~filt_breach_pred)))
 
-    raw_precision = round(raw_tp / max(1, raw_tp + raw_fp), 4)
-    raw_recall = round(raw_tp / max(1, raw_tp + raw_fn), 4)
-    raw_f1 = round(2 * (raw_precision * raw_recall) / max(1e-5, raw_precision + raw_recall), 4)
+    raw_precision  = round(raw_tp  / max(1, raw_tp  + raw_fp),  4)
+    raw_recall     = round(raw_tp  / max(1, raw_tp  + raw_fn),  4)
+    raw_f1         = round(2 * (raw_precision * raw_recall) / max(1e-5, raw_precision + raw_recall), 4)
 
     filt_precision = round(filt_tp / max(1, filt_tp + filt_fp), 4)
-    filt_recall = round(filt_tp / max(1, filt_tp + filt_fn), 4)
-    filt_f1 = round(2 * (filt_precision * filt_recall) / max(1e-5, filt_precision + filt_recall), 4)
+    filt_recall    = round(filt_tp / max(1, filt_tp + filt_fn), 4)
+    filt_f1        = round(2 * (filt_precision * filt_recall) / max(1e-5, filt_precision + filt_recall), 4)
 
-    # Sample slice for visual comparison chart (first 25 records of shipment 1)
+    # Sample slice for visual comparison (first 25 records)
     sample_slice = logs_df.head(25)[['log_id', 'timestamp', 'clean_temp', 'noisy_temp']].copy()
     sample_slice['filtered_temp'] = filtered_temp.head(25).round(2)
-    sample_slice['clean_temp'] = sample_slice['clean_temp'].round(2)
-    sample_slice['noisy_temp'] = sample_slice['noisy_temp'].round(2)
+    sample_slice['clean_temp']    = sample_slice['clean_temp'].round(2)
+    sample_slice['noisy_temp']    = sample_slice['noisy_temp'].round(2)
 
     return {
-        "noise_injection_level_pct": round(noise_level * 100.0, 1),
-        "total_observations_tested": total_records,
-        "noisy_observations_injected": int(np.sum(noise_mask)),
-        "outliers_detected_and_filtered": int(np.sum(is_detected_outlier)),
-        "filter_methodology": "Rolling Z-Score Outlier Identification (3-sigma) + Adaptive Median Suppression",
+        "noise_injection_level_pct":      round(noise_level * 100.0, 1),
+        "total_observations_tested":      total_records,
+        "noisy_observations_injected":    injected_spikes_count,
+        "outliers_detected_and_filtered": detected_outliers_count,
+        "filter_methodology": (
+            "Two-Pass Iterative Hampel Filter (tested on simulated sensor data): "
+            "Pass-1 Global MAD Pre-screen (threshold=4.0 sigma, robust to 49% contamination) "
+            "+ Pass-2 Centered Rolling Hampel (window=7, threshold=3.0 sigma MAD). "
+            "Spike replacement: local rolling median (Pass-2) / global series median (Pass-1 only). "
+            "Reference: Hampel (1974); Pearson et al. (2016)."
+        ),
+        "spike_detection_performance": {
+            "injected_spikes":  injected_spikes_count,
+            "detected_spikes":  detected_outliers_count,
+            "true_positives":   spike_tp,
+            "false_positives":  spike_fp,
+            "false_negatives":  spike_fn,
+            "true_negatives":   spike_tn,
+            "precision":        spike_precision,
+            "recall":           spike_recall,
+            "f1_score":         spike_f1,
+        },
         "raw_unfiltered_performance": {
-            "true_positives": raw_tp,
+            "true_positives":  raw_tp,
             "false_positives": raw_fp,
             "false_negatives": raw_fn,
-            "true_negatives": raw_tn,
-            "precision": raw_precision,
-            "recall": raw_recall,
-            "f1_score": raw_f1,
-            "accuracy_pct": round(((raw_tp + raw_tn) / total_records) * 100.0, 2)
+            "true_negatives":  raw_tn,
+            "precision":       raw_precision,
+            "recall":          raw_recall,
+            "f1_score":        raw_f1,
+            "accuracy_pct":    round(((raw_tp + raw_tn) / total_records) * 100.0, 2),
         },
         "processed_filtered_performance": {
-            "true_positives": filt_tp,
+            "true_positives":  filt_tp,
             "false_positives": filt_fp,
             "false_negatives": filt_fn,
-            "true_negatives": filt_tn,
-            "precision": filt_precision,
-            "recall": filt_recall,
-            "f1_score": filt_f1,
-            "accuracy_pct": round(((filt_tp + filt_tn) / total_records) * 100.0, 2)
+            "true_negatives":  filt_tn,
+            "precision":       filt_precision,
+            "recall":          filt_recall,
+            "f1_score":        filt_f1,
+            "accuracy_pct":    round(((filt_tp + filt_tn) / total_records) * 100.0, 2),
         },
         "improvements": {
             "false_positive_reduction": raw_fp - filt_fp,
-            "f1_score_gain": round(filt_f1 - raw_f1, 4)
+            "f1_score_gain":            round(filt_f1 - raw_f1, 4),
+            "spikes_suppressed":        spike_tp,
         },
-        "sample_series_comparison": sample_slice.to_dict(orient="records")
+        "sample_series_comparison": sample_slice.to_dict(orient="records"),
     }
-
 
 def run_threshold_tuning_experiment(
     temp_warning_threshold: float = 2.0,
@@ -522,6 +627,18 @@ def get_error_analysis_data() -> dict[str, Any]:
             "note": f"Confusion matrix calculation error: {str(e)}"
         }
 
+    evidence_completeness_targets = [
+        {"section": "Product Batch Registry", "source_table": "product_batches", "target_pct": 100.0, "required_fields": ["batch_id", "product_type", "required_temp_max"], "priority": "MANDATORY"},
+        {"section": "Active Reefer Shipments", "source_table": "shipments", "target_pct": 100.0, "required_fields": ["shipment_id", "driver_id", "shipment_status"], "priority": "MANDATORY"},
+        {"section": "IoT Telemetry Stream", "source_table": "sensor_logs", "target_pct": 98.0, "required_fields": ["sensor_id", "timestamp", "temperature"], "priority": "MANDATORY"},
+        {"section": "Calibration Certificates", "source_table": "sensor_calibrations", "target_pct": 100.0, "required_fields": ["calibration_id", "calibration_status"], "priority": "MANDATORY"},
+        {"section": "Custody Transfer Verification", "source_table": "handover_records", "target_pct": 100.0, "required_fields": ["handover_id", "from_person", "to_person"], "priority": "MANDATORY"},
+        {"section": "Route Checkpoint Events", "source_table": "route_events", "target_pct": 95.0, "required_fields": ["route_id", "event_type", "location"], "priority": "OPERATIONAL"},
+        {"section": "Driver Workload Safety", "source_table": "worker_logs", "target_pct": 100.0, "required_fields": ["driver_id", "working_hours", "safety_status"], "priority": "MANDATORY"},
+        {"section": "Regulatory Compliance Events", "source_table": "compliance_events", "target_pct": 100.0, "required_fields": ["event_id", "severity", "action_taken"], "priority": "AUDIT"},
+        {"section": "ML Anomaly & Risk Analysis", "source_table": "ml_predictions", "target_pct": 95.0, "required_fields": ["prediction_id", "risk_level", "confidence"], "priority": "ANALYTICAL"}
+    ]
+
     return {
         "data_quality_issues": {
             "missing_sensor_records": missing_count,
@@ -533,5 +650,7 @@ def get_error_analysis_data() -> dict[str, Any]:
             "route_delays": delayed_route_count,
             "unsafe_worker_workloads": unsafe_worker_count
         },
-        "ml_confusion_matrix": cm_result
+        "ml_confusion_matrix": cm_result,
+        "evidence_completeness_targets": evidence_completeness_targets,
+        "traceability_lineage_pipeline": "RAW DATABASE RECORD -> PROCESSING & VALIDATION -> EVIDENCE SECTION -> CANONICAL SHA-256 INTEGRITY PACK"
     }

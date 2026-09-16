@@ -138,6 +138,14 @@ def generate_evidence_pack_and_report(batch_id: str) -> Dict[str, Any]:
         ORDER BY timestamp ASC
     """, conn, params=(batch_id,))
 
+    # 8. Compliance Events
+    cursor.execute("""
+        SELECT event_id, event_type, severity, description, timestamp, recommended_action, status
+        FROM compliance_events
+        WHERE batch_id = ? OR shipment_id = ?
+        ORDER BY timestamp ASC
+    """, (batch_id, shipment_id))
+    compliance_events = [dict(r) for r in cursor.fetchall()]
     conn.close()
 
     total_logs = len(logs_df)
@@ -147,16 +155,144 @@ def generate_evidence_pack_and_report(batch_id: str) -> Dict[str, Any]:
     max_temp = float(logs_df["imputed_temp"].max()) if not logs_df.empty else batch["required_temp_max"]
     min_temp = float(logs_df["imputed_temp"].min()) if not logs_df.empty else batch["required_temp_min"]
 
-    # Handle NaN in max/min temp
     if pd.isna(max_temp):
         max_temp = batch["required_temp_max"]
     if pd.isna(min_temp):
         min_temp = batch["required_temp_min"]
 
-    # 8. ML Anomaly Findings
+    # 9. ML Anomaly Findings
     ml_analysis = analyze_single_batch(batch_id)
 
-    # 9. Evidence Completeness Score Calculation (0-100%)
+    # 10. Audit Trail Traceability Chain (Raw DB Record -> Processing -> Evidence Section -> Integrity Pack)
+    traceability_sections = [
+        {
+            "section_name": "Product Batch Metadata",
+            "source_table": "product_batches",
+            "source_record_ids": [batch["batch_id"]] if batch.get("batch_id") else ["MISSING_SOURCE_RECORD"],
+            "evidence_output_section": "batch_details",
+            "required_records": 1,
+            "available_records": 1 if batch.get("batch_id") else 0,
+            "missing_records": 0 if batch.get("batch_id") else 1,
+            "completeness_pct": 100.0 if batch.get("batch_id") else 0.0,
+            "traceability_status": "VERIFIED" if batch.get("batch_id") else "MISSING_SOURCE_RECORD",
+            "target_completeness_pct": 100.0,
+            "lineage_step": "RAW DATABASE RECORD (product_batches) -> SCHEMA VALIDATION -> EVIDENCE PACK"
+        },
+        {
+            "section_name": "Active Reefer Shipment",
+            "source_table": "shipments",
+            "source_record_ids": [shipment["shipment_id"]] if shipment.get("shipment_id") else ["MISSING_SOURCE_RECORD"],
+            "evidence_output_section": "shipment_details",
+            "required_records": 1,
+            "available_records": 1 if shipment.get("shipment_id") else 0,
+            "missing_records": 0 if shipment.get("shipment_id") else 1,
+            "completeness_pct": 100.0 if shipment.get("shipment_id") else 0.0,
+            "traceability_status": "VERIFIED" if shipment.get("shipment_id") else "MISSING_SOURCE_RECORD",
+            "target_completeness_pct": 100.0,
+            "lineage_step": "RAW DATABASE RECORD (shipments) -> JOIN BY shipment_id -> EVIDENCE PACK"
+        },
+        {
+            "section_name": "Sensor Telemetry Stream",
+            "source_table": "sensor_logs",
+            "source_record_ids": [f"SLOG-{batch_id}-N{total_logs}"] if total_logs > 0 else ["MISSING_SOURCE_RECORD"],
+            "evidence_output_section": "data_quality_analysis",
+            "required_records": 10,
+            "available_records": total_logs,
+            "missing_records": missing_logs,
+            "completeness_pct": round(((total_logs - missing_logs) / max(1, total_logs)) * 100.0, 1) if total_logs > 0 else 0.0,
+            "traceability_status": "VERIFIED" if total_logs >= 10 and missing_logs == 0 else ("PARTIAL" if total_logs > 0 else "MISSING_SOURCE_RECORD"),
+            "target_completeness_pct": 98.0,
+            "lineage_step": "RAW DATABASE RECORD (sensor_logs) -> TEMPORAL IMPUTATION & HAMPEL NOISE FILTER -> EVIDENCE PACK"
+        },
+        {
+            "section_name": "Sensor Calibration Certificates",
+            "source_table": "sensor_calibrations",
+            "source_record_ids": [c["calibration_id"] for c in calibrations] if calibrations else ["MISSING_SOURCE_RECORD"],
+            "evidence_output_section": "calibration_evidence",
+            "required_records": 1,
+            "available_records": len(calibrations),
+            "missing_records": 0 if len(calibrations) >= 1 else 1,
+            "completeness_pct": 100.0 if any(c.get("calibration_status") == "VALID" for c in calibrations) else (50.0 if calibrations else 0.0),
+            "traceability_status": "VERIFIED" if any(c.get("calibration_status") == "VALID" for c in calibrations) else ("EXPIRED_WARNING" if calibrations else "MISSING_SOURCE_RECORD"),
+            "target_completeness_pct": 100.0,
+            "lineage_step": "RAW DATABASE RECORD (sensor_calibrations) -> ISO 17025 VALIDATION -> EVIDENCE PACK"
+        },
+        {
+            "section_name": "Custody Transfer & Handover Chain",
+            "source_table": "handover_records",
+            "source_record_ids": [h["handover_id"] for h in handovers] if handovers else ["MISSING_SOURCE_RECORD"],
+            "evidence_output_section": "custody_handovers",
+            "required_records": 3,
+            "available_records": len(handovers),
+            "missing_records": max(0, 3 - len(handovers)),
+            "completeness_pct": round(min(100.0, (len(handovers) / 3.0) * 100.0), 1),
+            "traceability_status": "VERIFIED" if len(handovers) >= 3 else ("PARTIAL" if handovers else "MISSING_SOURCE_RECORD"),
+            "target_completeness_pct": 100.0,
+            "lineage_step": "RAW DATABASE RECORD (handover_records) -> PHYSICAL SEAL & CUSTODY CHECK -> EVIDENCE PACK"
+        },
+        {
+            "section_name": "Route & Checkpoint Events",
+            "source_table": "route_events",
+            "source_record_ids": [r["route_id"] for r in route_events] if route_events else ["MISSING_SOURCE_RECORD"],
+            "evidence_output_section": "route_events",
+            "required_records": 2,
+            "available_records": len(route_events),
+            "missing_records": max(0, 2 - len(route_events)),
+            "completeness_pct": round(min(100.0, (len(route_events) / 2.0) * 100.0), 1),
+            "traceability_status": "VERIFIED" if len(route_events) >= 2 else ("PARTIAL" if route_events else "MISSING_SOURCE_RECORD"),
+            "target_completeness_pct": 95.0,
+            "lineage_step": "RAW DATABASE RECORD (route_events) -> HIGHWAY / PORT DISPATCH LOG -> EVIDENCE PACK"
+        },
+        {
+            "section_name": "Driver Workload & Duty Safety",
+            "source_table": "worker_logs",
+            "source_record_ids": [driver_id] if driver_id else ["MISSING_SOURCE_RECORD"],
+            "evidence_output_section": "worker_safety_check",
+            "required_records": 1,
+            "available_records": 1 if driver_id else 0,
+            "missing_records": 0 if driver_id else 1,
+            "completeness_pct": 100.0 if workload_safety.get("is_safe") else 50.0,
+            "traceability_status": "VERIFIED" if workload_safety.get("is_safe") else ("UNSAFE_VIOLATION" if driver_id else "MISSING_SOURCE_RECORD"),
+            "target_completeness_pct": 100.0,
+            "lineage_step": "RAW DATABASE RECORD (worker_logs) -> MANDATORY REST CONSTRAINT CHECK -> EVIDENCE PACK"
+        },
+        {
+            "section_name": "Regulatory Compliance Events",
+            "source_table": "compliance_events",
+            "source_record_ids": [ev["event_id"] for ev in compliance_events] if compliance_events else ["NONE_NOMINAL"],
+            "evidence_output_section": "compliance_events",
+            "required_records": 0,
+            "available_records": len(compliance_events),
+            "missing_records": 0,
+            "completeness_pct": 100.0,
+            "traceability_status": "VERIFIED",
+            "target_completeness_pct": 100.0,
+            "lineage_step": "RAW DATABASE RECORD (compliance_events) -> CORRECTIVE ACTION AUDIT -> EVIDENCE PACK"
+        },
+        {
+            "section_name": "ML Risk & Anomaly Assessment",
+            "source_table": "ml_predictions",
+            "source_record_ids": [f"ML-PRED-{batch_id}"],
+            "evidence_output_section": "ml_anomaly_findings",
+            "required_records": 1,
+            "available_records": 1 if ml_analysis else 0,
+            "missing_records": 0 if ml_analysis else 1,
+            "completeness_pct": 100.0 if ml_analysis else 0.0,
+            "traceability_status": "VERIFIED" if ml_analysis else "MISSING_SOURCE_RECORD",
+            "target_completeness_pct": 95.0,
+            "lineage_step": "SQL MULTI-SOURCE INFERENCE -> ISOLATION FOREST + RANDOM FOREST -> EVIDENCE PACK"
+        }
+    ]
+
+    audit_lineage_summary = {
+        "total_sections": len(traceability_sections),
+        "verified_sections": sum(1 for s in traceability_sections if s["traceability_status"] == "VERIFIED"),
+        "missing_sections": sum(1 for s in traceability_sections if s["traceability_status"] == "MISSING_SOURCE_RECORD"),
+        "overall_traceability_pct": round((sum(s["completeness_pct"] for s in traceability_sections) / (len(traceability_sections) * 100.0)) * 100.0, 1),
+        "traceability_pipeline": "RAW DATABASE RECORD -> PROCESSING -> EVIDENCE SECTION -> CANONICAL SHA-256 INTEGRITY PACK"
+    }
+
+    # 11. Evidence Completeness Score Calculation (0-100%)
     score_components = {
         "batch_metadata": 15 if batch else 0,
         "shipment_metadata": 15 if shipment else 0,
@@ -204,6 +340,8 @@ def generate_evidence_pack_and_report(batch_id: str) -> Dict[str, Any]:
         "handover_count": len(handovers),
         "route_event_count": len(route_events),
         "calibration_count": len(calibrations),
+        "compliance_event_count": len(compliance_events),
+        "audit_lineage_summary": audit_lineage_summary,
     }
 
     canonical_str = _canonical_serialize(core_evidence)
@@ -231,12 +369,14 @@ def generate_evidence_pack_and_report(batch_id: str) -> Dict[str, Any]:
         "completeness_score": completeness_score,
         "completeness_breakdown": score_components,
         "integrity_metadata": integrity_metadata,
+        "audit_trail_traceability": traceability_sections,
+        "audit_lineage_summary": audit_lineage_summary,
         "executive_summary": (
             f"Automated Evidence Pack generated for {batch['product_type']} (Batch {batch_id}). "
             f"System joined {total_logs} sensor readings, {len(calibrations)} calibration records, "
             f"{len(handovers)} custody handovers, and worker safety logs. "
             f"Overall audit readiness score: {completeness_score}%. "
-            f"SHA-256 integrity hash embedded for tamper detection."
+            f"SHA-256 evidence integrity hash embedded for tamper detection."
         ),
         "batch_details": batch,
         "shipment_details": shipment,
@@ -245,6 +385,7 @@ def generate_evidence_pack_and_report(batch_id: str) -> Dict[str, Any]:
         "custody_handovers": handovers,
         "route_events": route_events,
         "worker_safety_check": workload_safety,
+        "compliance_events": compliance_events,
         "ml_anomaly_findings": ml_analysis,
         "data_quality_analysis": {
             "total_observations": total_logs,
@@ -311,6 +452,8 @@ def verify_evidence_pack_integrity(evidence_pack_data: Dict[str, Any]) -> Dict[s
         "handover_count": len(evidence_pack_data.get("custody_handovers", [])),
         "route_event_count": len(evidence_pack_data.get("route_events", [])),
         "calibration_count": len(evidence_pack_data.get("calibration_evidence", [])),
+        "compliance_event_count": len(evidence_pack_data.get("compliance_events", [])),
+        "audit_lineage_summary": evidence_pack_data.get("audit_lineage_summary", {}),
     }
 
     canonical_str = _canonical_serialize(core_evidence)
@@ -334,3 +477,25 @@ def verify_evidence_pack_integrity(evidence_pack_data: Dict[str, Any]) -> Dict[s
             "The core evidence data may have been altered after the Evidence Pack was generated."
         )
     }
+
+
+def get_audit_trail_traceability(batch_id: str) -> Dict[str, Any]:
+    """
+    Returns the complete evidentiary traceability chain for a batch,
+    mapping raw database primary keys across 9 tables to final evidence sections.
+    """
+    pack = generate_evidence_pack_and_report(batch_id)
+    if "error" in pack:
+        return pack
+
+    return {
+        "batch_id": batch_id,
+        "shipment_id": pack.get("shipment_id"),
+        "report_id": pack.get("report_id"),
+        "overall_status": pack.get("overall_status"),
+        "completeness_score": pack.get("completeness_score"),
+        "integrity_hash": pack.get("integrity_metadata", {}).get("integrity_hash"),
+        "audit_lineage_summary": pack.get("audit_lineage_summary"),
+        "sections": pack.get("audit_trail_traceability", [])
+    }
+

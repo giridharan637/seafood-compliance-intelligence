@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import {
-  Truck, ShieldAlert, UserCheck, AlertTriangle, MapPin, Clock,
-  CheckCircle2, ArrowRight, ShieldCheck, Activity, RefreshCw, UserX,
-  Home, Search, Filter, Database, Wifi, WifiOff, Package, Users,
-  Cpu, ChevronRight, Play, BarChart3, Thermometer, Bell, Info,
-  CheckCircle, XCircle, Download, FileCheck2, ChevronLeft
+  Truck, ShieldAlert, UserCheck, AlertTriangle, MapPin,
+  CheckCircle2, RefreshCw, UserX,
+  Home, Search, Database, Wifi, WifiOff, Package, Users,
+  Cpu, ChevronRight, Play, BarChart3, Info,
+  FileCheck2, ChevronLeft
 } from 'lucide-react';
 import { Shipment, Worker, NavigationRole, Sensor, RouteEvent } from '../types';
 import { apiFetch } from '../config/api';
@@ -12,7 +12,7 @@ import { StoreForwardBar } from './StoreForwardBar';
 import { ThemeToggle } from './ThemeToggle';
 import { RoleSidebar } from './RoleSidebar';
 import { ErrorBoundary } from './ErrorBoundary';
-import { KPICardsSkeleton, TableSkeleton, CardsGridSkeleton } from './SkeletonLoaders';
+import { KPICardsSkeleton, TableSkeleton } from './SkeletonLoaders';
 import { useToast } from '../context/ToastContext';
 
 type TransportTab =
@@ -69,7 +69,7 @@ export const TransportOperationsDashboard: React.FC<Props> = ({ onNavigate }) =>
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageSize, setPageSize] = useState(25);
+  const [pageSize] = useState(25);
 
   const showMsg = (msg: string) => {
     setActionMsg(msg);
@@ -129,10 +129,18 @@ export const TransportOperationsDashboard: React.FC<Props> = ({ onNavigate }) =>
     }
   }, []);
 
-  useEffect(() => { fetchAllData(); }, [fetchAllData]);
-
+  // Initial data-fetch on component mount
   useEffect(() => {
+    /* oxlint-disable react/set-state-in-effect */
+    fetchAllData();
+    /* oxlint-enable react/set-state-in-effect */
+  }, [fetchAllData]);
+
+  // Reset pagination to page 1 on filter/tab change
+  useEffect(() => {
+    /* oxlint-disable react/set-state-in-effect */
     setCurrentPage(1);
+    /* oxlint-enable react/set-state-in-effect */
   }, [activeTab, searchQuery, statusFilter]);
 
   useEffect(() => {

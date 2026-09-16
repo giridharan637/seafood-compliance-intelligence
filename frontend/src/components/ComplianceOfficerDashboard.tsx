@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
-  ShieldCheck, AlertTriangle, Cpu, FileCheck2, Activity, RefreshCw,
-  Download, ArrowRight, CheckCircle2, Clock, MapPin, Truck, ChevronRight,
-  Filter, Search, Sparkles, Home, ArrowLeft, Eye, BookOpen, TestTube2,
-  MessageSquare, ShieldAlert, GitMerge, Sliders, FileText, Users,
-  Thermometer, Bell, BarChart3, Play, XCircle, CheckCircle, Info,
-  ChevronLeft, Package, Anchor
+  ShieldCheck, Cpu, FileCheck2, Activity, RefreshCw,
+  ArrowRight, CheckCircle2, Clock, MapPin, Truck, ChevronRight,
+  Search, Sparkles, Home, BookOpen, TestTube2,
+  MessageSquare, ShieldAlert, Users,
+  Thermometer, Bell, BarChart3, Play, CheckCircle,
+  Package
 } from 'lucide-react';
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, LineChart, Line, AreaChart, Area
+  Tooltip, ResponsiveContainer,
+  PieChart, Pie, Cell
 } from 'recharts';
 import {
   Shipment, Batch, ComplianceAlert, MLPrediction, EvidencePack,
@@ -19,7 +19,7 @@ import { AuditReportModal } from './AuditReportModal';
 import { apiFetch } from '../config/api';
 import { ThemeToggle } from './ThemeToggle';
 import { useTheme } from '../context/ThemeContext';
-import { RoleSidebar, RoleSidebarItem } from './RoleSidebar';
+import { RoleSidebar } from './RoleSidebar';
 import { useToast } from '../context/ToastContext';
 
 
@@ -125,7 +125,7 @@ export const ComplianceOfficerDashboard: React.FC<Props> = ({ onNavigate }) => {
   const [batches, setBatches] = useState<Batch[]>([]);
   const [alerts, setAlerts] = useState<ComplianceAlert[]>([]);
   const [mlPredictions, setMlPredictions] = useState<MLPrediction[]>([]);
-  const [sensors, setSensors] = useState<Sensor[]>([]);
+  const [_sensors, setSensors] = useState<Sensor[]>([]);
   const [routes, setRoutes] = useState<RouteEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -163,6 +163,14 @@ export const ComplianceOfficerDashboard: React.FC<Props> = ({ onNavigate }) => {
   const [delayOffset, setDelayOffset] = useState(60);
   const [isTuning, setIsTuning] = useState(false);
 
+  const handleSelectBatch = useCallback(async (batch: Batch) => {
+    setSelectedBatch(batch);
+    try {
+      const timeRes = await apiFetch(`/timeline/${batch.batch_id}`);
+      setTimelineEvents(timeRes || []);
+    } catch { }
+  }, []);
+
   const fetchAllData = useCallback(async () => {
     setIsLoading(true);
     try {
@@ -189,10 +197,18 @@ export const ComplianceOfficerDashboard: React.FC<Props> = ({ onNavigate }) => {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  // Exclude selectedBatch intentionally to avoid re-fetching the whole dashboard when selecting a batch
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handleSelectBatch]);
 
-  useEffect(() => { fetchAllData(); }, [fetchAllData]);
+  // Initial mount data load
+  useEffect(() => {
+    /* oxlint-disable react/set-state-in-effect */
+    fetchAllData();
+    /* oxlint-enable react/set-state-in-effect */
+  }, [fetchAllData]);
 
+  // Lazy load experiment/feedback tabs on demand
   useEffect(() => {
     if (activeTab === 'Experiments') {
       if (experimentTab === 'BASELINE' && !baselineData) {
@@ -205,15 +221,9 @@ export const ComplianceOfficerDashboard: React.FC<Props> = ({ onNavigate }) => {
     if (activeTab === 'UserFeedback' && !feedbackSummary) {
       apiFetch('/feedback').then(setFeedbackSummary).catch(console.error);
     }
+  // Intentional lazy load on tab switch
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab, experimentTab]);
-
-  const handleSelectBatch = async (batch: Batch) => {
-    setSelectedBatch(batch);
-    try {
-      const timeRes = await apiFetch(`/timeline/${batch.batch_id}`);
-      setTimelineEvents(timeRes || []);
-    } catch { }
-  };
 
   const { showToast } = useToast();
 
@@ -770,7 +780,7 @@ export const ComplianceOfficerDashboard: React.FC<Props> = ({ onNavigate }) => {
           <div className="flex items-end">
             <button
               disabled={isLoadingPack || !selectedBatch}
-              onClick={() => handleGenerateEvidencePack(selectedBatch?.batch_id!)}
+              onClick={() => { if (selectedBatch) handleGenerateEvidencePack(selectedBatch.batch_id); }}
               className="w-full py-2.5 px-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-xl text-sm flex items-center justify-center gap-2 cursor-pointer transition-all disabled:opacity-50"
             >
               {isLoadingPack ? <RefreshCw className="w-4 h-4 animate-spin" /> : <FileCheck2 className="w-5 h-5" />}

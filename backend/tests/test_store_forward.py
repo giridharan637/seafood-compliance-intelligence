@@ -142,3 +142,46 @@ class TestStressTest:
         result = simulate_multi_sensor_outage(num_sensors=5, records_per_sensor=2)
         assert isinstance(result["conclusion"], str)
         assert "%" in result["conclusion"]  # Should mention data loss %
+
+
+class TestMultiHourOutageStress:
+    """Phase 8: Multi-hour simulated network outage stress tests."""
+
+    @pytest.mark.parametrize("hours,sensors", [
+        (1, 10),
+        (2, 20),
+        (4, 25),
+        (8, 15)
+    ])
+    def test_multi_hour_outage_zero_data_loss(self, hours, sensors):
+        from store_forward import simulate_multi_hour_outage_benchmark
+        result = simulate_multi_hour_outage_benchmark(
+            outage_hours=hours,
+            num_sensors=sensors,
+            readings_per_hour=4
+        )
+        assert result["status"] == "PASS"
+        assert result["records_lost"] == 0, f"Expected 0 records lost for {hours}h outage, got {result['records_lost']}"
+        assert result["data_loss_pct"] == 0.0, f"Expected 0.0% data loss, got {result['data_loss_pct']}%"
+        assert result["records_synchronized"] == result["records_generated"]
+        assert result["duplicates_prevented"] > 0
+        assert result["throughput_records_per_sec"] > 0
+
+
+class TestMultiMessageSequence:
+    """Phase 9: Multi-message outage sequence integration test."""
+
+    def test_multi_message_sequence_integration(self):
+        from store_forward import run_multi_message_outage_sequence
+        result = run_multi_message_outage_sequence(num_cycles=3)
+        assert result["status"] == "PASS"
+        assert result["data_loss_detected"] is False
+        assert result["total_messages_found_in_database"] >= result["total_messages_generated"]
+        assert len(result["cycle_details"]) == 3
+        for cycle in result["cycle_details"]:
+            assert len(cycle["messages"]) == 6
+            assert cycle["messages"][0]["result"] == "DIRECT_INGEST"
+            assert cycle["messages"][1]["result"] == "BUFFERED_OFFLINE"
+            assert cycle["messages"][4]["result"] == "BUFFERED_OFFLINE"
+            assert cycle["messages"][5]["result"] == "DIRECT_INGEST"
+

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { NavigationRole, AdminTab } from './types';
 import { ToastProvider } from './context/ToastContext';
 import { ToastContainer } from './components/Toast';
@@ -22,106 +22,96 @@ const TechnicalDocsPage = lazy(() => import('./components/TechnicalDocsPage').th
 const DatasetExplorerPage = lazy(() => import('./components/DatasetExplorerPage').then(m => ({ default: m.DatasetExplorerPage })));
 const ManualComplianceEntryPage = lazy(() => import('./components/ManualComplianceEntryPage').then(m => ({ default: m.ManualComplianceEntryPage })));
 
+function getRouteFromPath(pathname: string): { role: NavigationRole; tab: AdminTab } {
+  const cleanPath = pathname.toLowerCase().replace(/\/$/, '') || '/';
+
+  if (cleanPath === '' || cleanPath === '/' || cleanPath === '/home') {
+    return { role: 'LANDING', tab: 'Dashboard' };
+  }
+
+  if (cleanPath === '/compliance' || cleanPath === '/compliance-hub') {
+    return { role: 'COMPLIANCE', tab: 'Dashboard' };
+  }
+
+  if (cleanPath === '/transport' || cleanPath === '/operations') {
+    return { role: 'TRANSPORT', tab: 'Dashboard' };
+  }
+
+  if (cleanPath === '/failure-modes') {
+    return { role: 'FAILURE_MODES', tab: 'Dashboard' };
+  }
+
+  if (cleanPath === '/workflow-map') {
+    return { role: 'WORKFLOW_MAP', tab: 'Dashboard' };
+  }
+
+  if (cleanPath === '/threshold-tuning') {
+    return { role: 'THRESHOLD_TUNING', tab: 'Dashboard' };
+  }
+
+  if (cleanPath === '/error-analysis') {
+    return { role: 'ERROR_ANALYSIS', tab: 'Dashboard' };
+  }
+
+  if (cleanPath === '/user-feedback') {
+    return { role: 'USER_FEEDBACK', tab: 'Dashboard' };
+  }
+
+  if (cleanPath === '/tech-docs') {
+    return { role: 'TECH_DOCS', tab: 'Dashboard' };
+  }
+
+  // Admin Routes
+  if (cleanPath.startsWith('/admin')) {
+    let tab: AdminTab = 'Dashboard';
+    if (cleanPath.includes('/shipments')) tab = 'Shipments';
+    else if (cleanPath.includes('/batches')) tab = 'Batches';
+    else if (cleanPath.includes('/sensors')) tab = 'Sensors';
+    else if (cleanPath.includes('/users')) tab = 'Users';
+    else if (cleanPath.includes('/routes')) tab = 'Routes';
+    else if (cleanPath.includes('/system-health') || cleanPath.includes('/health')) tab = 'Health';
+    else if (cleanPath.includes('/reports')) tab = 'Reports';
+    else if (cleanPath.includes('/experiments')) tab = 'Experiments';
+    else if (cleanPath.includes('/settings')) tab = 'Settings';
+    else if (cleanPath.includes('/dataset-explorer')) tab = 'DatasetExplorer';
+    return { role: 'ADMIN', tab };
+  }
+
+  if (cleanPath === '/dataset-explorer') {
+    return { role: 'DATASET_EXPLORER', tab: 'Dashboard' };
+  }
+
+  if (cleanPath === '/experiments') {
+    return { role: 'EXPERIMENTS', tab: 'Dashboard' };
+  }
+
+  if (cleanPath === '/manual-entry' || cleanPath === '/manual-compliance-entry') {
+    return { role: 'MANUAL_ENTRY', tab: 'Dashboard' };
+  }
+
+  // Fallback to landing
+  return { role: 'LANDING', tab: 'Dashboard' };
+}
+
 export function App() {
-  const [currentRole, setCurrentRole] = useState<NavigationRole>('LANDING');
-  const [adminTab, setAdminTab] = useState<AdminTab>('Dashboard');
+  const [currentRole, setCurrentRole] = useState<NavigationRole>(() => {
+    return typeof window !== 'undefined' ? getRouteFromPath(window.location.pathname).role : 'LANDING';
+  });
+  const [adminTab, setAdminTab] = useState<AdminTab>(() => {
+    return typeof window !== 'undefined' ? getRouteFromPath(window.location.pathname).tab : 'Dashboard';
+  });
 
-  // Resolve path to role and tab
-  const resolveRouteFromPath = useCallback((pathname: string) => {
-    const cleanPath = pathname.toLowerCase().replace(/\/$/, '') || '/';
-
-    if (cleanPath === '' || cleanPath === '/' || cleanPath === '/home') {
-      setCurrentRole('LANDING');
-      return;
-    }
-
-    if (cleanPath === '/compliance' || cleanPath === '/compliance-hub') {
-      setCurrentRole('COMPLIANCE');
-      return;
-    }
-
-    if (cleanPath === '/transport' || cleanPath === '/operations') {
-      setCurrentRole('TRANSPORT');
-      return;
-    }
-
-    if (cleanPath === '/failure-modes') {
-      setCurrentRole('FAILURE_MODES');
-      return;
-    }
-
-    if (cleanPath === '/workflow-map') {
-      setCurrentRole('WORKFLOW_MAP');
-      return;
-    }
-
-    if (cleanPath === '/threshold-tuning') {
-      setCurrentRole('THRESHOLD_TUNING');
-      return;
-    }
-
-    if (cleanPath === '/error-analysis') {
-      setCurrentRole('ERROR_ANALYSIS');
-      return;
-    }
-
-    if (cleanPath === '/user-feedback') {
-      setCurrentRole('USER_FEEDBACK');
-      return;
-    }
-
-    if (cleanPath === '/tech-docs') {
-      setCurrentRole('TECH_DOCS');
-      return;
-    }
-
-    // Admin Routes
-    if (cleanPath.startsWith('/admin')) {
-      setCurrentRole('ADMIN');
-      if (cleanPath.includes('/shipments')) setAdminTab('Shipments');
-      else if (cleanPath.includes('/batches')) setAdminTab('Batches');
-      else if (cleanPath.includes('/sensors')) setAdminTab('Sensors');
-      else if (cleanPath.includes('/users')) setAdminTab('Users');
-      else if (cleanPath.includes('/routes')) setAdminTab('Routes');
-      else if (cleanPath.includes('/system-health') || cleanPath.includes('/health')) setAdminTab('Health');
-      else if (cleanPath.includes('/reports')) setAdminTab('Reports');
-      else if (cleanPath.includes('/experiments')) setAdminTab('Experiments');
-      else if (cleanPath.includes('/settings')) setAdminTab('Settings');
-      else if (cleanPath.includes('/dataset-explorer')) setAdminTab('DatasetExplorer');
-      else setAdminTab('Dashboard');
-      return;
-    }
-
-    if (cleanPath === '/dataset-explorer') {
-      setCurrentRole('DATASET_EXPLORER');
-      return;
-    }
-
-    if (cleanPath === '/experiments') {
-      setCurrentRole('EXPERIMENTS');
-      return;
-    }
-
-    if (cleanPath === '/manual-entry' || cleanPath === '/manual-compliance-entry') {
-      setCurrentRole('MANUAL_ENTRY');
-      return;
-    }
-
-    // Fallback to landing
-    setCurrentRole('LANDING');
-  }, []);
-
-  // Handle browser back/forward and initial URL
+  // Handle browser back/forward (popstate)
   useEffect(() => {
-    resolveRouteFromPath(window.location.pathname);
-
     const handlePopState = () => {
-      resolveRouteFromPath(window.location.pathname);
+      const route = getRouteFromPath(window.location.pathname);
+      setCurrentRole(route.role);
+      setAdminTab(route.tab);
     };
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, [resolveRouteFromPath]);
+  }, []);
 
   // Navigates and updates URL without full page reload
   const handleNavigate = (role: NavigationRole) => {

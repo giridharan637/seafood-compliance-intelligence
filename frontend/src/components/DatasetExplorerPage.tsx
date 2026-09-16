@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {
   Database, Search, Filter, ChevronLeft, ChevronRight, RefreshCw,
   AlertTriangle, CheckCircle2, Activity, Cpu, ChevronDown, ChevronUp,
-  Anchor, ArrowUp, ArrowDown, FileSearch, XCircle, Home, Download, FileSpreadsheet,
-  Zap, BarChart3
+  ArrowUp, ArrowDown, FileSearch, XCircle, Home, Download, FileSpreadsheet,
+  Zap
 } from 'lucide-react';
 import { NavigationRole } from '../types';
 import { ThemeToggle } from './ThemeToggle';
@@ -116,7 +116,7 @@ export const DatasetExplorerPage: React.FC<Props> = ({ onNavigate, refreshKey = 
     try {
       const data = await apiFetch<DatasetSummary>('/dataset/summary');
       setSummary(data);
-    } catch (err: any) {
+    } catch {
       setSummaryError('Failed to load dataset summary. Is the backend running?');
     } finally {
       setSummaryLoading(false);
@@ -141,7 +141,7 @@ export const DatasetExplorerPage: React.FC<Props> = ({ onNavigate, refreshKey = 
       setBatchTotal(data.total || 0);
       setBatchTotalPages(data.total_pages || 1);
       setBatchPage(data.page || 1);
-    } catch (err: any) {
+    } catch {
       setBatchError('Failed to load batches. Check backend connection.');
     } finally {
       setBatchLoading(false);
@@ -161,7 +161,7 @@ export const DatasetExplorerPage: React.FC<Props> = ({ onNavigate, refreshKey = 
       setSensorLogsTotal(data.total || 0);
       setSensorLogsTotalPages(data.total_pages || 1);
       setSensorLogsPage(data.page || 1);
-    } catch (err: any) {
+    } catch {
       setSensorLogs([]);
     } finally {
       setSensorLogsLoading(false);
@@ -169,23 +169,37 @@ export const DatasetExplorerPage: React.FC<Props> = ({ onNavigate, refreshKey = 
   };
 
   useEffect(() => {
+    /* oxlint-disable react/set-state-in-effect */
     fetchSummary();
+    /* oxlint-enable react/set-state-in-effect */
   }, []);
 
   // Re-fetch when refreshKey changes (e.g., dataset regenerated from AdminDashboard)
   useEffect(() => {
     if (refreshKey > 0) {
+      /* oxlint-disable react/set-state-in-effect */
       fetchSummary();
       fetchBatches(1);
+      /* oxlint-enable react/set-state-in-effect */
     }
+  // Intentional trigger only on external refreshKey change
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refreshKey]);
 
   useEffect(() => {
+    /* oxlint-disable react/set-state-in-effect */
     fetchBatches(1);
+    /* oxlint-enable react/set-state-in-effect */
+  // Intentionally triggers page reset to 1 on filter/sort changes
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchQuery, statusFilter, sortBy, sortOrder]);
 
   useEffect(() => {
+    /* oxlint-disable react/set-state-in-effect */
     fetchBatches(batchPage);
+    /* oxlint-enable react/set-state-in-effect */
+  // Triggers data fetch on page navigation
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [batchPage]);
 
   const handleGenerateDataset = async (count: number) => {

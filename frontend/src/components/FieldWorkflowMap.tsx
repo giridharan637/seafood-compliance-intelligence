@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GitMerge, MapPin, ShieldCheck, CheckCircle2, Clock, Activity, Home, ArrowRight, Layers, FileCheck2 } from 'lucide-react';
+import { CheckCircle2, Activity, Home, Layers, FileCheck2 } from 'lucide-react';
 import { NavigationRole } from '../types';
 import { ThemeToggle } from './ThemeToggle';
 

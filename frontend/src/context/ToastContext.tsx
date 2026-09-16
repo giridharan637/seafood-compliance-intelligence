@@ -45,6 +45,8 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   );
 };
 
+// Standard React context pattern: exporting provider and hook together in the context module
+// eslint-disable-next-line react-refresh/only-export-components, react/only-export-components
 export const useToast = (): ToastContextValue => {
   const ctx = useContext(ToastContext);
   if (!ctx) throw new Error('useToast must be used within ToastProvider');

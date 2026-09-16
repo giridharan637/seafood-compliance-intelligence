@@ -46,3 +46,11 @@ logs/
 # OS
 .DS_Store
 Thumbs.db
+
+# Temporary verification / lint output artifacts (not project source)
+lint_detail.txt
+lint_json.txt
+lint_output.txt
+lint_summary.txt
+verification_report.json
+generate_verification_report.py

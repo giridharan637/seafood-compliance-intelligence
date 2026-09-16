@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
   FileCheck2, Search, CheckCircle2, AlertTriangle, XCircle, ShieldCheck,
-  ShieldAlert, RefreshCw, Database, Sparkles, Home, ArrowRight, Download,
-  Printer, Thermometer, Cpu, Truck, MapPin, Package, Clock, Eye, AlertCircle,
-  FileSpreadsheet, Zap, HelpCircle, Layers, ChevronRight
+  RefreshCw, Database, Sparkles, Home,
+  Thermometer, Cpu, Truck, MapPin, Package, Eye, AlertCircle,
+  FileSpreadsheet
 } from 'lucide-react';
 import { NavigationRole, EvidencePack, ManualEntryFormState, ManualEntryValidationResult } from '../types';
 import { apiFetch } from '../config/api';
@@ -49,7 +49,7 @@ export const ManualComplianceEntryPage: React.FC<Props> = ({ onNavigate }) => {
 
   // Status and result states
   const [isAutofilled, setIsAutofilled] = useState(false);
-  const [autofillSource, setAutofillSource] = useState<'DATABASE' | 'SAMPLE' | null>(null);
+  const [_autofillSource, setAutofillSource] = useState<'DATABASE' | 'SAMPLE' | null>(null);
   const [sampleBadgeLabel, setSampleBadgeLabel] = useState<string | null>(null);
   const [isValidating, setIsValidating] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -57,7 +57,7 @@ export const ManualComplianceEntryPage: React.FC<Props> = ({ onNavigate }) => {
   
   const [validationResult, setValidationResult] = useState<ManualEntryValidationResult | null>(null);
   const [saveSuccessMsg, setSaveSuccessMsg] = useState<string | null>(null);
-  const [savedBatchId, setSavedBatchId] = useState<string | null>(null);
+  const [_savedBatchId, setSavedBatchId] = useState<string | null>(null);
   
   // Evidence Pack & Audit Report modal
   const [evidencePack, setEvidencePack] = useState<EvidencePack | null>(null);
@@ -301,8 +301,8 @@ export const ManualComplianceEntryPage: React.FC<Props> = ({ onNavigate }) => {
 
   // Stored telemetry & route preview from auto-fill
   const [recentObservations, setRecentObservations] = useState<any[]>([]);
-  const [routeInfo, setRouteInfo] = useState<{ status: string; last_event: string; count: number } | null>(null);
-  const [custodyInfo, setCustodyInfo] = useState<{ last_handover: string; count: number } | null>(null);
+  const [_routeInfo, setRouteInfo] = useState<{ status: string; last_event: string; count: number } | null>(null);
+  const [_custodyInfo, setCustodyInfo] = useState<{ last_handover: string; count: number } | null>(null);
   const [isGeneratingReport, setIsGeneratingReport] = useState(false);
 
   // Helper for field change
