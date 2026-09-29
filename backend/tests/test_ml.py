@@ -29,6 +29,18 @@ class TestMLEngine:
         # Should include some form of metrics
         assert any(k in result for k in ["anomaly_count", "training_records", "rf_accuracy", "records_analyzed"])
 
+    def test_ml_result_has_train_test_split_metrics(self):
+        from ml_engine import preprocess_and_train_models
+        result = preprocess_and_train_models()
+        assert "rf_test_metrics" in result
+        tm = result["rf_test_metrics"]
+        assert "test_accuracy" in tm
+        assert "precision_weighted" in tm
+        assert "recall_weighted" in tm
+        assert "f1_weighted" in tm
+        assert 0.0 <= tm["test_accuracy"] <= 1.0
+        assert 0.0 <= tm["f1_weighted"] <= 1.0
+
     def test_analyze_single_batch_valid(self, sample_batch_id):
         from ml_engine import analyze_single_batch
         result = analyze_single_batch(sample_batch_id)

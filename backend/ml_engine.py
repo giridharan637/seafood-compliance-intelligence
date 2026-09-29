@@ -3,6 +3,8 @@ import sys
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import IsolationForest, RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import precision_recall_fscore_support
 from typing import Dict, Any, List
 
 # Ensure backend directory is in sys.path
@@ -102,8 +104,21 @@ def preprocess_and_train_models():
     X_risk = features_df[['avg_temp', 'max_temp', 'min_temp', 'missing_pct', 'noise_pct', 'max_anomaly', 'workload_score']]
     y_risk = features_df['target']
 
+    # Deterministic 70/30 train/test split — random_state=42 ensures reproducibility
+    X_train, X_test, y_train, y_test = train_test_split(
+        X_risk, y_risk, test_size=0.30, random_state=42, stratify=None
+    )
+
+    # Train only on the training partition
     rf_model = RandomForestClassifier(n_estimators=50, random_state=42)
-    rf_model.fit(X_risk, y_risk)
+    rf_model.fit(X_train, y_train)
+
+    # Evaluate on the held-out test partition for genuine generalisation metrics
+    y_pred = rf_model.predict(X_test)
+    precision_w, recall_w, f1_w, _ = precision_recall_fscore_support(
+        y_test, y_pred, average='weighted', zero_division=0
+    )
+    test_accuracy = float(rf_model.score(X_test, y_test))
 
     conn.commit()
     conn.close()
@@ -114,7 +129,17 @@ def preprocess_and_train_models():
         "anomalies_detected": int((logs_df['anomaly_prediction'] == -1).sum()),
         "missing_imputed": int(logs_df['is_imputed'].sum()),
         "noisy_flagged": int(logs_df['detected_noise'].sum()),
-        "rf_accuracy": float(rf_model.score(X_risk, y_risk))
+        # Legacy key — kept for backwards compatibility with existing API consumers
+        "rf_accuracy": round(test_accuracy, 4),
+        # Genuine test-set metrics (30% held-out, random_state=42, reproducible)
+        "rf_test_metrics": {
+            "split": "70% train / 30% test (random_state=42)",
+            "test_set_size": len(y_test),
+            "test_accuracy": round(test_accuracy, 4),
+            "precision_weighted": round(float(precision_w), 4),
+            "recall_weighted": round(float(recall_w), 4),
+            "f1_weighted": round(float(f1_w), 4),
+        }
     }
 
 def analyze_single_batch(batch_id: str) -> Dict[str, Any]:

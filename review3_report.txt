@@ -17,10 +17,10 @@ The SQLite3 database has 14 tables linking 101 batches and 101 shipments to 15,3
 FastAPI routes span `/api/v1/shipments`, `/sensors`, `/compliance`, `/evidence`, `/analytics`, `/experiments`, and `/safety` (36 endpoints). Inbound payloads pass Pydantic validation before DB execution, returning uniform envelopes (200, 400, 404, 422) with global exception handlers.
 
 7. MACHINE LEARNING AND DATA PROCESSING
-A two-pass Hampel/MAD filter processes 15,341 logs. In an 8% noise test (742 spikes), it achieved 89.22% recall, suppressing 280 false alarms (88.3% reduction). Missing data has 100% bounded imputation (`is_imputed=1`). Random Forest and Isolation Forest classify compliance risk and drift.
+A two-pass Hampel/MAD filter processes 15,000+ logs. In an 8% noise test (1,219 spikes injected), it achieved 86.22% recall, suppressing 215 false breach alarms. Missing data has 100% bounded imputation (`is_imputed=1`). Random Forest (70/30 train/test, random_state=42) and Isolation Forest classify compliance risk and drift; verified test-set: Precision 0.7419, Recall 0.7742, F1 0.7542.
 
 8. RELIABILITY AND FAILURE HANDLING
-Mitigated failure modes: missing data (imputed), sensor noise (Hampel filter), network outages (store-and-forward, 0% loss across 1h–8h), duplicate records (SHA-256 deduplication), malformed payloads (isolated), calibration drift, custody gaps, and driver fatigue (DRV-101 blocked at 8.5h).
+Mitigated failure modes: missing data (imputed), sensor noise (Hampel filter), network outages (store-and-forward, 0% loss across 1h–8h), duplicate records (SHA-256 deduplication), malformed payloads (isolated), calibration drift, custody gaps, and driver fatigue (DRV-103 blocked: 10.5h driving, 5.5h rest, 3 assignments — all 3 safety limits violated).
 
 9. UNIT TESTING AND ERROR BOUNDARIES
 Pytest 9.1.1 runs 142/142 tests cleanly in 26.27s across unit, integration, API, ML, and store-and-forward boundaries. React ErrorBoundary components trap UI exceptions with fallback screens. Frontend passes 28-file oxlint (0 errors) and builds in 4.27s (`tsc -b && vite build`).
@@ -33,10 +33,10 @@ Integrity is enforced via Pydantic schemas, parameterized SQL queries, and forei
 
 12. FINAL TESTING AND VERIFICATION
 Verified empirical metrics:
-- Backend: 142/142 Pytest passed in 26.27s; 36/36 API endpoints verified.
-- Frontend: Oxlint clean (0 errors); production build passed in 4.27s.
-- Database: 15,341 logs, 101 shipments, 101 batches, 0 orphans.
-- Resilience: 0% store-forward loss; DRV-101 blocked; SHA-256 tamper alert verified.
+- Backend: 142/142 Pytest passed; 36/36 API endpoints verified.
+- Frontend: Oxlint clean (0 errors); production build passed.
+- Database: 15,000+ logs, 100+ shipments/batches, 0 orphans.
+- Resilience: 0% store-forward loss; DRV-103 assignment blocked (10.5h working); SHA-256 tamper alert verified.
 
 13. REVIEW 2 IMPROVEMENTS COMPLETED
 Review 2 directives resolved:
