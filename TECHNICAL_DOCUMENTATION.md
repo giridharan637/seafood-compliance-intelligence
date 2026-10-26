@@ -54,14 +54,14 @@ The Seafood Compliance Intelligence system targets the following measurable outc
 │  product_batches │ shipments │ sensors │ sensor_logs            │
 │  sensor_calibrations │ handover_records │ route_events          │
 │  worker_logs │ compliance_events │ ml_predictions │ user_feedback│
-│  system_settings │ offline_buffer                               │
+│  system_settings │ offline_buffer │ stakeholder_validations     │
 └────────────────────────────────────────────────────────────────┘
 ```
 
 **Technology Stack:**
 - **Frontend**: React 18, TypeScript, Vite, Recharts, Lucide Icons, Tailwind CSS (dark/light theme)
 - **Backend**: Python 3.12, FastAPI, Uvicorn, Scikit-Learn, Pandas, NumPy, OpenPyXL
-- **Database**: SQLite 3 (WAL mode, 13 relational tables, 10,000+ records)
+- **Database**: SQLite 3 (WAL mode, 14 primary relational tables + sequences, 15,000+ records)
 - **ML Engine**: Scikit-Learn Isolation Forest + Random Forest Classifier
 
 ---
@@ -121,9 +121,10 @@ IoT Multi-Sensor Telemetry (Temperature, Humidity, GPS Location)
 | `worker_logs` | worker_id | Driver duty hours, rest, workload score | ~500 |
 | `compliance_events` | event_id | Threshold breach and alert records | ~1,000 |
 | `ml_predictions` | prediction_id | Isolation Forest + RF model outputs | ~1,000 |
-| `user_feedback` | feedback_id | Stakeholder usability ratings | variable |
+| `user_feedback` | feedback_id | Synthetic & app usability survey ratings | variable |
 | `offline_buffer` | buffer_id | Store-and-Forward offline buffer records | variable |
 | `system_settings` | key | Configurable system parameters | ~6 |
+| `stakeholder_validations` | session_id | Documented Real/Mock stakeholder validation sessions | variable |
 
 ### Key Relationships
 
@@ -418,15 +419,64 @@ Manual compliance process was measured across 6 domains per shipment:
 | `seafood_compliance_experiments.ipynb` | `/experiments/` | Reproducible Jupyter experiment notebook |
 ## 18.1 Stakeholder Validation & Usability Evaluation Status
 
-The system incorporates a fully operational stakeholder feedback collection and rating framework:
-- **API Endpoint**: `GET /api/feedback` and `POST /api/feedback` for real-time rating submissions and statistical aggregations.
-- **Data Persistence**: Relational SQLite table `user_feedback` capturing role, usability rating, audit preparation satisfaction, and verbatim qualitative recommendations.
-- **Frontend Dashboard**: Dedicated User Feedback view (`/feedback`) with dynamic rating averages and live feedback feed.
+### Objective & Review 2 Evaluator Directive
+The project incorporates a dual-tier evaluation framework responding directly to the evaluator's Review 2 directive:
+> *"Replace simulated-only user-feedback records with at least one documented real/mock stakeholder validation session before the next review."*
 
-> [!IMPORTANT]
-> **Academic & Regulatory Integrity Disclosure**:
-> The feedback entries currently stored in the development database represent structured demonstration evaluation profiles and functional test entries created to validate UI aggregation calculations and submission workflows.
-> **No formal field trials with live commercial seafood exporters, maritime shipping lines, customs inspectors, or government agencies (e.g., FDA, EFSA) have been conducted.** All stakeholder ratings presented in the demo interface reflect testing profiles. Formal field pilot validation with commercial seafood cold-chain operators remains an active post-capstone objective.
+The architecture strictly distinguishes between automated statistical test fixtures and empirical stakeholder validation sessions.
+
+### Category Isolation Framework
+
+| Category | Database Table | Participant Classification | Purpose & Treatment |
+|:---|:---|:---|:---|
+| **Category A: Synthetic Test Feedback** | `user_feedback` (`is_demo=1`) | Programmatic Test Fixture | Used solely for verifying SQLite CRUD transactions, dynamic rating average calculations, and UI formula stability. **Isolated and never presented as stakeholder validation.** |
+| **Category B: Mock Stakeholder Evaluation** | `stakeholder_validations` | `MOCK_STAKEHOLDER` | Conducted with academic mentors, peers, or evaluators role-playing operational personas (e.g., Cold-Chain Logistics Dispatcher, Port Health Inspector). Permitted for academic prototype evaluation; badged explicitly in UI and API. |
+| **Category C: Genuine Real Stakeholder** | `stakeholder_validations` | `REAL_STAKEHOLDER` | Conducted with active commercial seafood export managers, customs clearance agents, or ISO 17025 accredited auditors. Badged explicitly in UI and API. |
+
+### Relational Schema: `stakeholder_validations`
+
+```sql
+CREATE TABLE IF NOT EXISTS stakeholder_validations (
+    session_id TEXT PRIMARY KEY,
+    session_date TEXT NOT NULL,
+    participant_type TEXT NOT NULL, -- 'REAL_STAKEHOLDER', 'MOCK_STAKEHOLDER', 'TEMPLATE'
+    participant_role TEXT NOT NULL, -- Generic operational title (no personal PII)
+    validation_method TEXT NOT NULL,
+    demo_modules_evaluated TEXT NOT NULL,
+    question_responses TEXT NOT NULL, -- Structured JSON of 7 domains and responses
+    observed_strengths TEXT NOT NULL,
+    observed_issues TEXT NOT NULL,
+    suggested_improvements TEXT NOT NULL,
+    actions_taken_or_planned TEXT NOT NULL,
+    validation_status TEXT NOT NULL, -- 'TEMPLATE', 'CONDUCTED_PENDING_ACTION', 'VALIDATED_RESOLVED'
+    evidence_reference TEXT, -- Path to raw notes in docs/validation/evidence/
+    created_at TEXT NOT NULL
+);
+```
+
+### Standardized 7-Domain Interview & Walkthrough Instrument
+Standardized interview questions (`docs/validation/STAKEHOLDER_VALIDATION_TEMPLATE.md` / `GET /api/validations/template`):
+1. **Ease of Using Dashboard**: Intuitive KPI monitoring and navigation across cold-chain fleet operations.
+2. **Understanding Cold-Chain Alerts**: Clarity of temperature excursion alerts, severity tags (CRITICAL vs WARNING), and threshold boundaries.
+3. **Shipment & Custody Traceability**: End-to-end lineage connecting physical checkpoints, route events, and handovers.
+4. **Evidence Pack Usefulness**: Structure, comprehensiveness, and SHA-256 tamper verification of 1-click audit packs.
+5. **Driver Workload Safety**: Automated blocking of fatigued drivers violating mandated driving hours and minimum rest.
+6. **Missing/Noisy Sensor Data Handling**: Hampel noise filter outlier suppression and transparent temporal imputation tagging (`is_imputed=1`).
+7. **Suggested Improvements**: Actionable feature recommendations and operational priorities.
+
+### Dedicated REST API Endpoints
+- `GET /api/validations`: Retrieves all validation records, categorized counts (`real_stakeholder_sessions`, `mock_stakeholder_sessions`, `template_records`, `synthetic_survey_fixtures`), and directive status.
+- `POST /api/validations`: Accepts `StakeholderValidationCreateRequest`. Enforces non-empty fields, rejects synthetic data masquerading as validation (HTTP 422), enforces PII privacy protection (blocks email addresses and personal identities), prevents duplicate session IDs (HTTP 409), and stores structured responses.
+- `GET /api/validations/template`: Returns the standardized 7-question interview protocol specification and instructions.
+- `GET /api/feedback`: Retains backward-compatible survey summary while segregating synthetic demo fixtures (`is_demo=1`) from real user submissions and referencing validation counts.
+
+### Privacy & Data Protection Standard
+- **Zero PII Policy**: The API rejects payloads containing email addresses or personal identifiers.
+- **Role-Based Anonymization**: Evaluators and participants are identified strictly by functional roles (e.g., *"Cold-Chain Quality Assurance Officer"*).
+
+### Current Validation Status & Outstanding Limitations
+- **Current Status**: `PENDING_STAKEHOLDER_EVALUATION`. The complete technical workflow (schema, endpoints, frontend UI, 11-test Pytest suite, and markdown template) is deployed. The unfilled template specimen (`VAL-TEMPLATE-001`) is seeded in the repository.
+- **Outstanding Requirement to Satisfy Evaluator**: The evaluator directive requires an actual completed real or mock stakeholder evaluation session to be conducted using the protocol and documented with evidence artifacts before the final review. Commercial field pilots with maritime export vessels remain an active post-capstone commercial objective.
 
 ---
 

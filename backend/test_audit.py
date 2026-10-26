@@ -55,6 +55,7 @@ def run_all_tests():
     assert "user_feedback" in tables
     assert "system_settings" in tables
     assert "offline_buffer" in tables
+    assert "stakeholder_validations" in tables
     conn.close()
 
     print("\n=== 2. FASTAPI CLIENT & ENDPOINTS AUDIT ===")
@@ -193,7 +194,21 @@ def run_all_tests():
     assert r.status_code == 200
     r = client.get("/api/feedback")
     assert r.status_code == 200
-    print(f"[PASS] Feedback API: {r.json().get('total_responses')} responses, Avg rating = {r.json().get('avg_rating')}")
+    feedback_data = r.json()
+    assert "validation_summary" in feedback_data
+    assert "synthetic_fixtures_count" in feedback_data
+    print(f"[PASS] Feedback API: {feedback_data.get('total_responses')} responses, Avg rating = {feedback_data.get('avg_rating')}")
+
+    # Stakeholder Validation API Audit (Template, GET, POST)
+    r_tmpl = client.get("/api/validations/template")
+    assert r_tmpl.status_code == 200
+    assert len(r_tmpl.json().get("questions", [])) == 7
+    print(f"[PASS] GET /api/validations/template: {len(r_tmpl.json().get('questions'))} standardized interview questions returned.")
+
+    r_vals = client.get("/api/validations")
+    assert r_vals.status_code == 200
+    assert "counts" in r_vals.json()
+    print(f"[PASS] GET /api/validations: Total sessions = {r_vals.json().get('counts', {}).get('total_records')}, Status = {r_vals.json().get('validation_status')}")
 
     # Workload Check
     r = client.post("/api/workload-check", json={"driver_id": "DRV-101", "additional_hours": 2.0})

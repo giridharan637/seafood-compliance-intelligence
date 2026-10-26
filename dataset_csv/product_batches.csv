@@ -100,3 +100,4 @@ BTC-SEA-5098,Maine Lobster (Live),2899.6,2026-09-17,Seattle Pier 91 Logistics Ce
 BTC-SEA-5099,Yellowfin Tuna (Super-Frozen),1001.2,2026-09-17,Kodiak Island Seafood Dock (AK),Los Angeles Int'l Cargo Center (LAX - USA),-55.0,-50.0,2026-09-18,SHP-2026-199,NORMAL
 BTC-SEA-5100,Black Tiger Shrimp (Chilled),2275.9,2026-09-17,Seattle Pier 91 Logistics Center (WA),Shanghai Pudong Int'l Freight Hub (PVG - China),0.5,4.0,2026-09-18,SHP-2026-200,NORMAL
 BTC-DEMO-999,Black Tiger Shrimp (Chilled),2500.0,2026-09-28,Portland Marine Cold Terminal,Los Angeles Cold Logistics Center,0.0,4.0,2026-09-05,SHP-DEMO-2026-999,NORMAL
+BTC-AUDIT-001,Pacific Oysters (Live Shellstock),669.7,2026-09-29,Boston Harbor Freight Terminal (MA),Singapore Changi Freight Hub (SIN - Singapore),1.0,5.0,2026-09-05,SHP-DEMO-AUDIT-001,WARNING

@@ -311,4 +311,42 @@ export interface ManualEntryValidationResult {
   summary: string;
 }
 
+export interface ValidationQuestionItem {
+  question_id: string;
+  question_text: string;
+  response_text: string;
+}
+
+export interface StakeholderValidationSession {
+  session_id: string;
+  session_date: string;
+  participant_type: 'REAL_STAKEHOLDER' | 'MOCK_STAKEHOLDER' | 'TEMPLATE';
+  participant_role: string;
+  validation_method: string;
+  demo_modules_evaluated: string;
+  question_responses: ValidationQuestionItem[] | string;
+  observed_strengths: string;
+  observed_issues: string;
+  suggested_improvements: string;
+  actions_taken_or_planned: string;
+  validation_status: 'TEMPLATE' | 'CONDUCTED_PENDING_ACTION' | 'VALIDATED_RESOLVED';
+  evidence_reference: string;
+  created_at: string;
+}
+
+export interface ValidationsResponse {
+  status: string;
+  validation_status: string;
+  evaluator_directive_met: boolean;
+  counts: {
+    total_records: number;
+    real_stakeholder_sessions: number;
+    mock_stakeholder_sessions: number;
+    template_records: number;
+    synthetic_survey_fixtures: number;
+  };
+  sessions: StakeholderValidationSession[];
+  methodology_isolation_policy: string;
+}
+
 

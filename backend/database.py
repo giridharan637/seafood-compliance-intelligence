@@ -213,6 +213,62 @@ def init_db():
     )
     """)
 
+    # Stakeholder Validation Sessions (Real/Mock Sessions separate from synthetic feedback)
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS stakeholder_validations (
+        session_id TEXT PRIMARY KEY,
+        session_date TEXT NOT NULL,
+        participant_type TEXT NOT NULL,
+        participant_role TEXT NOT NULL,
+        validation_method TEXT NOT NULL,
+        demo_modules_evaluated TEXT NOT NULL,
+        question_responses TEXT NOT NULL,
+        observed_strengths TEXT NOT NULL,
+        observed_issues TEXT NOT NULL,
+        suggested_improvements TEXT NOT NULL,
+        actions_taken_or_planned TEXT NOT NULL,
+        validation_status TEXT NOT NULL,
+        evidence_reference TEXT,
+        created_at TEXT NOT NULL
+    )
+    """)
+
+    # Seed the unfilled structured interview template specimen if not present
+    cursor.execute("SELECT COUNT(*) FROM stakeholder_validations WHERE session_id = 'VAL-TEMPLATE-001'")
+    if cursor.fetchone()[0] == 0:
+        import json
+        template_questions = [
+            {"question_id": "Q1_DASHBOARD", "question_text": "Ease of using the dashboard for cold-chain monitoring", "response_text": "[UNFILLED TEMPLATE - Awaiting live session]"},
+            {"question_id": "Q2_ALERTS", "question_text": "Understanding of cold-chain temperature excursion alerts", "response_text": "[UNFILLED TEMPLATE - Awaiting live session]"},
+            {"question_id": "Q3_TRACEABILITY", "question_text": "Shipment, sensor lineage, and custody handover traceability", "response_text": "[UNFILLED TEMPLATE - Awaiting live session]"},
+            {"question_id": "Q4_EVIDENCE", "question_text": "Evidence pack usefulness, structure, and integrity verification", "response_text": "[UNFILLED TEMPLATE - Awaiting live session]"},
+            {"question_id": "Q5_SAFETY", "question_text": "Driver workload safety and hours-of-service compliance checks", "response_text": "[UNFILLED TEMPLATE - Awaiting live session]"},
+            {"question_id": "Q6_DATA_QUALITY", "question_text": "Missing telemetry imputation and noisy sensor data handling", "response_text": "[UNFILLED TEMPLATE - Awaiting live session]"},
+            {"question_id": "Q7_IMPROVEMENTS", "question_text": "Suggested operational improvements and feature priorities", "response_text": "[UNFILLED TEMPLATE - Awaiting live session]"}
+        ]
+        cursor.execute("""
+            INSERT INTO stakeholder_validations (
+                session_id, session_date, participant_type, participant_role,
+                validation_method, demo_modules_evaluated, question_responses,
+                observed_strengths, observed_issues, suggested_improvements,
+                actions_taken_or_planned, validation_status, evidence_reference, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+        """, (
+            "VAL-TEMPLATE-001",
+            "2026-10-26",
+            "TEMPLATE",
+            "Quality / Operations / Audit Stakeholder (Template Specimen)",
+            "Structured Cognitive Walkthrough & Task Demonstration",
+            "Dashboard, Cold-Chain Alerts, Traceability, Evidence Pack, Driver Safety, Noise/Missing Imputation",
+            json.dumps(template_questions),
+            "[UNFILLED TEMPLATE - Record observed system strengths during session]",
+            "[UNFILLED TEMPLATE - Record points of confusion, bugs, or friction]",
+            "[UNFILLED TEMPLATE - Record stakeholder feature or UX recommendations]",
+            "[UNFILLED TEMPLATE - Record engineering response / action plan]",
+            "TEMPLATE",
+            "docs/validation/STAKEHOLDER_VALIDATION_TEMPLATE.md"
+        ))
+
     # System Settings / Offline Sync State
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS system_settings (

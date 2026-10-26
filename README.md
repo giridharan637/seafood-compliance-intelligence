@@ -20,7 +20,7 @@
    - **Missing Data Experiment**: Evaluates forward-fill temporal imputation with ISO metadata tagging (`is_imputed=1`) at controlled loss rates (1%–50%), maintaining 99.8% evidence completeness with mathematically bounded recovery rates (`0% <= rate <= 100%`).
    - **Noise Filtering Experiment**: Two-pass iterative Hampel filter combining Global-MAD pre-screening (4.0σ breakdown robustness) and centered rolling Hampel outlier suppression (window=7, 3.0σ MAD) on injected synthetic noise spikes (4°C–12°C), achieving high spike recall (≥75%) and suppressing false breach alarms across 1% to 25% noise densities.
    - **Threshold Sensitivity Tuning**: Dynamic trade-off analysis between False Positives (FP) and True Anomaly Recall across thermal excursion offsets (+0.0°C to +4.0°C) with dynamic confusion matrix calculations.
-   - **Stakeholder Usability Evaluation**: Interactive survey framework (`/api/feedback`) and live empirical rating breakdown; initial demonstration profiles provided with honest disclosure of planned post-capstone commercial field trials.
+   - **Stakeholder Validation Protocol**: Formal evaluation framework (`/api/validations`, `/api/validations/template`) implementing the Review 2 evaluator directive. Strictly isolates programmatic synthetic survey fixtures from empirical Mock/Real stakeholder evaluations across 7 standardized interview domains.
 
 3. **Production-Grade Resilience & Cryptographic Integrity**:
    - **SHA-256 Evidence Integrity Engine**: Deterministic canonical JSON serialization and 64-character SHA-256 digest calculation for tamper-evident compliance audit packages (`/api/evidence-pack/{batch_id}/verify`).
@@ -172,11 +172,60 @@ Follow this sequence for live presentations:
 5. **Experiments & Benchmarks** (`/admin/experiments` or `/experiments`):
    - Review *Baseline vs Proposed* benchmark (4.2 hrs vs 1.35 sec).
    - Adjust *Missing Data* slider to show forward-fill recovery.
-   - Test *Noise Filtering* and *Threshold Sensitivity Tuning*.
 6. **Field Workflow Map** (`/workflow-map`):
    - Click through lifecycle stages from Fishing Dock to Final Port Import.
+7. **Stakeholder Validation & User Feedback** (`/feedback`):
+   - Switch between **Stakeholder Validation Sessions** and **Synthetic Test Feedback**.
+   - Review the 7-domain interview protocol or record a new session with evidence artifacts.
+
+---
+
+## 👥 Stakeholder Validation Protocol (Review 2 Evaluator Directive)
+
+### Objective & Evaluator Directive Context
+In Review 2, the project evaluator issued the following directive:
+> *"Replace simulated-only user-feedback records with at least one documented real/mock stakeholder validation session before the next review."*
+
+The system implements a transparent, multi-tiered validation architecture that strictly distinguishes between automated test fixtures and empirical human evaluation sessions.
+
+### Categorization & Isolation Framework
+
+| Category | Designation | Definition & Treatment |
+|:---|:---|:---|
+| **Category A** | `SYNTHETIC_TEST_FIXTURE` | Programmatic survey records generated during dataset seeding. Used exclusively to verify SQLite CRUD transactions, dynamic mathematical average formulas, and star-rating distribution charts. **Never presented or tallied as stakeholder validation.** |
+| **Category B** | `MOCK_STAKEHOLDER` | Structured evaluation sessions conducted with teaching assistants, faculty, or peer evaluators adopting operational personas (e.g., Cold-Chain Logistics Dispatcher, Port Health Inspector). Permitted for academic prototype evaluation; badged explicitly with purple tag `🟣 MOCK STAKEHOLDER`. |
+| **Category C** | `REAL_STAKEHOLDER` | Empirical validation conducted with active commercial seafood exporters, maritime shipping managers, or ISO 17025 accredited auditors. Badged explicitly with green tag `🟢 REAL STAKEHOLDER`. |
+
+### Standardized 7-Domain Interview & Walkthrough Protocol
+The evaluation instrument (`docs/validation/STAKEHOLDER_VALIDATION_TEMPLATE.md` / `GET /api/validations/template`) covers 7 core operational domains:
+1. **Ease of Using Dashboard**: Intuitive KPI monitoring and navigation across fleet operations.
+2. **Understanding Cold-Chain Alerts**: Clarity of temperature excursion alerts, severity tags (CRITICAL vs WARNING), and threshold boundaries.
+3. **Shipment & Custody Traceability**: End-to-end lineage connecting physical checkpoints, route events, and handovers.
+4. **Evidence Pack Usefulness**: Structure, comprehensiveness, and SHA-256 tamper verification of 1-click audit packs.
+5. **Driver Workload Safety**: Automated blocking of fatigued drivers violating mandated driving hours and minimum rest.
+6. **Missing/Noisy Sensor Data Handling**: Hampel noise filter outlier suppression and transparent temporal imputation tagging (`is_imputed=1`).
+7. **Suggested Improvements**: Actionable feature recommendations and operational priorities.
+
+### How to Conduct and Record a Validation Session
+1. **Step 1 — Prepare Protocol**: Review `docs/validation/STAKEHOLDER_VALIDATION_TEMPLATE.md` or fetch the template via `GET /api/validations/template`.
+2. **Step 2 — Execute Guided Demo**: Walk the participant through live system modules (`/compliance`, `/transport`, `/workflow-map`, `/experiments`, `/evidence`).
+3. **Step 3 — Capture Verbatim Responses**: Record answers to all 7 questions, noting observed strengths, points of friction, and suggested enhancements.
+4. **Step 4 — Persist the Session**:
+   - Via Web UI: Open `/feedback`, click **Record Validation Session**, complete the form, and submit.
+   - Via REST API: Send a `POST /api/validations` payload (must specify `participant_type: "MOCK_STAKEHOLDER"` or `"REAL_STAKEHOLDER"`). Synthetic types are rejected with HTTP 422.
+5. **Step 5 — Archive Raw Evidence**: Place session notes, evaluation rubrics, or audio recording logs in `docs/validation/evidence/<session_id>_notes.md`.
+
+### Privacy & Data Protection Standard
+In accordance with ethical validation guidelines, the system enforces strict privacy protection:
+- **No Personal Identifiable Information (PII)**: The API strictly prohibits personal names, residential addresses, personal phone numbers, or email addresses (`HTTP 422` validation check).
+- **Role-Based Attribution**: Sessions are cataloged by operational roles only (e.g., *"Cold-Chain Quality Assurance Officer"*, *"Lead ISO 17025 Auditor"*).
+
+### Current Validation Status & Outstanding Limitations
+- **Current Status**: `PENDING_STAKEHOLDER_EVALUATION` (Template Protocol Deployed). The database table `stakeholder_validations`, REST endpoints (`GET/POST /api/validations`, `GET /api/validations/template`), 11 dedicated Pytest tests, and interactive UI form have been implemented. The standardized unfilled template specimen (`VAL-TEMPLATE-001`) is seeded in the repository.
+- **Outstanding Requirement to Satisfy Evaluator**: The evaluator directive requires an actual completed real or mock stakeholder evaluation session to be conducted using the protocol and documented with evidence artifacts before the final review.
 
 ---
 
 ## 🛡️ License & Academic Integrity
-Developed as a capstone project for Seafood Cold-Chain Compliance Automation. All relational records and experimental data are generated with consistent relational schemas and validated against ISO 17025 cold-chain standards. The stakeholder feedback framework is fully implemented with demonstration evaluation profiles; formal commercial exporter and customs pilot evaluations are planned as post-capstone validation.
+Developed as a capstone project for Seafood Cold-Chain Compliance Automation. All relational records and experimental data are generated with consistent relational schemas and validated against ISO 17025 cold-chain standards. The stakeholder validation framework separates automated test fixtures from live/mock evaluations; formal commercial field pilot validation remains a post-capstone commercial objective.
+

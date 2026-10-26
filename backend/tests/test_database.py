@@ -12,7 +12,8 @@ class TestSchema:
         "product_batches", "shipments", "sensors", "sensor_logs",
         "sensor_calibrations", "handover_records", "route_events",
         "worker_logs", "compliance_events", "ml_predictions",
-        "user_feedback", "system_settings", "offline_buffer"
+        "user_feedback", "system_settings", "offline_buffer",
+        "stakeholder_validations"
     ]
 
     def test_all_tables_exist(self, use_test_database):
@@ -148,6 +149,32 @@ class TestCRUD:
         conn.close()
         assert row is not None
         assert row["value"] == "42"
+
+    def test_stakeholder_validations_crud(self):
+        from database import get_db_connection
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute("""
+            INSERT INTO stakeholder_validations (
+                session_id, session_date, participant_type, participant_role,
+                validation_method, demo_modules_evaluated, question_responses,
+                observed_strengths, observed_issues, suggested_improvements,
+                actions_taken_or_planned, validation_status, evidence_reference, created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+        """, (
+            "VAL-TEST-001", "2026-10-26", "MOCK_STAKEHOLDER", "Cold-Chain Quality Lead",
+            "Cognitive Walkthrough", "Dashboard, Cold-Chain Alerts", "[]",
+            "Intuitive UI", "Minor latency", "Add quick-filter",
+            "Optimized query", "CONDUCTED_PENDING_ACTION", "docs/validation/test.md"
+        ))
+        conn.commit()
+        cursor.execute("SELECT * FROM stakeholder_validations WHERE session_id = 'VAL-TEST-001'")
+        row = cursor.fetchone()
+        conn.close()
+        assert row is not None
+        assert row["participant_type"] == "MOCK_STAKEHOLDER"
+        assert row["participant_role"] == "Cold-Chain Quality Lead"
+        assert row["validation_status"] == "CONDUCTED_PENDING_ACTION"
 
 
 class TestOfflineBufferDeduplication:

@@ -1,0 +1,64 @@
+{
+  "template_id": "VAL-PROTOCOL-2026-V1",
+  "title": "Standardized Stakeholder Validation Interview Template",
+  "instructions": "Fill in the fields below when conducting a live or mock stakeholder session. Submit to POST /api/validations or through the User Feedback UI.",
+  "sample_payload": {
+    "session_id": "VAL-MOCK-2026-001",
+    "session_date": "YYYY-MM-DD",
+    "participant_type": "MOCK_STAKEHOLDER",
+    "participant_role": "[e.g., Cold-Chain Logistics Dispatcher / Lead ISO 17025 Auditor]",
+    "validation_method": "Cognitive Walkthrough & Task Demonstration",
+    "demo_modules_evaluated": [
+      "Admin Dashboard & System KPIs",
+      "Real-time Telemetry & Cold-Chain Alerts",
+      "Shipment & Custody Traceability",
+      "1-Click Evidence Pack & SHA-256 Verification",
+      "Driver Duty Safety Hard-Blocking",
+      "Store-and-Forward Network Disruption Resilience",
+      "Missing Data Imputation & Hampel Noise Filtering"
+    ],
+    "question_responses": [
+      {
+        "question_id": "Q1_DASHBOARD",
+        "question_text": "Ease of using the dashboard for cold-chain monitoring",
+        "response_text": "[Record actual response]"
+      },
+      {
+        "question_id": "Q2_ALERTS",
+        "question_text": "Understanding of cold-chain temperature excursion alerts",
+        "response_text": "[Record actual response]"
+      },
+      {
+        "question_id": "Q3_TRACEABILITY",
+        "question_text": "Shipment, sensor lineage, and custody handover traceability",
+        "response_text": "[Record actual response]"
+      },
+      {
+        "question_id": "Q4_EVIDENCE",
+        "question_text": "Evidence pack usefulness, structure, and integrity verification",
+        "response_text": "[Record actual response]"
+      },
+      {
+        "question_id": "Q5_SAFETY",
+        "question_text": "Driver workload safety and hours-of-service compliance checks",
+        "response_text": "[Record actual response]"
+      },
+      {
+        "question_id": "Q6_DATA_QUALITY",
+        "question_text": "Missing telemetry imputation and noisy sensor data handling",
+        "response_text": "[Record actual response]"
+      },
+      {
+        "question_id": "Q7_IMPROVEMENTS",
+        "question_text": "Suggested operational improvements and feature priorities",
+        "response_text": "[Record actual response]"
+      }
+    ],
+    "observed_strengths": "[Record observed system strengths]",
+    "observed_issues": "[Record points of friction, confusion, or issues]",
+    "suggested_improvements": "[Record suggested enhancements]",
+    "actions_taken_or_planned": "[Record engineering response or backlog item]",
+    "validation_status": "CONDUCTED_PENDING_ACTION",
+    "evidence_reference": "docs/validation/evidence/<session_id>_notes.txt"
+  }
+}
